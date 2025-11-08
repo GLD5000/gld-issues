@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ComponentProps, useState } from 'react';
 import {
     getIssueDeadline,
     getIssueDeadlineDateComboString,
@@ -16,13 +16,7 @@ import GitIssueDeadlineDoubleButton from './GitIssueDeadlineDoubleButton';
 import CategoryAddIssueButton from './CategoryAddIssueButton';
 import GitIssueTaskList from './GitIssueTaskList';
 
-export default function GitIssueCard({
-    issue,
-    setIssues,
-    listIssueArray,
-    setListIssue,
-    lastUpdated,
-}: {
+interface GitIssueCardProps extends ComponentProps<'details'>{
     issue: SelectiveIssue;
     setIssues: (
         type?: string, //eslint-disable-line
@@ -35,7 +29,16 @@ export default function GitIssueCard({
     //eslint-disable-next-line
     setListIssue: (valueIn: string | string[]) => void;
     lastUpdated: string;
-}) {
+
+}
+
+export default function GitIssueCard({
+    issue,
+    setIssues,
+    listIssueArray,
+    setListIssue,
+    lastUpdated, className, ...props
+}: GitIssueCardProps) {
     const [deadline, setDeadline] = useState(getIssueDeadline(issue));
     const [shortTitle, setShortTitle] = useState(getTitleNoDeadline(issue));
     const [loadingString, setLoadingString] = useState('');
@@ -54,7 +57,7 @@ export default function GitIssueCard({
     const labels = issue.labels.map((label) => (
         <div
             key={label.name}
-            className="rounded-full border border-solid w-fit h-fit py-0 px-2 font-normal font-light text-sm"
+            className="rounded-full border border-solid w-fit h-fit py-0 px-2 font-normal text-sm"
             style={{ borderColor: `#${label.color}` }}
         >
             {label.name}
@@ -80,9 +83,9 @@ export default function GitIssueCard({
     const taskList = issue.body?.taskLists || undefined;
     return (
         <details
-            className={`text-sm w-full box-border rounded-none border-0 border-b border-solid border-b-neutral-400 dark:border-b-neutral-500 group`}
+            className={`text-sm w-full box-border rounded-none border-0 border-b border-solid border-b-neutral-400 dark:border-b-neutral-500 group`} {...props}
         >
-            <summary className="cursor-pointer p-[2px] flex flex-wrap gap-2 items-center w-full box-border bg-neutral-100 dark:bg-neutral-800">
+            <summary className="cursor-pointer p-0.5 flex flex-wrap gap-2 items-center w-full box-border bg-neutral-100 dark:bg-neutral-800">
                 <span className="text-center text-white right-0 top-1 ease-out duration-200 transition-transform group-open:rotate-180 group-open:ease-in rounded-[50%] w-8 h-8 p-1 box-border block ">
                     <svg
                         width="100%"
