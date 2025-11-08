@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement } from "react";
+import { Fragment, ReactElement } from "react";
 import IssueCards from "./IssueCards";
 import {
   SelectiveIssuesJsonShape,

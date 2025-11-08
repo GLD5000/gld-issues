@@ -1,6 +1,6 @@
 'use client';
 import { useStore } from '@/zustand/zustand';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Link from 'next/link';
 import SignIn from '@/auth/SignIn';
 import GldSvg from '@/components/assets/GldSvg';

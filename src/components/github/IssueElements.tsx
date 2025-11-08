@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import CategoryCards from "./CategoryCards";
 // import IssueCards from './IssueCards';
 import { SelectiveIssuesJsonShape } from "./useIssues";

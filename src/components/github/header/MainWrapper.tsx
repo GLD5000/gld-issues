@@ -1,7 +1,7 @@
 'use client';
 
 import { useStore } from '@/zustand/zustand';
-import React, { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 export default function MainWrapper({ children }: { children: ReactNode }) {
     function handleResize() {
@@ -24,7 +24,7 @@ export default function MainWrapper({ children }: { children: ReactNode }) {
     return (
         <main
             id="main"
-            className={`relative flex flex-col gap-8 min-w-[280px] min-h-screen font-Avenir-heavy pt-20 pb-[50vh]`}
+            className={`relative flex flex-col gap-8 min-w-[280px] min-h-screen font-bold pb-[50vh]`}
         >
             {children}
         </main>
