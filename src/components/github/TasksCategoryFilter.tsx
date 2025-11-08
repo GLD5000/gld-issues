@@ -20,7 +20,7 @@ export default function TasksCategoryFilter({
 }) {
     return (
         <div className="w-fit flex gap-2 flex-wrap items-center">
-            <label className="flex gap-2 flex-wrap items-center text-black dark:text-white text-sm font-Avenir-medium font-normal text-center border-none w-fit h-fit py-1 px-0 rounded-lg bg-transparent transition ml-auto mr-2 box-border">
+            <label className="flex gap-2 flex-wrap items-center text-black dark:text-white text-sm font-normal text-center border-none w-fit h-fit py-1 px-0 rounded-lg bg-transparent transition ml-auto mr-2 box-border">
                 View mode:
                 {[
                     'Categories',

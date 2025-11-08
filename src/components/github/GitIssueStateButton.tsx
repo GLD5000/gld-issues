@@ -78,7 +78,7 @@ export default function GitIssueStateButton({
     }
     if (previousUpdated === lastUpdated)
         return (
-            <div className="ml-auto w-36 h-[28px] box-border p-1 text-center rounded-none border-none bg-neutral-500">
+            <div className="ml-auto w-36 h-7 box-border p-1 text-center rounded-none border-none bg-neutral-500">
                 <LoadingSpinner />
             </div>
         );

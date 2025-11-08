@@ -23,7 +23,7 @@ export default function Homepage() {
             <p className="text-black dark:text-white text-2xl mx-auto">
                 Please use the button above to log in!
             </p>
-            {/* <div className=" text-grey6F dark:text-white bg-white font-Avenir-medium mx-auto max-w-[67.5rem] py-16 px-10">
+            {/* <div className=" text-grey6F dark:text-white bg-white mx-auto max-w-[67.5rem] py-16 px-10">
          <Markdown /> 
       </div> */}
             {/* <Iframe/> */}

@@ -20,7 +20,7 @@ export default function TasksPrioritySection({
         <div className="border-2 border-solid border-neutral-500 dark:border-neutral-400 rounded box-border p-2 my-[1em] mb-[3em]">
             <h2 className="normal-case text-left m-0 mb-2 mx-auto w-fit">
                 {'Priority'}
-                <span className="font-Avenir-light text-neutral-500 dark:text-neutral-400 text-sm">
+                <span className="font-light text-neutral-500 dark:text-neutral-400 text-sm">
                     {` (${listIssueArray.length})`}
                 </span>
             </h2>

@@ -13,7 +13,7 @@ export default function DeadlineFlagButton({
             onClick={() => {
                 handleDeadlineViewClick();
             }}
-            className={`grid relative cursor-pointer p-1 box-border w-36 h-6 my-auto text-center rounded-none items-center text-black dark:text-white items-center font-Avenir-medium border-2 border-solid bg-transparent ${deadlineFlagColour || 'border-black dark:border-white'}`}
+            className={`grid relative cursor-pointer p-1 box-border w-36 h-6 my-auto text-center rounded-none items-center text-black dark:text-white items-center border-2 border-solid bg-transparent ${deadlineFlagColour || 'border-black dark:border-white'}`}
         >
             <span className="block leading-[0.8] text-sm">
                 {deadlineFlagValue}

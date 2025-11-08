@@ -39,7 +39,7 @@ export default function TasksTopButtons({
                 }}
             >
                 {lastUpdated && (
-                    <div className="text-left text-sm ml-auto font-Avenir-light h-5 block">
+                    <div className="text-left text-sm ml-auto font-light h-5 block">
                         Last updated: {date.split('-').toReversed().join('/')}{' '}
                         at {time.split(':')[0]}:{time.split(':')[1]}
                     </div>

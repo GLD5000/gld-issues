@@ -33,7 +33,7 @@ export default function GitIssueDeadlineDoubleButton({
     if (!isGTM) {
         return (
             <div
-                className={`flex gap-0 text-sm w-fit ml-auto mr-[2px] h-[28px] justify-end box-border rounded-none border-none p-0`}
+                className={`flex gap-0 text-sm w-fit ml-auto mr-[2px] h-7 justify-end box-border rounded-none border-none p-0`}
             >
                 <DeadlineModeButton />
                 <DeadlineFlagButton

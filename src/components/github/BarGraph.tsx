@@ -52,7 +52,7 @@ export default function BarGraph({
                         />
                     </svg>
                 </span>
-                <div className="text-xl text-left font-Avenir-medium ">{`${subTitle} - (${
+                <div className="text-xl text-left ">{`${subTitle} - (${
                     Object.values(toDoObject)
                         .flatMap((cat) => [...cat])
                         .filter((issue) => issue.state !== 'open').length

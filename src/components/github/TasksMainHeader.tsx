@@ -6,7 +6,7 @@ export default function TasksMainHeader({ title }: { title: string }) {
             target="_blank"
         >
             <h1 >
-                <span className=" w-fit block text-3xl text-black dark:text-white font-Avenir-black  transition group-focus:scale-105 group-hover:scale-105 mx-auto">
+                <span className=" w-fit block text-3xl text-black dark:text-white font-bold  transition group-focus:scale-105 group-hover:scale-105 mx-auto">
                     {title}
                 </span>
             </h1>

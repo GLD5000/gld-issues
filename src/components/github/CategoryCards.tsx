@@ -71,7 +71,7 @@ export default function CategoryCards({
                             <div className="flex flex-wrap w-full gap-6 justify-between items-center">
                                 <h2 className="block normal-case text-left m-0 w-fit h-auto">
                                     {entry[0]}
-                                    <span className="font-Avenir-light text-neutral-500 dark:text-neutral-400 text-sm">
+                                    <span className="font-light text-neutral-500 dark:text-neutral-400 text-sm">
                                         {` (${entry[1].filter((issue) => issue.state === 'closed').length}/${entry[1].length})`}
                                     </span>
                                 </h2>

@@ -54,7 +54,7 @@ export default function GitIssueCard({
     const labels = issue.labels.map((label) => (
         <div
             key={label.name}
-            className="rounded-full border border-solid w-fit h-fit py-0 px-2 font-normal font-Avenir-light text-sm"
+            className="rounded-full border border-solid w-fit h-fit py-0 px-2 font-normal font-light text-sm"
             style={{ borderColor: `#${label.color}` }}
         >
             {label.name}
@@ -106,7 +106,7 @@ export default function GitIssueCard({
                     </svg>
                 </span>
                 <a
-                    className="font-Avenir-light text-neutral-500 dark:text-neutral-400 text-sm w-[4.5em] transition hover:underline focus:underline hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white font-bold"
+                    className="font-light text-neutral-500 dark:text-neutral-400 text-sm w-[4.5em] transition hover:underline focus:underline hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white font-bold"
                     href={`https://github.com/GLD5000/Dev-2.0/issues/${issue.number}`}
                     target="_blank"
                 >
@@ -250,7 +250,7 @@ export default function GitIssueCard({
                 <div className="flex flex-wrap justify-center gap-2 w-fit">
                     {labels}
                 </div>
-                <div className="flex gap-4 font-Avenir-light text-neutral-500 dark:text-neutral-400 text-sm">
+                <div className="flex gap-4 font-light text-neutral-500 dark:text-neutral-400 text-sm">
                     <span>{`Created: ${created}`}</span>
                     <span>{`Updated: ${lastUpdate}`}</span>
                     {issue.state !== 'open' && (
