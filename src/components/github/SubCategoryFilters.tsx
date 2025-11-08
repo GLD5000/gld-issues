@@ -1,4 +1,4 @@
-import React from "react";
+
 import FilterButtonSmall from "./FilterButtonSmall";
 import TasksSortButton from "./TasksSortButton";
 

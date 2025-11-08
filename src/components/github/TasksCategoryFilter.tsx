@@ -1,4 +1,4 @@
-import React from "react";
+
 import FilterButton from "./FilterButton";
 import { SelectiveIssuesJsonShape } from "./useIssues";
 import CategoryFilterDropdown from "./CategoryFilterDropdown";

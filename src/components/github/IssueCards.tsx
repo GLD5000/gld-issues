@@ -1,4 +1,4 @@
-import React from "react";
+
 import { SelectiveIssue } from "./useIssues";
 import GitIssueCard from "./GitIssueCard";
 

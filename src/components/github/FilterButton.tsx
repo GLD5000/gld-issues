@@ -1,5 +1,5 @@
 import { useQueryParams } from "@/utils/searchParamsURL";
-import React from "react";
+
 
 export default function FilterButton({
   categoryFilter,

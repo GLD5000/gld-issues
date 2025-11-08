@@ -1,4 +1,4 @@
-import React from "react";
+
 import GitIssueCardTask from "./GitIssueCardTask";
 
 export default function GitIssueTaskList({

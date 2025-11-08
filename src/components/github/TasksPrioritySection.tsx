@@ -1,4 +1,4 @@
-import React from "react";
+
 import GitIssueCard from "./GitIssueCard";
 import { SelectiveIssuesJsonShape } from "./useIssues";
 

@@ -1,4 +1,4 @@
-import React from "react";
+
 
 export const barColours = {
   completed: "bg-blue-400 dark:bg-blue-300",

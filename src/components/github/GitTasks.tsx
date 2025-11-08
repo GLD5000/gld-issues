@@ -13,7 +13,7 @@ import {
 } from "@/utils/dates";
 import { useQueryParams, useQueryParamsArray } from "@/utils/searchParamsURL";
 import { GetFilteredTodoObject, getCategoryData } from "./useIssuesObjects";
-import React from "react";
+
 import { useSortMode } from "./tasksQueryHooks";
 import BarGraph from "./BarGraph";
 import TasksMainHeader from "./TasksMainHeader";

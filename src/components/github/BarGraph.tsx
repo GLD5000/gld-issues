@@ -1,4 +1,4 @@
-import React from "react";
+
 // import { BarPlot } from './BarPlot';
 import { SelectiveIssuesJsonShape } from "./useIssues";
 import { BarPlotV2 } from "./BarPlotV2";
