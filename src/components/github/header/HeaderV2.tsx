@@ -93,7 +93,7 @@ export default function HeaderV2({}: {}) {
                         Dev 2.0
                     </span> */}
                 </Link>
-                        <TasksMainHeader title={title} />
+                        <TasksMainHeader title={title} colourTheme={colourTheme} />
                 
                 {/* <NavigationV2 /> */}
                 <div className="mx-auto lg:ml-auto lg:mr-0 flex h-14 w-fit flex-row items-center gap-2 p-2">
