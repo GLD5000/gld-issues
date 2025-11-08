@@ -1,39 +1,36 @@
-# GLD-Issues
-An interface that allows you to easily create and manage GitHub Issues for your projects or use GitHub Issues as a project management tool
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## To create from scratch
+## Getting Started
 
-1. Create a repo on GitHub using lowercase letters for the name
-2. Clone locally or in codespaces
-3. [Create Next App](https://nextjs.org/docs/app/getting-started)
+First, run the development server:
 
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
-npx create-next-app@latest
-```
-4. [Add NextAuth](https://next-auth.js.org/getting-started/example)
 
-```
-npm install next-auth
-```
-5. Create API Route: `/app/api/auth/[...nextauth]/route.ts` e.g.:
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```
-import NextAuth, { NextAuthOptions } from "next-auth";
-import GoogleProvider from 'next-auth/providers/google';
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-const configNextAuth = {
-    providers: [
-        GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID || '',
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-        }),
-    ], // rest of your config
-} satisfies NextAuthOptions;
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-const handler = NextAuth(configNextAuth);
+## Learn More
 
-export { handler as GET, handler as POST }
-```
-6. Add environmental variables
+To learn more about Next.js, take a look at the following resources:
 
-7. Get Google Cloud Token & Whitelist emails
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
