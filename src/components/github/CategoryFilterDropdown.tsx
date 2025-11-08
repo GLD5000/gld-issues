@@ -27,7 +27,7 @@ export default function CategoryFilterDropdown({
   return (
     <select
       aria-label="Select Category"
-      className={`appearance-none block text-sm cursor-pointer p-1 box-border w-36 h-fit text-center border-2 rounded-none bg-neutral-100 border-black text-black text-ellipsis ${currentValue === "Select Category" ? "text-neutral-400" : "text-black"} font-Avenir-medium`}
+      className={`appearance-none block text-sm cursor-pointer p-1 box-border w-36 h-fit text-center border-2 rounded-none bg-neutral-100 border-black text-black text-ellipsis ${currentValue === "Select Category" ? "text-neutral-400" : "text-black"}`}
       value={currentValue}
       onChange={handleClick}
     >
