@@ -16,7 +16,7 @@ export default function TasksTitleFilter({
     clearAllFilters: (excludeCategory?: boolean) => void; //eslint-disable-line
 }) {
     return (
-        <div className="w-fit flex gap-2 flex-wrap text-sm align-middle">
+        <div className="w-fit flex gap-2 flex-wrap text-sm items-center">
             <input
                 className="text-black text-sm placeholder:text-sm placeholder:text-neutral-400 bg-neutral-100 w-60 h-fit px-2 py-1 my-1 font-Avenir-medium leading-[0.8]"
                 placeholder="Filter Titles"

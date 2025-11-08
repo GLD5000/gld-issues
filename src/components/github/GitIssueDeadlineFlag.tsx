@@ -21,7 +21,7 @@ export default function GitIssueDeadlineFlag({
     if (!progressState) return null;
     return (
         <div
-            className={`grid relative cursor-default p-1 box-border w-36 h-6 my-auto text-center rounded-none align-middle text-black dark:text-white items-center font-Avenir-medium border-2 border-solid ${progressState.border || 'border-black dark-border-white'}`}
+            className={`grid relative cursor-default p-1 box-border w-36 h-6 my-auto text-center rounded-none items-center text-black dark:text-white items-center font-Avenir-medium border-2 border-solid ${progressState.border || 'border-black dark-border-white'}`}
         >
             <span className="block leading-[0.8]">{progressState.msg}</span>
         </div>

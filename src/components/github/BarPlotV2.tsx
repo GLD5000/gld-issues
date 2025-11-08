@@ -39,7 +39,7 @@ export const BarPlotV2 = ({
                         }
                     }}
                     key={`${index}-flex`}
-                    className="group grid grid-cols-[auto_1fr] box-border bg-transparent border-none p-0 m-0 w-full h-auto cursor-pointer hover:brightness-110 transition align-middle"
+                    className="group grid grid-cols-[auto_1fr] box-border bg-transparent border-none p-0 m-0 w-full h-auto cursor-pointer hover:brightness-110 transition items-center"
                 >
                     <span className="block w-[300px] text-neutral-500 dark:text-neutral-400 text-base tracking-tighter box-border text-left group-hover:underline underline-offset-2 font-Avenir-heavy">{`${group.title} (${group.closed} / ${group.total})`}</span>
                     <TasksBarPlot

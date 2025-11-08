@@ -68,7 +68,7 @@ export default function CategoryCards({
                 const sectionTitle = (
                     <div className="grid w-full">
                         <div className="flex flex-wrap gap-2 w-full justify-between">
-                            <div className="flex flex-wrap w-full gap-6 justify-between align-middle">
+                            <div className="flex flex-wrap w-full gap-6 justify-between items-center">
                                 <h2 className="block normal-case text-left m-0 w-fit h-auto">
                                     {entry[0]}
                                     <span className="font-Avenir-light text-neutral-500 dark:text-neutral-400 text-sm">
@@ -118,7 +118,7 @@ export default function CategoryCards({
                         className="grid gap-0 w-full h-auto group/subsection box-border"
                         key={`${entry[0]}${index}`}
                     >
-                        <summary className="w-full grid grid-cols-[auto_1fr] align-middle rounded-none border-none mb-2">
+                        <summary className="w-full grid grid-cols-[auto_1fr] items-center rounded-none border-none mb-2">
                             <span className="text-center text-white right-0 top-1 ease-out duration-200 transition-transform group-open/subsection:rotate-180 group-open/subsection:ease-in rounded-[50%] w-10 h-10 p-1 box-border block">
                                 <svg
                                     width="100%"

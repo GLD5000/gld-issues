@@ -21,7 +21,7 @@ export default function GitIssueCardTask({
         <button
             type="button"
             onClick={clickHandler}
-            className="border-none align-middle text-sm p-0 m-0 font-inherit bg-transparent h-auto w-full text-left grid grid-cols-[auto_1fr]"
+            className="border-none items-center text-sm p-0 m-0 font-inherit bg-transparent h-auto w-full text-left grid grid-cols-[auto_1fr]"
         >
             <span className="block h-7 w-7 p-[6px]">
                 {task.indexOf('[x]') > -1 ? <TickSvg /> : <UnTicked />}

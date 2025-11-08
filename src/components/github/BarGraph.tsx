@@ -29,7 +29,7 @@ export default function BarGraph({
             open
             className="hidden md:grid gap-0 w-full h-auto group/graph"
         >
-            <summary className="w-full grid grid-cols-[auto_1fr] align-middle rounded-none mb-2 cursor-pointer">
+            <summary className="w-full grid grid-cols-[auto_1fr] items-center rounded-none mb-2 cursor-pointer">
                 <span className="text-center text-white right-0 top-1 ease-out duration-200 transition-transform group-open/graph:rotate-180 group-open/graph:ease-in rounded-[50%] w-8 h-8 p-1 box-border block ">
                     <svg
                         width="100%"

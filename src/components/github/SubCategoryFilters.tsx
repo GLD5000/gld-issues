@@ -21,8 +21,8 @@ export default function SubCategoryFilters({
     return (
         <>
             {titleFilterElement}
-            <div className="flex flex-wrap gap-1 align-middle justify-between">
-                <div className="flex flex-wrap gap-1 align-middle">
+            <div className="flex flex-wrap gap-1 items-center justify-between">
+                <div className="flex flex-wrap gap-1 items-center">
                     <span className="text-sm font-Avenir-light">Show:</span>
                     {[
                         'Deadlines',

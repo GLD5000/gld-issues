@@ -30,7 +30,7 @@ export default function TasksTopButtons({
             <button
                 type="button"
                 aria-label="Refresh Issues"
-                className="flex flex-wrap gap-[2px] w-fit border-none align-middle text-center text-sm p-0 bg-transparent text-neutral-500 dark:text-neutral-400 bg-white dark:bg-black hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white transition ml-auto box-border"
+                className="flex flex-wrap gap-[2px] w-fit border-none items-center text-center text-sm p-0 bg-transparent text-neutral-500 dark:text-neutral-400 bg-white dark:bg-black hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white transition ml-auto box-border"
                 onClick={() => {
                     if (!isLoading) {
                         setLoadingString(lastUpdated);

@@ -82,7 +82,7 @@ export default function GitIssueCard({
         <details
             className={`text-sm w-full box-border rounded-none border-0 border-b border-solid border-b-neutral-400 dark:border-b-neutral-500 group`}
         >
-            <summary className="cursor-pointer p-[2px] flex flex-wrap gap-2 align-middle w-full box-border bg-neutral-100 dark:bg-neutral-800">
+            <summary className="cursor-pointer p-[2px] flex flex-wrap gap-2 items-center w-full box-border bg-neutral-100 dark:bg-neutral-800">
                 <span className="text-center text-white right-0 top-1 ease-out duration-200 transition-transform group-open:rotate-180 group-open:ease-in rounded-[50%] w-8 h-8 p-1 box-border block ">
                     <svg
                         width="100%"
@@ -146,7 +146,7 @@ export default function GitIssueCard({
                     textAlign="text-center text-sm"
                     isLoading={titleIsLoading}
                 />
-                <div className="ml-auto gap-2 flex flex-wrap w-fit align-middle ">
+                <div className="ml-auto gap-2 flex flex-wrap w-fit items-center ">
                     <GitIssueDeadlineDoubleButton issue={issue} />
 
                     <GitIssueStateButton
@@ -157,7 +157,7 @@ export default function GitIssueCard({
                 </div>
             </summary>
             <div className="grid gap-4 text-sm w-full box-border p-4 newDesktop:p-8">
-                <div className="flex flex-wrap align-middle">
+                <div className="flex flex-wrap items-center">
                     <DoubleClickInput
                         onBlurHandler={fullTitleOnBlurHandler}
                         onChangeHandler={fullTitleOnChangeHandler}
