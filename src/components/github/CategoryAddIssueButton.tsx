@@ -80,13 +80,13 @@ export default function CategoryAddIssueButton({
         <button
           onClick={handleClick}
           type="button"
-          className="text-center grid grid-cols-[auto_auto] items-center gap-2 text-xs border-none w-24 h-[20px] m-0 bg-transparent p-0 text-neutral-500 dark:text-neutral-400 transform-none aspect-square hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white transition box-border"
+          className="text-center grid grid-cols-[auto_auto] items-center gap-2 text-xs border-none w-24 h-5 m-0 bg-transparent p-0 text-neutral-500 dark:text-neutral-400 transform-none aspect-square hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white transition box-border"
         >
           <svg
             role="decoration"
             height="20px"
             width="20px"
-            className="block stroke-current stroke-2 border-current border-2 border-solid rounded-full w-[20px] h-[20px] m-0 box-border"
+            className="block stroke-current stroke-2 border-current border-2 border-solid rounded-full w-5 h-5 m-0 box-border"
             viewBox="0 0 16 16"
           >
             <g>

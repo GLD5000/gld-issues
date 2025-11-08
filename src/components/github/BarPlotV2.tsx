@@ -27,7 +27,7 @@ export const BarPlotV2 = ({
   const sortedData = data.sort((a, b) => b.total - a.total);
 
   return (
-    <div className="w-full h-auto box-border grid gap-[2px]">
+    <div className="w-full h-auto box-border grid gap-0.5">
       {sortedData.map((group, index) => (
         <button
           type="button"

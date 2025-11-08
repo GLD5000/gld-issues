@@ -41,7 +41,7 @@ export default function GitIssueDeadlineDivider({
   if (!isGTM) {
     return (
       <div
-        className={`flex gap-0 text-sm w-fit ml-auto mr-[2px] justify-end box-border rounded-none border-none pt-2 pb-2`}
+        className={`flex gap-0 text-sm w-fit ml-auto mr-0.5 justify-end box-border rounded-none border-none pt-2 pb-2`}
       >
         <DeadlineModeButton />
         <DeadlineFlagButton
@@ -76,7 +76,7 @@ export default function GitIssueDeadlineDivider({
   const dateModeValue = lookupDeadlineData[dateMode || "build"].type;
   return (
     <div
-      className={`flex justify-end gap-0 text-sm w-fit ml-auto mr-[2px] box-border rounded-none border-none pt-2 pb-2`}
+      className={`flex justify-end gap-0 text-sm w-fit ml-auto mr-0.5 box-border rounded-none border-none pt-2 pb-2`}
     >
       <DeadlineModeButton
         handleDateModeClick={handleDateModeClick}

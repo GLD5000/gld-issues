@@ -8,7 +8,7 @@ export default function DeadlineModeButton({
   if (!handleDateModeClick || !dateModeValue)
     return (
       <div
-        className={`grid relative py-2 px-6 box-border border-none text-sm w-fit h-6 my-auto text-right rounded-none items-center text-neutral-500 cursor-default dark:text-neutral-400 items-center bg-transparent`}
+        className={`grid relative py-2 px-6 box-border border-none text-sm w-fit h-6 my-auto text-right rounded-none text-neutral-500 cursor-default dark:text-neutral-400 items-center bg-transparent`}
       >
         <span className="block leading-none w-fit">{"Due:"}</span>
       </div>
@@ -19,7 +19,7 @@ export default function DeadlineModeButton({
       onClick={() => {
         handleDateModeClick();
       }}
-      className={`grid relative py-2 px-6 box-border border-none text-sm cursor-pointer w-fit h-6 my-auto text-right rounded-none items-center text-neutral-500 dark:text-neutral-400 items-center bg-transparent hover:underline transition  underline-offset-4`}
+      className={`grid relative py-2 px-6 box-border border-none text-sm cursor-pointer w-fit h-6 my-auto text-right rounded-none text-neutral-500 dark:text-neutral-400 items-center bg-transparent hover:underline transition  underline-offset-4`}
     >
       <span className="block leading-none w-fit">{dateModeValue}</span>
     </button>

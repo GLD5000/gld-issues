@@ -21,7 +21,7 @@ export default function TasksBarPlot({
   ];
   return (
     <div
-      className="flex w-full mb-[4px] p-0 m-0 box-border rounded-md  overflow-clip"
+      className="flex w-full mb-1 p-0 m-0 box-border rounded-md  overflow-clip"
       style={{ height }}
     >
       {barColoursArray.map((colour, index) => (

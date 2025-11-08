@@ -33,7 +33,7 @@ export default function GitIssueDeadlineDoubleButton({
   if (!isGTM) {
     return (
       <div
-        className={`flex gap-0 text-sm w-fit ml-auto mr-[2px] h-7 justify-end box-border rounded-none border-none p-0`}
+        className={`flex gap-0 text-sm w-fit ml-auto mr-0.5 h-7 justify-end box-border rounded-none border-none p-0`}
       >
         <DeadlineModeButton />
         <DeadlineFlagButton
@@ -68,7 +68,7 @@ export default function GitIssueDeadlineDoubleButton({
   const dateModeValue = lookupDeadlineData[dateMode || "build"].type;
   return (
     <div
-      className={`flex justify-end gap-0 text-sm w-fit ml-auto mr-[2px] box-border rounded-none border-none p-0`}
+      className={`flex justify-end gap-0 text-sm w-fit ml-auto mr-0.5 box-border rounded-none border-none p-0`}
     >
       <DeadlineModeButton
         handleDateModeClick={toggleDateMode}
