@@ -16,7 +16,6 @@ import { GetFilteredTodoObject, getCategoryData } from "./useIssuesObjects";
 
 import { useSortMode } from "./tasksQueryHooks";
 import BarGraph from "./BarGraph";
-import TasksMainHeader from "./TasksMainHeader";
 import TasksTopButtons from "./TasksTopButtons";
 import IssueElements from "./IssueElements";
 import TasksPrioritySection from "./TasksPrioritySection";
