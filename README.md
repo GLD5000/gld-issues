@@ -34,3 +34,6 @@ const handler = NextAuth(configNextAuth);
 
 export { handler as GET, handler as POST }
 ```
+6. Add environmental variables
+
+7. Get Google Cloud Token & Whitelist emails
