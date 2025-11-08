@@ -1,34 +1,33 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import LayoutClient from './LayoutClient';
+import Providers from '@/auth/Providers';
+import { showLoginPage } from '@/auth/auth';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
+const inter = Inter({ subsets: ['latin'] });
+//<link rel="stylesheet" href="https://use.typekit.net/ikx5mmg.css">
 export const metadata: Metadata = {
   title: "GLD Issues UI",
   description: "An interface for your GitHub Issues or task management",
 };
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-  );
+export default async function RootLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
+    const { accessLevel } = await showLoginPage();
+    return (
+        <html lang="en" className={`scroll-smooth w-full`}>
+            <body
+                className={`${inter.className} scroll-smooth w-full bg-black`}
+            >
+                <Providers>
+                    <LayoutClient accessLevel={accessLevel}>
+                        {children}
+                    </LayoutClient>
+                </Providers>
+            </body>
+        </html>
+    );
 }
