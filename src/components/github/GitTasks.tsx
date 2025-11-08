@@ -39,7 +39,7 @@ export default function GitTasks() {
     metadata: { lastUpdated },
   } = issuesObject;
   const currentDate = new Date();
-  const title = `Tasks and Issues Week ${currentWeek}`;
+  // const title = `Tasks and Issues Week ${currentWeek}`;
   const subTitle = convertDateToDayDateComboString(currentDate);
   const hasNoIssues = !issues || issues.length === 0 || issues === null;
   if (hasNoIssues) return <LoadingSpinner />;
@@ -65,7 +65,7 @@ export default function GitTasks() {
   return (
     <div className="text-black dark:text-white px-1 sm:px-6 md:px-8 max-w-7xl w-full mx-auto">
       <div className="text-inherit text-base sm:p-3 grid gap-2 w-full">
-        <TasksMainHeader title={title} />
+        {/* <TasksMainHeader title={title} /> */}
         <div className="flex flex-wrap gap-2 w-full">
           <div className="text-inherit text-sm grid gap-2 w-full h-fit max-w-[min(100%,70rem)]">
             {issues && (

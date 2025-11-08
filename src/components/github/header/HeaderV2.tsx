@@ -8,6 +8,8 @@ import MoonSvg from '@/components/assets/MoonSvg';
 import SunSvg from '@/components/assets/SunSvg';
 import NavigationV2 from './NavigationV2';
 import SvgButtonHeader from './SvgButtonHeader';
+import TasksMainHeader from '../TasksMainHeader';
+import { getCurrentWeekNumber } from '@/utils/dates';
 
 export default function HeaderV2({}: {}) {
     function setThemeToLocalStorage(themeBoolean: boolean) {
@@ -29,6 +31,9 @@ export default function HeaderV2({}: {}) {
         setThemeToLocalStorage(!colourTheme);
         setColourTheme(!colourTheme);
     }
+  const currentWeek = getCurrentWeekNumber();
+
+  const title = `Tasks and Issues Week ${currentWeek}`;
 
     useEffect(() => {
         setColourTheme(getThemeFromSessionStorage());
@@ -52,7 +57,7 @@ export default function HeaderV2({}: {}) {
             }`}
         >
             <nav
-                className={`mx-auto w-full p-2 h-fit grid md:grid-cols-[1fr_auto_auto] md:gap-8 items-center  justify-center  text-base text-white lg:w-body
+                className={`mx-auto w-full p-2 h-fit grid md:grid-cols-[auto_1fr_auto] md:gap-8 items-center  justify-center  text-base text-white lg:w-body
                ${
                    colourTheme
                        ? 'dark:border-b-white dark:bg-black'
@@ -62,7 +67,7 @@ export default function HeaderV2({}: {}) {
             >
                 <Link
                     href="https://github.com/GLD5000"
-                    className={`my-auto mr-auto lg:ml-0 lg:mr-auto flex h-10 w-fit content-center items-center justify-center gap-2 rounded border-2 border-transparent p-1 text-center text-3xl text-black hover:border-current hover:transition dark:text-white  dark:hover:border-white ${
+                    className={`my-auto mx-auto lg:ml-0 lg:mr-auto flex h-10 w-fit content-center items-center justify-center gap-2 rounded border-2 border-transparent p-1 text-center text-3xl text-black hover:border-current hover:transition dark:text-white  dark:hover:border-white ${
                         colourTheme
                             ? 'text-white'
                             : 'text-black'
@@ -88,6 +93,8 @@ export default function HeaderV2({}: {}) {
                         Dev 2.0
                     </span> */}
                 </Link>
+                        <TasksMainHeader title={title} />
+                
                 {/* <NavigationV2 /> */}
                 <div className="mx-auto lg:ml-auto lg:mr-0 flex h-14 w-fit flex-row items-center gap-2 p-2">
                     <SignIn />
