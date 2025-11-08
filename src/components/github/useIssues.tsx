@@ -468,43 +468,6 @@ function addTodoObject(
 ) {
     toDoObject[key] ? toDoObject[key].push(issue) : (toDoObject[key] = [issue]);
 }
-function processObjectStyleTodoStrings(
-    entry: [string, SelectiveIssuesJsonShape]
-) {
-    const title = entry[0] as string;
-    const objectArray = entry[1] as SelectiveIssuesJsonShape;
-    if (
-        title === 'This Week' ||
-        title === 'Website - GTM' ||
-        title === 'priority' ||
-        title === 'awaiting'
-    ) {
-        const processedArray = objectArray
-            .sort(
-                (a, b) =>
-                    Number(getIssueDeadlineSortValue(a)) -
-                    Number(getIssueDeadlineSortValue(b))
-            )
-            .map((object) => getIssueTodoString(object));
-        return processedArray.join('\n');
-    }
-    return objectArray.map((object) => getIssueTodoString(object)).join('\n');
-}
-function processIssueObjectWeeklyTodo(toDoObject: {
-    [key: string]: SelectiveIssuesJsonShape;
-}) {
-    return Object.entries(toDoObject)
-        .filter((entry) => entry[1].length > 0)
-        .map(
-            (entry) =>
-                '\n\n' +
-                entry[0] +
-                '\n\n' +
-                processObjectStyleTodoStrings(entry)
-        )
-        .join('')
-        .trim();
-}
 export function getIssueDeadlineSortValue(issueIn: SelectiveIssue) {
     const deadline = getIssueDeadline(issueIn) || '';
     return deadline
@@ -574,9 +537,6 @@ function convertDateToDayDateComboString(dateIn: Date) {
     return `${day} ${date}/${month}/${year}`;
 }
 
-function getIssueTodoString(issueIn: SelectiveIssue) {
-    return `- [${issueIn.state === 'open' ? ' ' : 'x'}] #${issueIn.number}`;
-}
 export function makeWeeklyToDoObject(
     issues: SelectiveIssuesJsonShape,
     currentWeek: number
@@ -682,52 +642,6 @@ export function getAdjustedDeadlineDate(issue: SelectiveIssue) {
         : adjustDateToWorkday(getDeadlineDate(deadline) || new Date());
 }
 
-export function makeWeeklyToDoBodyString(issues: SelectiveIssuesJsonShape) {
-    const issueTargetLabels = [
-        'priority',
-        'awaiting',
-        'Website - GTM',
-        'Website - content',
-        'Website - loyalty',
-        'Website - CLP',
-        'Website - PDP',
-        'Website - Core Web Vitals',
-        'Website - UX',
-        'Website - SEO',
-        'Website - Accessibility',
-        'Website - AB Testing',
-        'Website - security',
-        'SFCC - fix',
-        'SFCC - workflow',
-        'Dev 2.0 - fix',
-        'Dev 2.0 - testing / QA',
-        'Dev 2.0 - build tools',
-        'Dev 2.0 - collaboration',
-        'Dev 2.0 - project management',
-        'Dev 2.0 - reporting',
-        'Dev 2.0 - helpdesk',
-    ];
-    const toDoObject: { [key: string]: SelectiveIssuesJsonShape } = {};
-    issueTargetLabels.forEach((key) => {
-        toDoObject[key] = [];
-    });
-    // toDoObject['other'] = [];
-    const filteredIssues = filterToDoIssues(issues, false);
-    filteredIssues.forEach((issue) => {
-        if (
-            !issueTargetLabels.some((label) => {
-                if (issue.labels?.some((item) => item.name === label)) {
-                    addTodoObject(label, issue, toDoObject);
-                    return true;
-                }
-            })
-        ) {
-            // addTodoObject('other', issue, toDoObject);
-        }
-    });
-
-    return processIssueObjectWeeklyTodo(toDoObject);
-}
 function completedAsPlanned(issue: SelectiveIssue) {
     return issue.state !== 'open' && issue.state_reason !== 'not_planned';
 }
