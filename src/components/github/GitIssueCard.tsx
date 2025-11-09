@@ -1,12 +1,5 @@
 import { ComponentProps, useState } from "react";
-import {
-  getIssueDeadline,
-  getIssueDeadlineDateComboString,
-  getStringDeadlineDate,
-  getTitleNoDeadline,
-  reBuildIssueTitle,
-  SelectiveIssue,
-} from "./useIssues";
+import { SelectiveIssue } from "./useIssues/useIssues";
 import GitIssueStateButton from "./GitIssueStateButton";
 import { convertIsoDateToDayDateComboString } from "@/utils/dates";
 import DoubleClickInput from "./DoubleClickInput";
@@ -16,6 +9,13 @@ import GitIssueDeadlineDoubleButton from "./GitIssueDeadlineDoubleButton";
 import CategoryAddIssueButton from "./CategoryAddIssueButton";
 import GitIssueTaskList from "./GitIssueTaskList";
 import { classMerge } from "@/utils/twUtils";
+import {
+  getIssueDeadline,
+  getTitleNoDeadline,
+  getIssueDeadlineDateComboString,
+  reBuildIssueTitle,
+  getStringDeadlineDate,
+} from "./useIssues/useIssuesUtils";
 
 interface GitIssueCardProps extends ComponentProps<"details"> {
   issue: SelectiveIssue;

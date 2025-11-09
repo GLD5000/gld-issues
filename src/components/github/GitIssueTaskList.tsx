@@ -1,4 +1,3 @@
-
 import GitIssueCardTask from "./GitIssueCardTask";
 
 export default function GitIssueTaskList({

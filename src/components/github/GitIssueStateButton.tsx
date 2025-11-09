@@ -1,11 +1,12 @@
 import { SyntheticEvent, useState } from "react";
-import { getIssueDeadlineDateObject, SelectiveIssue } from "./useIssues";
+import { SelectiveIssue } from "./useIssues/useIssues";
 import {
   getCurrentWeekNumber,
   getWeekNumberFromISOString,
   getWeekNumberFromMilliseconds,
 } from "@/utils/dates";
 import LoadingSpinner from "./LoadingSpinner";
+import { getIssueDeadlineDateObject } from "./useIssues/useIssuesUtils";
 
 const optionsArray = [
   "Completed",

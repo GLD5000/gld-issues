@@ -4,15 +4,17 @@ import {
   SelectiveIssuesJsonShape,
   issueIsGTM,
   issueIsParent,
-  getIssueDeadlineSortValue,
-  getIssueDeadline,
   SelectiveIssue,
   issueIsBlocked,
   issueIsTesting,
-  getIssueUpdatedSortValue,
-} from "./useIssues";
+} from "./useIssues/useIssues";
 import CategoryAddIssueButton from "./CategoryAddIssueButton";
 import SubCategoryFilters from "./SubCategoryFilters";
+import {
+  getIssueDeadline,
+  getIssueDeadlineSortValue,
+  getIssueUpdatedSortValue,
+} from "./useIssues/useIssuesUtils";
 
 export default function CategoryCards({
   filteredToDoObject,

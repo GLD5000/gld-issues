@@ -8,7 +8,8 @@ import {
 } from "@/utils/dates";
 import { useStore } from "@/zustand/zustand";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { gldIssuesConfig } from "../../../gitIssues.config";
+import { gldIssuesConfig } from "../../../../gitIssues.config";
+import { getIssueDeadline, getDeadlineDate } from "./useIssuesUtils";
 const { githubIssueCategories } = gldIssuesConfig;
 export type Issue = {
   url: string;
@@ -150,108 +151,17 @@ type SelectiveIssueBody = {
 };
 
 export type SelectiveIssue = {
-  // url: string;
-  // repository_url: string;
-  // labels_url: string;
-  // comments_url: string;
-  // events_url: string;
-  // html_url: string;
-  // id: number;
-  // node_id: string;
   number: number;
   title: string;
-  // user: {
-  //     login: string;
-  //     id: number;
-  //     node_id: string;
-  //     avatar_url: string;
-  //     gravatar_id: string;
-  //     url: string;
-  //     html_url: string;
-  //     followers_url: string;
-  //     following_url: string;
-  //     gists_url: string;
-  //     starred_url: string;
-  //     subscriptions_url: string;
-  //     organizations_url: string;
-  //     repos_url: string;
-  //     events_url: string;
-  //     received_events_url: string;
-  //     type: string;
-  //     user_view_type: string;
-  //     site_admin: false;
-  // };
   labels: SelectiveIssueLabel[];
   state: string;
-  // locked: false;
-  assignee: string; //login: string;
-  // {
-  // login: string;
-  // id: number;
-  // node_id: string;
-  // avatar_url: string;
-  // gravatar_id: string;
-  // url: string;
-  // html_url: string;
-  // followers_url: string;
-  // following_url: string;
-  // gists_url: string;
-  // starred_url: string;
-  // subscriptions_url: string;
-  // organizations_url: string;
-  // repos_url: string;
-  // events_url: string;
-  // received_events_url: string;
-  // type: string;
-  // user_view_type: string;
-  // site_admin: false;
-  // };
-  // assignees: [
-  //     {
-  //         login: string;
-  //         id: number;
-  //         node_id: string;
-  //         avatar_url: string;
-  //         gravatar_id: string;
-  //         url: string;
-  //         html_url: string;
-  //         followers_url: string;
-  //         following_url: string;
-  //         gists_url: string;
-  //         starred_url: string;
-  //         subscriptions_url: string;
-  //         organizations_url: string;
-  //         repos_url: string;
-  //         events_url: string;
-  //         received_events_url: string;
-  //         type: string;
-  //         user_view_type: string;
-  //         site_admin: false;
-  //     },
-  // ];
+  assignee: string;
   milestone: string;
   comments: number;
   created_at: string;
   updated_at: string;
   closed_at: string;
-  // author_association: string;
-  // active_lock_reason: string;
   body: SelectiveIssueBody; //Strip out task list and links
-  // closed_by: string;
-  // reactions: {
-  //     url: string;
-  //     total_count: number;
-  //     '+1': number;
-  //     '-1': number;
-  //     laugh: number;
-  //     hooray: number;
-  //     confused: number;
-  //     heart: number;
-  //     rocket: number;
-  //     eyes: 0;
-  // };
-  // timeline_url: string;
-  // performed_via_github_app: string;
   state_reason: string;
 };
 
@@ -271,17 +181,17 @@ function setSessionStorageIssues(newObject: IssuesSessionObject) {
   return window.sessionStorage.setItem(keyName, JSON.stringify(newObject));
 }
 function addFetchedIssuesToSessionStorageObject(
-  newObject: SelectiveIssuesJsonShape
+  newObject: SelectiveIssuesJsonShape,
 ) {
   const sessionStorageIssues = getSessionStorageIssues();
   if (!sessionStorageIssues) return newObject;
   const sessionStorageIssuesObject = JSON.parse(
-    sessionStorageIssues
+    sessionStorageIssues,
   ) as IssuesSessionObject;
   const oldIssuesArray = sessionStorageIssuesObject.issues || [];
   newObject.forEach((issueObject) => {
     const insertIndex = oldIssuesArray?.findIndex(
-      (arrayItem) => arrayItem.number === issueObject.number
+      (arrayItem) => arrayItem.number === issueObject.number,
     );
     if (insertIndex > -1) {
       oldIssuesArray[insertIndex] = issueObject;
@@ -299,7 +209,7 @@ export function useIssues(): [
     body?: //eslint-disable-line
     {
       [key: string]: string;
-    }
+    },
   ) => {},
 ] {
   const [state, setState] = useState<IssuesSessionObject | null>(null);
@@ -380,7 +290,7 @@ export function useIssues(): [
         state,
         (
           type = "refresh",
-          body?: Record<string, string> // eslint-disable-line
+          body?: Record<string, string>, // eslint-disable-line
         ) => {
           console.log("accessLevel:", accessLevel);
           console.log(type);
@@ -391,13 +301,13 @@ export function useIssues(): [
 }
 async function storeNewValue(
   setState: Dispatch<SetStateAction<IssuesSessionObject | null>>,
-  slug?: string
+  slug?: string,
 ) {
   const fetchedValue = await fetchGithubTasks(slug);
   if (!fetchedValue) return;
   const selectiveValue = slug
     ? addFetchedIssuesToSessionStorageObject(
-        convertIssuesToSelectiveIssues(fetchedValue)
+        convertIssuesToSelectiveIssues(fetchedValue),
       )
     : convertIssuesToSelectiveIssues(fetchedValue);
   const newObject: IssuesSessionObject = {
@@ -413,7 +323,7 @@ async function fetchGithubTasks(slug?: string) {
   console.log("Fetch running...");
   try {
     const response = await fetch(
-      slug ? `/api/getGithubIssues/${slug}` : "/api/getGithubIssues/tasks/"
+      slug ? `/api/getGithubIssues/${slug}` : "/api/getGithubIssues/tasks/",
     );
     if (!response.ok) {
       throw new Error("Failed to fetch log file");
@@ -429,78 +339,14 @@ async function fetchGithubTasks(slug?: string) {
 function addTodoObject(
   key: string,
   issue: SelectiveIssue,
-  toDoObject: { [key: string]: SelectiveIssuesJsonShape }
+  toDoObject: { [key: string]: SelectiveIssuesJsonShape },
 ) {
   toDoObject[key] ? toDoObject[key].push(issue) : (toDoObject[key] = [issue]);
-}
-export function getIssueDeadlineSortValue(issueIn: SelectiveIssue) {
-  const deadline = getIssueDeadline(issueIn) || "";
-  return deadline
-    .split(/[\s\.\-\/\\]/)
-    .toReversed()
-    .join("");
-}
-export function getIssueUpdatedSortValue(issueIn: SelectiveIssue) {
-  const updated = issueIn.updated_at || "";
-  const sortNumber = updated.replace(/[\:TZ\/\.\s\.\-\/\\\-]/g, "");
-  return sortNumber;
-}
-export function getIssueDeadline(issueIn: SelectiveIssue) {
-  return getStringDeadlineDate(issueIn.title);
-}
-const issueDeadlineRegex = /\d\d[\s\.\-\/\\]+\d\d[\s\.\-\/\\]+\d\d$/;
-export function getStringDeadlineDate(stringIn: string) {
-  const matchReturn = stringIn.trim().match(issueDeadlineRegex);
-  const deadline = matchReturn ? matchReturn[0] : undefined;
-  return deadline || undefined;
-}
-export function getTitleNoDeadline(issueIn: SelectiveIssue) {
-  return issueIn.title.trim().replace(issueDeadlineRegex, "").trim();
-}
-export function reBuildIssueTitle(
-  shortTitle: string,
-  deadline: string | undefined
-) {
-  const deadlineString = deadline ? getStringDeadlineDate(deadline) : undefined;
-  return deadlineString ? `${shortTitle} ${deadlineString}` : shortTitle;
-}
-
-export function getDeadlineDate(deadline: string | undefined) {
-  if (deadline === undefined) return undefined;
-  const century = getCurrentCentury();
-  const [day, month, year] = deadline.split("/").map((value) => Number(value));
-  return new Date(year + century, month - 1, day, 1);
-}
-
-export function getIssueDeadlineDateObject(issueIn: SelectiveIssue) {
-  return getDeadlineDate(getIssueDeadline(issueIn)) || null;
-}
-
-export function getIssueDeadlineDateComboString(issueIn: SelectiveIssue) {
-  const deadline = getIssueDeadline(issueIn);
-  if (!deadline) return undefined;
-  const deadlineDate = getDeadlineDate(deadline);
-  if (!deadlineDate || !(deadlineDate instanceof Date)) return undefined;
-  try {
-    return convertDateToDayDateComboString(deadlineDate);
-  } catch (error) {
-    console.log("deadlineDate:", deadlineDate);
-    console.error("error:", error);
-  }
-}
-function convertDateToDayDateComboString(dateIn: Date) {
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-  const date = dateIn.getDate();
-  const day = days[dateIn.getDay()];
-  const month = `${dateIn.getUTCMonth() + 1}`.padStart(2, "0");
-  const year = `${dateIn.getFullYear()}`.slice(2);
-  return `${day} ${date}/${month}/${year}`;
 }
 
 export function makeWeeklyToDoObject(
   issues: SelectiveIssuesJsonShape,
-  currentWeek: number
+  currentWeek: number,
 ) {
   const categoriesObject: { [key: string]: SelectiveIssuesJsonShape } = {
     // 'This Week': [],
@@ -583,7 +429,7 @@ function completedAsPlanned(issue: SelectiveIssue) {
 }
 function filterToDoIssues(
   arrayIn: SelectiveIssuesJsonShape,
-  includeLastWeekGTM = true
+  includeLastWeekGTM = true,
 ) {
   return arrayIn
     .toReversed()
@@ -599,7 +445,7 @@ function filterToDoIssues(
             issueIsGTM(issue) &&
             issue.closed_at &&
             completedAsPlanned(issue) &&
-            dateIsLastFortnight(issue.closed_at)))
+            dateIsLastFortnight(issue.closed_at))),
     );
 }
 export function issueIsBlocked(issue: SelectiveIssue) {

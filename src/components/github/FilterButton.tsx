@@ -1,6 +1,5 @@
 import { useQueryParams } from "@/utils/searchParamsURL";
 
-
 export default function FilterButton({
   categoryFilter,
   setCategoryFilter,

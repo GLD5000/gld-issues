@@ -1,5 +1,3 @@
-
-
 export const barColours = {
   completed: "bg-blue-400 dark:bg-blue-300",
   testing: "bg-neutral-400 dark:bg-neutral-300",

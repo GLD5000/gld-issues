@@ -1,6 +1,5 @@
-
 import GitIssueCard from "./GitIssueCard";
-import { SelectiveIssuesJsonShape } from "./useIssues";
+import { SelectiveIssuesJsonShape } from "./useIssues/useIssues";
 
 export default function TasksPrioritySection({
   listIssueArray,

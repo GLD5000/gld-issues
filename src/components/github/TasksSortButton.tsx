@@ -1,5 +1,3 @@
-
-
 export default function TasksSortButton({
   incrementSortMode,
   sortMode,

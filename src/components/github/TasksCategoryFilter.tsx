@@ -1,6 +1,5 @@
-
 import FilterButton from "./FilterButton";
-import { SelectiveIssuesJsonShape } from "./useIssues";
+import { SelectiveIssuesJsonShape } from "./useIssues/useIssues";
 import CategoryFilterDropdown from "./CategoryFilterDropdown";
 
 export default function TasksCategoryFilter({

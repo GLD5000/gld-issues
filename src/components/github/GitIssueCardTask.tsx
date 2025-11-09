@@ -1,7 +1,6 @@
 import TickSvg from "@/icons/TickSvg";
 import UnTicked from "@/icons/UnTicked";
 
-
 export default function GitIssueCardTask({
   task,
   issueNumber,

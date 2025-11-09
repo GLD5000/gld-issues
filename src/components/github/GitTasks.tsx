@@ -3,7 +3,7 @@ import {
   makeWeeklyToDoObject,
   SelectiveIssuesJsonShape,
   useIssues,
-} from "./useIssues";
+} from "./useIssues/useIssues";
 import { useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import {
@@ -12,7 +12,10 @@ import {
   getCurrentWeekNumber,
 } from "@/utils/dates";
 import { useQueryParams, useQueryParamsArray } from "@/utils/searchParamsURL";
-import { GetFilteredTodoObject, getCategoryData } from "./useIssuesObjects";
+import {
+  GetFilteredTodoObject,
+  getCategoryData,
+} from "./useIssues/useIssuesObjects";
 
 import { useSortMode } from "./tasksQueryHooks";
 import BarGraph from "./BarGraph";

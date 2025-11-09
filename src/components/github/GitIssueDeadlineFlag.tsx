@@ -4,7 +4,7 @@ import {
   getAdjustedDeadlineDate,
   SelectiveIssue,
   issueIsGTM,
-} from "./useIssues";
+} from "./useIssues/useIssues";
 import { getProgressState } from "./GitIssueDeadlineDivider";
 import { adjustDateToPreviousWorkday } from "@/utils/dates";
 

@@ -1,4 +1,3 @@
-
 import FilterButtonSmall from "./FilterButtonSmall";
 import TasksSortButton from "./TasksSortButton";
 
