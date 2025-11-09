@@ -26,24 +26,24 @@ interface GitIssueCardProps extends ComponentProps<"details"> {
       [key: string]: string;
     },
   ) => {};
-  listIssueArray: string[];
+  priorityList: string[];
   //eslint-disable-next-line
-  setListIssue: (valueIn: string | string[]) => void;
+  setPriorityList: (valueIn: string | string[]) => void;
   lastUpdated: string;
 }
 
 export default function GitIssueCard({
   issue,
   setIssues,
-  listIssueArray,
-  setListIssue,
+  priorityList,
+  setPriorityList,
   lastUpdated,
   className,
   ...props
 }: GitIssueCardProps) {
   const [deadline, setDeadline] = useState(getIssueDeadline(issue));
   const [shortTitle, setShortTitle] = useState(getTitleNoDeadline(issue));
-  const [loadingString, setLoadingString] = useState("");
+  const [previousUpdate, setPreviousUpdate] = useState("");
   const [fullTitle, setFullTitle] = useState(issue.title);
   const lastUpdate = issue.updated_at
     ? convertIsoDateToDayDateComboString(issue.updated_at)
@@ -55,7 +55,7 @@ export default function GitIssueCard({
   const created = issue.created_at
     ? convertIsoDateToDayDateComboString(issue.created_at)
     : undefined;
-  const titleIsLoading = loadingString === `title-${lastUpdated}`;
+  const titleIsLoading = previousUpdate === `title-${lastUpdated}`;
   const labels = issue.labels.map((label) => (
     <div
       key={label.name}
@@ -126,10 +126,10 @@ export default function GitIssueCard({
           type="button"
           onClick={() => {
             const issueNumberString = `${issue.number}`;
-            setListIssue(issueNumberString);
+            setPriorityList(issueNumberString);
           }}
         >
-          {listIssueArray.includes(`${issue.number}`) ? (
+          {priorityList.includes(`${issue.number}`) ? (
             <TickSvg />
           ) : (
             <UnTicked />
@@ -264,7 +264,7 @@ export default function GitIssueCard({
     </details>
   );
   function setTitlesToLoad() {
-    setLoadingString(`title-${lastUpdated}`);
+    setPreviousUpdate(`title-${lastUpdated}`);
   }
   function shortTitleOnBlurHandler(e: React.FocusEvent<HTMLInputElement>) {
     const newValue = e.currentTarget.value;

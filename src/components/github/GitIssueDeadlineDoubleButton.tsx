@@ -10,13 +10,16 @@ import {
 } from "@/utils/dates";
 import DeadlineFlagButton from "./DeadlineFlagButton";
 import DeadlineModeButton from "./DeadlineModeButton";
-import { useDateMode, useDeadlineViewMode } from "./tasksQueryHooks";
 import {
   getAdjustedDeadlineDate,
   getIssueDeadlineDateComboString,
   issueIsGTM,
 } from "./useIssues/useIssuesUtils";
 import { SelectiveIssue } from "./useIssues/useIssuesTypes";
+import {
+  useDateMode,
+  useDeadlineViewMode,
+} from "./useIssues/useIssuesParameterHooks";
 
 export default function GitIssueDeadlineDoubleButton({
   issue,

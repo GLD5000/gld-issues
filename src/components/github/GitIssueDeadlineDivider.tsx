@@ -9,13 +9,13 @@ import {
 } from "@/utils/dates";
 import DeadlineFlagButton from "./DeadlineFlagButton";
 import DeadlineModeButton from "./DeadlineModeButton";
-import { useSortMode } from "./tasksQueryHooks";
 import {
   getAdjustedDeadlineDate,
   getIssueDeadlineDateComboString,
   issueIsGTM,
 } from "./useIssues/useIssuesUtils";
 import { SelectiveIssue } from "./useIssues/useIssuesTypes";
+import { useSortMode } from "./useIssues/useIssuesParameterHooks";
 
 export default function GitIssueDeadlineDivider({
   issue,

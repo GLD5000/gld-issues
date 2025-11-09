@@ -13,7 +13,6 @@ import {
   getCategoryData,
 } from "./useIssues/useIssuesObjects";
 
-import { useSortMode } from "./tasksQueryHooks";
 import BarGraph from "./BarGraph";
 import TasksTopButtons from "./TasksTopButtons";
 import IssueElements from "./IssueElements";
@@ -22,15 +21,23 @@ import TasksCategoryFilter from "./TasksCategoryFilter";
 import TasksTitleFilter from "./TasksTitleFilter";
 import { SelectiveIssuesJsonShape } from "./useIssues/useIssuesTypes";
 import { makeWeeklyToDoObject } from "./useIssues/useIssuesUtils";
+import {
+  useCategoryFilter,
+  usePriorityList,
+  useSortMode,
+  useSubCategoryFilter,
+  useTitleFilter,
+  useViewMode,
+} from "./useIssues/useIssuesParameterHooks";
 
 export default function GitTasks() {
   const [issuesObject, setIssues] = useIssues();
-  const [loadingString, setLoadingString] = useState("");
-  const [titleFilter, setTitleFilter] = useQueryParams("tf");
-  const [categoryFilter, setCategoryFilter] = useQueryParams("cf");
-  const [subCategoryFilter, setSubCategoryFilter] = useQueryParamsArray("scf");
-  const [listIssueArray, setListIssue] = useQueryParamsArray("p");
-  const [viewMode, setViewMode] = useQueryParams("vm", "Category");
+  const [previousUpdate, setPreviousUpdate] = useState("");
+  const [titleFilter, setTitleFilter] = useTitleFilter();
+  const [categoryFilter, setCategoryFilter] = useCategoryFilter();
+  const [subCategoryFilter, setSubCategoryFilter] = useSubCategoryFilter();
+  const [priorityList, setPriorityList] = usePriorityList();
+  const [viewMode, setViewMode] = useViewMode();
   const [sortMode, incrementSortMode] = useSortMode();
   if (!issuesObject) return <LoadingSpinner />;
   const currentWeek = getCurrentWeekNumber();
@@ -49,7 +56,7 @@ export default function GitTasks() {
     currentWeek,
   );
   const [date, time] = getLastUpdated(lastUpdated);
-  const isLoading = getIsLoading(lastUpdated, loadingString);
+  const isLoading = getIsLoading(lastUpdated, previousUpdate);
   const openIssues = getOpenIssues(issues);
   const filteredToDoObject = GetFilteredTodoObject(
     titleFilter,
@@ -92,17 +99,17 @@ export default function GitTasks() {
 
         <TasksTopButtons
           isLoading={isLoading}
-          setLoadingString={setLoadingString}
+          setPreviousUpdate={setPreviousUpdate}
           lastUpdated={lastUpdated}
           setIssues={setIssues}
           date={date}
           time={time}
         />
         <TasksPrioritySection
-          listIssueArray={listIssueArray}
+          priorityList={priorityList}
           issues={issues}
           setIssues={setIssues}
-          setListIssue={setListIssue}
+          setPriorityList={setPriorityList}
           lastUpdated={lastUpdated}
         />
         {issues && (
@@ -111,8 +118,8 @@ export default function GitTasks() {
             issues={issues}
             // openIssues={openIssues}
             setIssues={setIssues}
-            listIssueArray={listIssueArray}
-            setListIssue={setListIssue}
+            priorityList={priorityList}
+            setPriorityList={setPriorityList}
             filteredToDoObject={filteredToDoObject}
             subCategoryFilter={subCategoryFilter}
             setSubCategoryFilter={setSubCategoryFilter}
@@ -207,8 +214,8 @@ function getFilterSettings(categoryFilter: string) {
   };
 }
 
-function getIsLoading(lastUpdated: string, loadingString: string) {
-  return lastUpdated === loadingString;
+function getIsLoading(lastUpdated: string, previousUpdate: string) {
+  return lastUpdated === previousUpdate;
 }
 function getLastUpdated(lastUpdated: string): string[] {
   let date = new Date(lastUpdated);

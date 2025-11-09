@@ -23,8 +23,8 @@ export default function CategoryCards({
   incrementSortMode,
   sortMode,
   setIssues,
-  listIssueArray,
-  setListIssue,
+  priorityList,
+  setPriorityList,
   titleFilter,
   filterSettings,
   categoryFilter,
@@ -43,8 +43,8 @@ export default function CategoryCards({
       [key: string]: string; //eslint-disable-line
     }, //eslint-disable-line
   ) => {}; //eslint-disable-line
-  listIssueArray: string[];
-  setListIssue: (value: string | string[]) => void; //eslint-disable-line
+  priorityList: string[];
+  setPriorityList: (value: string | string[]) => void; //eslint-disable-line
   titleFilter: string;
   filterSettings: {
     notFiltering: boolean;
@@ -108,8 +108,8 @@ export default function CategoryCards({
                 // )
                 .filter(filterCategory)}
               setIssues={setIssues}
-              listIssueArray={listIssueArray}
-              setListIssue={setListIssue}
+              priorityList={priorityList}
+              setPriorityList={setPriorityList}
               lastUpdated={lastUpdated}
             />
           </div>
@@ -220,7 +220,7 @@ export default function CategoryCards({
     // }
 
     return (
-      !issueInWorkingList(issue.number, listIssueArray) &&
+      !issueInWorkingList(issue.number, priorityList) &&
       ((notFiltering && titleFilter.length === 0) ||
         (notFiltering &&
           issue.title.toLowerCase().indexOf(titleFilter.toLowerCase()) > -1) ||
@@ -261,7 +261,7 @@ export default function CategoryCards({
   }
 }
 
-function issueInWorkingList(issueNumber: number, listIssueArray: string[]) {
-  const testResult = listIssueArray.includes(`${issueNumber}`);
+function issueInWorkingList(issueNumber: number, priorityList: string[]) {
+  const testResult = priorityList.includes(`${issueNumber}`);
   return testResult;
 }

@@ -2,14 +2,14 @@ import LoadingSpinner from "./LoadingSpinner";
 
 export default function TasksTopButtons({
   isLoading,
-  setLoadingString,
+  setPreviousUpdate,
   lastUpdated,
   setIssues,
   date,
   time,
 }: {
   isLoading: boolean;
-  setLoadingString: React.Dispatch<React.SetStateAction<string>>;
+  setPreviousUpdate: React.Dispatch<React.SetStateAction<string>>;
   lastUpdated: string;
   setIssues: (type?: string, body?: { [key: string]: string }) => {}; //eslint-disable-line
   date: string;
@@ -30,7 +30,7 @@ export default function TasksTopButtons({
         className="flex flex-wrap gap-0.5 w-fit border-none items-center text-center text-sm p-0 text-neutral-500 dark:text-neutral-400 hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white transition ml-auto box-border"
         onClick={() => {
           if (!isLoading) {
-            setLoadingString(lastUpdated);
+            setPreviousUpdate(lastUpdated);
             setIssues();
           }
         }}

@@ -14,8 +14,8 @@ export default function IssueElements({
   incrementSortMode,
   sortMode,
   setIssues,
-  listIssueArray,
-  setListIssue,
+  priorityList,
+  setPriorityList,
   titleFilter,
   filterSettings,
   categoryFilter,
@@ -38,8 +38,8 @@ export default function IssueElements({
       [key: string]: string; //eslint-disable-line
     }, //eslint-disable-line
   ) => {}; //eslint-disable-line
-  listIssueArray: string[];
-  setListIssue: (value: string | string[]) => void; //eslint-disable-line
+  priorityList: string[];
+  setPriorityList: (value: string | string[]) => void; //eslint-disable-line
   titleFilter: string;
   filterSettings: {
     notFiltering: boolean;
@@ -60,8 +60,8 @@ export default function IssueElements({
       incrementSortMode={incrementSortMode}
       sortMode={sortMode}
       setIssues={setIssues}
-      listIssueArray={listIssueArray}
-      setListIssue={setListIssue}
+      priorityList={priorityList}
+      setPriorityList={setPriorityList}
       titleFilter={titleFilter}
       filterSettings={filterSettings}
       categoryFilter={categoryFilter}

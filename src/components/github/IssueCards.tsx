@@ -4,8 +4,8 @@ import { SelectiveIssue } from "./useIssues/useIssuesTypes";
 export default function IssueCards({
   issueArray,
   setIssues,
-  listIssueArray,
-  setListIssue,
+  priorityList,
+  setPriorityList,
   lastUpdated,
 }: {
   issueArray: SelectiveIssue[];
@@ -17,9 +17,9 @@ export default function IssueCards({
       [key: string]: string;
     },
   ) => {};
-  listIssueArray: string[];
+  priorityList: string[];
   //eslint-disable-next-line
-  setListIssue: (valueIn: string | string[]) => void;
+  setPriorityList: (valueIn: string | string[]) => void;
   lastUpdated: string;
 }) {
   return (
@@ -30,8 +30,8 @@ export default function IssueCards({
             key={`${index}${issue.number}`}
             issue={issue}
             setIssues={setIssues}
-            listIssueArray={listIssueArray}
-            setListIssue={setListIssue}
+            priorityList={priorityList}
+            setPriorityList={setPriorityList}
             lastUpdated={lastUpdated}
             className={
               index === issueArray.length - 1

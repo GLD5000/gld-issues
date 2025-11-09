@@ -4,17 +4,6 @@
 import { SelectiveIssue } from "./useIssuesTypes";
 import { issueIsBlocked } from "./useIssuesUtils";
 
-export function useIssueObjects() {
-  // const [issuesObject, setIssues] = useIssues();
-  // const [loadingString, setLoadingString] = useState('');
-  // const [titleFilter, setTitleFilter] = useQueryParams('title');
-  // const [categoryFilter, setCategoryFilter] = useQueryParams('cat');
-  // const [subCategoryFilter, setSubCategoryFilter] = useQueryParams('show');
-  // const [listIssueArray, setListIssue] = useQueryParamsArray('priority');
-  // const [viewMode, setViewMode] = useQueryParams('mode', 'Category');
-  // return openIssues , filteredToDoObject, categoryData
-}
-
 function filterToDoObject(
   objectToFilter: { [key: string]: SelectiveIssue[] },
   categoryFilter: string,
