@@ -92,7 +92,7 @@ export default function GitIssueCard({
       {...props}
     >
       <summary className="cursor-pointer p-0.5 flex flex-wrap gap-2 items-center w-full box-border bg-neutral-100 dark:bg-neutral-800">
-        <span className="text-center text-white right-0 top-1 ease-out duration-200 transition-transform group-open:rotate-180 group-open:ease-in rounded-[50%] w-8 h-8 p-1 box-border block ">
+        <span className="text-center text-black dark:text-white right-0 top-1 ease-out duration-200 transition-transform group-open:rotate-180 group-open:ease-in rounded-[50%] w-8 h-8 p-1 box-border block ">
           <svg
             width="100%"
             height="100%"

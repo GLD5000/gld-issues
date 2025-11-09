@@ -27,7 +27,7 @@ export default function BarGraph({
   return (
     <details open className="hidden md:grid gap-0 w-full h-auto group/graph">
       <summary className="w-full grid grid-cols-[auto_1fr] items-center rounded-none mb-2 cursor-pointer">
-        <span className="text-center text-white right-0 top-1 ease-out duration-200 transition-transform group-open/graph:rotate-180 group-open/graph:ease-in rounded-[50%] w-8 h-8 p-1 box-border block ">
+        <span className="text-center right-0 top-1 ease-out duration-200 transition-transform group-open/graph:rotate-180 group-open/graph:ease-in rounded-[50%] w-8 h-8 p-1 box-border block ">
           <svg
             width="100%"
             height="100%"
@@ -49,7 +49,7 @@ export default function BarGraph({
             />
           </svg>
         </span>
-        <div className="text-xl text-left ">{`${subTitle} - (${
+        <div className="text-xl text-left text-black dark:text-white">{`${subTitle} - (${
           Object.values(toDoObject)
             .flatMap((cat) => [...cat])
             .filter((issue) => issue.state !== "open").length

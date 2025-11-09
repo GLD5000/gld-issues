@@ -119,7 +119,7 @@ export default function CategoryCards({
             key={`${entry[0]}${index}`}
           >
             <summary className="w-full grid grid-cols-[auto_1fr] items-center rounded-none border-none mb-2">
-              <span className="text-center text-white right-0 top-1 ease-out duration-200 transition-transform group-open/subsection:rotate-180 group-open/subsection:ease-in rounded-[50%] w-10 h-10 p-1 box-border block">
+              <span className="text-center text-black dark:text-white right-0 top-1 ease-out duration-200 transition-transform group-open/subsection:rotate-180 group-open/subsection:ease-in rounded-[50%] w-10 h-10 p-1 box-border block">
                 <svg
                   width="100%"
                   height="100%"
