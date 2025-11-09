@@ -1,5 +1,5 @@
-import { SelectiveIssue } from "./useIssues/useIssues";
 import GitIssueCard from "./GitIssueCard";
+import { SelectiveIssue } from "./useIssues/useIssuesTypes";
 
 export default function IssueCards({
   issueArray,

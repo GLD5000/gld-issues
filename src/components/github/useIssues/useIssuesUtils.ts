@@ -1,5 +1,23 @@
-import { getCurrentCentury } from "@/utils/dates";
-import { SelectiveIssue } from "./useIssues";
+import {
+  adjustDateToPreviousWorkday,
+  adjustDateToWorkday,
+  dateIsLastFortnight,
+  dateIsThisWeek,
+  getCurrentCentury,
+  getWeekNumberFromISOString,
+} from "@/utils/dates";
+
+import { gldIssuesConfig } from "../../../../gitIssues.config";
+import {
+  SelectiveIssue,
+  SelectiveIssuesJsonShape,
+  IssuesJsonShape,
+  Issue,
+  SelectiveIssueLabel,
+  SelectiveIssueBody,
+} from "./useIssuesTypes";
+
+const { githubIssueCategories } = gldIssuesConfig;
 
 export function getIssueDeadlineSortValue(issueIn: SelectiveIssue) {
   const deadline = getIssueDeadline(issueIn) || "";
@@ -64,4 +82,191 @@ function convertDateToDayDateComboString(dateIn: Date) {
   const month = `${dateIn.getUTCMonth() + 1}`.padStart(2, "0");
   const year = `${dateIn.getFullYear()}`.slice(2);
   return `${day} ${date}/${month}/${year}`;
+}
+export function getAdjustedDeadlineDate(issue: SelectiveIssue) {
+  const deadline = getIssueDeadline(issue) || undefined;
+  if (!deadline) return null;
+  return issueIsGTM(issue)
+    ? adjustDateToPreviousWorkday(getDeadlineDate(deadline) || new Date())
+    : adjustDateToWorkday(getDeadlineDate(deadline) || new Date());
+}
+function makeTimeObject(issues: SelectiveIssuesJsonShape, currentWeek: number) {
+  const returnObject: { [key: string]: SelectiveIssuesJsonShape } = {
+    "This Week": [],
+    "Next Week": [],
+    [`Week ${currentWeek + 2}`]: [],
+    [`Week ${currentWeek + 3}`]: [],
+    Later: [],
+  };
+
+  const filteredIssues = filterToDoIssues(issues);
+  filteredIssues.forEach((issue) => {
+    const deadline = getIssueDeadline(issue) || undefined;
+    if (deadline) {
+      const deadlineDate = getAdjustedDeadlineDate(issue);
+      try {
+        const issueWeekNumber = deadlineDate
+          ? getWeekNumberFromISOString(deadlineDate.toISOString())
+          : undefined;
+        if (
+          issueWeekNumber !== undefined &&
+          (currentWeek === issueWeekNumber || currentWeek > issueWeekNumber)
+        ) {
+          addTodoObject("This Week", issue, returnObject);
+        } else if (currentWeek + 1 === issueWeekNumber) {
+          addTodoObject("Next Week", issue, returnObject);
+        } else if (currentWeek + 2 === issueWeekNumber) {
+          addTodoObject(`Week ${currentWeek + 2}`, issue, returnObject);
+        } else if (currentWeek + 3 === issueWeekNumber) {
+          addTodoObject(`Week ${currentWeek + 3}`, issue, returnObject);
+        } else if (issue.state === "open") {
+          addTodoObject(`Later`, issue, returnObject);
+        }
+      } catch (e) {
+        console.log("issue.title:", issue.title);
+        console.log("deadline:", deadline);
+
+        console.log("deadlineDate:", deadlineDate);
+        console.log("e:", e);
+      }
+    }
+  });
+  return returnObject;
+}
+
+export function makeWeeklyToDoObject(
+  issues: SelectiveIssuesJsonShape,
+  currentWeek: number,
+) {
+  const categoriesObject: { [key: string]: SelectiveIssuesJsonShape } = {
+    // 'This Week': [],
+    // 'Next Week': [],
+    // Blocked: [],
+  };
+  const timeObject = makeTimeObject(issues, currentWeek);
+  githubIssueCategories.forEach((key) => {
+    categoriesObject[key] = [];
+  });
+  const filteredIssues = filterToDoIssues(issues);
+  filteredIssues.forEach((issue) => {
+    if (
+      !githubIssueCategories.some((label) => {
+        if (issue.labels?.some((item) => item.name === label)) {
+          addTodoObject(label, issue, categoriesObject);
+          return true;
+        }
+      })
+    ) {
+      // addTodoObject('other', issue, categoriesObject);
+    }
+  });
+
+  return { categoriesObject, timeObject };
+}
+
+function completedAsPlanned(issue: SelectiveIssue) {
+  return issue.state !== "open" && issue.state_reason !== "not_planned";
+}
+function filterToDoIssues(
+  arrayIn: SelectiveIssuesJsonShape,
+  includeLastWeekGTM = true,
+) {
+  return arrayIn
+    .toReversed()
+    .filter(
+      (issue) =>
+        !issueIsTodo(issue) &&
+        (issue.state === "open" ||
+          (completedAsPlanned(issue) && dateIsThisWeek(issue.created_at)) ||
+          (completedAsPlanned(issue) &&
+            issue.closed_at &&
+            dateIsThisWeek(issue.closed_at)) ||
+          (includeLastWeekGTM &&
+            issueIsGTM(issue) &&
+            issue.closed_at &&
+            completedAsPlanned(issue) &&
+            dateIsLastFortnight(issue.closed_at))),
+    );
+}
+export function issueIsBlocked(issue: SelectiveIssue) {
+  return (
+    issue.state === "open" &&
+    issue.labels.some((label) => label.name === "awaiting")
+  );
+}
+export function issueIsTesting(issue: SelectiveIssue) {
+  return (
+    issue.state === "open" &&
+    issue.labels.some((label) => label.name === "testing")
+  );
+}
+export function issueIsGTM(issue: SelectiveIssue) {
+  return issue.labels.some((label) => label.name === "Website - GTM");
+}
+export function issueIsParent(issue: SelectiveIssue) {
+  return issue.labels.some((label) => label.name === "parent project");
+}
+export function issueIsTodo(issue: SelectiveIssue) {
+  return issue.labels.some((label) => label.name === "todo");
+}
+export function convertIssuesToSelectiveIssues(issues: IssuesJsonShape) {
+  return issues.map(convertIssueToSelectiveIssue) as SelectiveIssuesJsonShape;
+}
+function convertIssueToSelectiveIssue(issue: Issue): SelectiveIssue {
+  const {
+    number,
+    title,
+    labels,
+    state,
+    assignee,
+    milestone,
+    comments,
+    created_at,
+    updated_at,
+    closed_at,
+    body,
+    state_reason,
+  } = issue;
+  const convertedIssue = {
+    number,
+    labels: labels.map((labelEntry): SelectiveIssueLabel => {
+      const { name, color, description } = labelEntry;
+      return { name, color, description };
+    }),
+    assignee: assignee ? assignee.login : "",
+    title,
+    state,
+    milestone,
+    comments,
+    created_at,
+    updated_at,
+    closed_at,
+    body: getLinksTasksFromBodyString(body),
+    state_reason,
+  };
+  return convertedIssue;
+}
+function getLinksTasksFromBodyString(body: string): SelectiveIssueBody {
+  const webLinkRegex = /https:[^\n\r]+/g;
+
+  const tasksRegex = /- \[[x ]{1}\][^\r\n]+/g;
+  const tasksArray = body?.match(tasksRegex);
+  let taskLists: string[] = [];
+  if (tasksArray && Array.isArray(tasksArray)) {
+    tasksArray.forEach((task) => taskLists.push(task));
+  }
+
+  const webLinks = body?.match(webLinkRegex);
+  let links: string[] = [];
+  if (webLinks && Array.isArray(webLinks)) {
+    webLinks.forEach((link) => links.push(link));
+  }
+  return { links, taskLists };
+}
+function addTodoObject(
+  key: string,
+  issue: SelectiveIssue,
+  toDoObject: { [key: string]: SelectiveIssuesJsonShape },
+) {
+  toDoObject[key] ? toDoObject[key].push(issue) : (toDoObject[key] = [issue]);
 }

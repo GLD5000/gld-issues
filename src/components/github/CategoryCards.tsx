@@ -1,20 +1,20 @@
 import { Fragment, ReactElement } from "react";
 import IssueCards from "./IssueCards";
-import {
-  SelectiveIssuesJsonShape,
-  issueIsGTM,
-  issueIsParent,
-  SelectiveIssue,
-  issueIsBlocked,
-  issueIsTesting,
-} from "./useIssues/useIssues";
 import CategoryAddIssueButton from "./CategoryAddIssueButton";
 import SubCategoryFilters from "./SubCategoryFilters";
 import {
   getIssueDeadline,
   getIssueDeadlineSortValue,
   getIssueUpdatedSortValue,
+  issueIsBlocked,
+  issueIsGTM,
+  issueIsParent,
+  issueIsTesting,
 } from "./useIssues/useIssuesUtils";
+import {
+  SelectiveIssuesJsonShape,
+  SelectiveIssue,
+} from "./useIssues/useIssuesTypes";
 
 export default function CategoryCards({
   filteredToDoObject,

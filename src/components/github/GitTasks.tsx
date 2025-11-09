@@ -1,9 +1,5 @@
 "use client";
-import {
-  makeWeeklyToDoObject,
-  SelectiveIssuesJsonShape,
-  useIssues,
-} from "./useIssues/useIssues";
+import { useIssues } from "./useIssues/useIssues";
 import { useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import {
@@ -24,6 +20,8 @@ import IssueElements from "./IssueElements";
 import TasksPrioritySection from "./TasksPrioritySection";
 import TasksCategoryFilter from "./TasksCategoryFilter";
 import TasksTitleFilter from "./TasksTitleFilter";
+import { SelectiveIssuesJsonShape } from "./useIssues/useIssuesTypes";
+import { makeWeeklyToDoObject } from "./useIssues/useIssuesUtils";
 
 export default function GitTasks() {
   const [issuesObject, setIssues] = useIssues();

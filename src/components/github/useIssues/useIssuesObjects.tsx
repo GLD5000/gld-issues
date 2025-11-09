@@ -1,6 +1,8 @@
 // import { useQueryParams, useQueryParamsArray } from "@/utils/searchParamsURL";
 // import { useState } from "react";
-import { issueIsBlocked, SelectiveIssue } from "./useIssues";
+
+import { SelectiveIssue } from "./useIssuesTypes";
+import { issueIsBlocked } from "./useIssuesUtils";
 
 export function useIssueObjects() {
   // const [issuesObject, setIssues] = useIssues();

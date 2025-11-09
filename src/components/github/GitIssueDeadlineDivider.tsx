@@ -1,10 +1,4 @@
 "use client";
-
-import {
-  getAdjustedDeadlineDate,
-  issueIsGTM,
-  SelectiveIssue,
-} from "./useIssues/useIssues";
 import {
   adjustDateToPreviousWorkday,
   dateIsFri,
@@ -16,7 +10,12 @@ import {
 import DeadlineFlagButton from "./DeadlineFlagButton";
 import DeadlineModeButton from "./DeadlineModeButton";
 import { useSortMode } from "./tasksQueryHooks";
-import { getIssueDeadlineDateComboString } from "./useIssues/useIssuesUtils";
+import {
+  getAdjustedDeadlineDate,
+  getIssueDeadlineDateComboString,
+  issueIsGTM,
+} from "./useIssues/useIssuesUtils";
+import { SelectiveIssue } from "./useIssues/useIssuesTypes";
 
 export default function GitIssueDeadlineDivider({
   issue,
