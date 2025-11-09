@@ -8,7 +8,8 @@ import {
 } from "@/utils/dates";
 import { useStore } from "@/zustand/zustand";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-
+import { gldIssuesConfig } from "../../../gitIssues.config";
+const { githubIssueCategories } = gldIssuesConfig;
 export type Issue = {
   url: string;
   repository_url: string;
@@ -290,31 +291,6 @@ function addFetchedIssuesToSessionStorageObject(
   });
   return oldIssuesArray;
 }
-export const issueTargetLabels = [
-  // 'priority',
-  // 'awaiting',
-  "Targets",
-  "Website - GTM",
-  "Website - content",
-  "Website - loyalty",
-  "Website - CLP",
-  "Website - PDP",
-  "Website - Core Web Vitals",
-  "Website - UX",
-  "Website - SEO",
-  "Website - Accessibility",
-  "Website - AB Testing",
-  "Website - security",
-  "SFCC - fix",
-  "SFCC - workflow",
-  "Dev 2.0 - fix",
-  "Dev 2.0 - testing / QA",
-  "Dev 2.0 - build tools",
-  "Dev 2.0 - collaboration",
-  "Dev 2.0 - project management",
-  "Dev 2.0 - reporting",
-  "Dev 2.0 - helpdesk",
-];
 
 export function useIssues(): [
   IssuesSessionObject | null,
@@ -532,13 +508,13 @@ export function makeWeeklyToDoObject(
     // Blocked: [],
   };
   const timeObject = makeTimeObject(issues, currentWeek);
-  issueTargetLabels.forEach((key) => {
+  githubIssueCategories.forEach((key) => {
     categoriesObject[key] = [];
   });
   const filteredIssues = filterToDoIssues(issues);
   filteredIssues.forEach((issue) => {
     if (
-      !issueTargetLabels.some((label) => {
+      !githubIssueCategories.some((label) => {
         if (issue.labels?.some((item) => item.name === label)) {
           addTodoObject(label, issue, categoriesObject);
           return true;
