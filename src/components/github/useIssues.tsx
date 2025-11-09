@@ -591,26 +591,6 @@ function makeTimeObject(issues: SelectiveIssuesJsonShape, currentWeek: number) {
         console.log("e:", e);
       }
     }
-    // }   else {
-    //     addTodoObject('Other', issue, returnObject);
-    // }
-    // if (
-    //     issue.state === 'open' &&
-    //     issue.labels.some((label) => label.name === 'awaiting')
-    // ) {
-    //     addTodoObject('Blocked', issue, returnObject);
-    // }
-
-    // if (
-    //     !issueTargetLabels.some((label) => {
-    //         if (issue.labels?.some((item) => item.name === label)) {
-    //             addTodoObject(label, issue, returnObject);
-    //             return true;
-    //         }
-    //     })
-    // ) {
-    //     addTodoObject('other', issue, returnObject);
-    // }
   });
   return returnObject;
 }
