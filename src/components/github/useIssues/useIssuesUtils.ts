@@ -157,7 +157,7 @@ export function makeWeeklyToDoObject(
         }
       })
     ) {
-      // addTodoObject('other', issue, categoriesObject);
+      addTodoObject('Uncategorised', issue, categoriesObject);
     }
   });
 
