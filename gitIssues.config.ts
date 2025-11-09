@@ -1,8 +1,5 @@
 export const gldIssuesConfig = {
-    /**
-     * githubIssueCategories : the GitHub Issue labels that get will populate category filters and progress bars
-     */
-  githubIssueCategories: [
+  githubIssueCategories: [//GitHub Issue labels that populate category filters and progress bars
     "Targets",
     "Website - GTM",
     "Website - content",
