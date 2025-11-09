@@ -1,7 +1,5 @@
 export const gldIssuesConfig = {
   githubIssueCategories: [
-    // 'priority',
-    // 'awaiting',
     "Targets",
     "Website - GTM",
     "Website - content",
