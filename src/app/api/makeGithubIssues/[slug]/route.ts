@@ -63,7 +63,7 @@ export async function PATCH(
   request: Request, //eslint-disable-line
   { params }: { params: { slug: string | undefined } },
 ): Promise<NextResponse> {
-  const {slug} = await params;//erroneous TS error (Next.js Route handler update)
+  const { slug } = await params; //erroneous TS error (Next.js Route handler update)
 
   if (slug && slug === "patchTodo") {
     const res = await request.json();
