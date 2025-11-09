@@ -270,17 +270,17 @@ function setSessionStorageIssues(newObject: IssuesSessionObject) {
   return window.sessionStorage.setItem(keyName, JSON.stringify(newObject));
 }
 function addFetchedIssuesToSessionStorageObject(
-  newObject: SelectiveIssuesJsonShape,
+  newObject: SelectiveIssuesJsonShape
 ) {
   const sessionStorageIssues = getSessionStorageIssues();
   if (!sessionStorageIssues) return newObject;
   const sessionStorageIssuesObject = JSON.parse(
-    sessionStorageIssues,
+    sessionStorageIssues
   ) as IssuesSessionObject;
   const oldIssuesArray = sessionStorageIssuesObject.issues || [];
   newObject.forEach((issueObject) => {
     const insertIndex = oldIssuesArray?.findIndex(
-      (arrayItem) => arrayItem.number === issueObject.number,
+      (arrayItem) => arrayItem.number === issueObject.number
     );
     if (insertIndex > -1) {
       oldIssuesArray[insertIndex] = issueObject;
@@ -323,7 +323,7 @@ export function useIssues(): [
     body?: //eslint-disable-line
     {
       [key: string]: string;
-    },
+    }
   ) => {},
 ] {
   const [state, setState] = useState<IssuesSessionObject | null>(null);
@@ -404,7 +404,7 @@ export function useIssues(): [
         state,
         (
           type = "refresh",
-          body?: Record<string, string>, // eslint-disable-line
+          body?: Record<string, string> // eslint-disable-line
         ) => {
           console.log("accessLevel:", accessLevel);
           console.log(type);
@@ -415,13 +415,13 @@ export function useIssues(): [
 }
 async function storeNewValue(
   setState: Dispatch<SetStateAction<IssuesSessionObject | null>>,
-  slug?: string,
+  slug?: string
 ) {
   const fetchedValue = await fetchGithubTasks(slug);
   if (!fetchedValue) return;
   const selectiveValue = slug
     ? addFetchedIssuesToSessionStorageObject(
-        convertIssuesToSelectiveIssues(fetchedValue),
+        convertIssuesToSelectiveIssues(fetchedValue)
       )
     : convertIssuesToSelectiveIssues(fetchedValue);
   const newObject: IssuesSessionObject = {
@@ -437,7 +437,7 @@ async function fetchGithubTasks(slug?: string) {
   console.log("Fetch running...");
   try {
     const response = await fetch(
-      slug ? `/api/getGithubIssues/${slug}` : "/api/getGithubIssues/tasks/",
+      slug ? `/api/getGithubIssues/${slug}` : "/api/getGithubIssues/tasks/"
     );
     if (!response.ok) {
       throw new Error("Failed to fetch log file");
@@ -453,7 +453,7 @@ async function fetchGithubTasks(slug?: string) {
 function addTodoObject(
   key: string,
   issue: SelectiveIssue,
-  toDoObject: { [key: string]: SelectiveIssuesJsonShape },
+  toDoObject: { [key: string]: SelectiveIssuesJsonShape }
 ) {
   toDoObject[key] ? toDoObject[key].push(issue) : (toDoObject[key] = [issue]);
 }
@@ -483,7 +483,7 @@ export function getTitleNoDeadline(issueIn: SelectiveIssue) {
 }
 export function reBuildIssueTitle(
   shortTitle: string,
-  deadline: string | undefined,
+  deadline: string | undefined
 ) {
   const deadlineString = deadline ? getStringDeadlineDate(deadline) : undefined;
   return deadlineString ? `${shortTitle} ${deadlineString}` : shortTitle;
@@ -524,7 +524,7 @@ function convertDateToDayDateComboString(dateIn: Date) {
 
 export function makeWeeklyToDoObject(
   issues: SelectiveIssuesJsonShape,
-  currentWeek: number,
+  currentWeek: number
 ) {
   const categoriesObject: { [key: string]: SelectiveIssuesJsonShape } = {
     // 'This Week': [],
@@ -569,7 +569,10 @@ function makeTimeObject(issues: SelectiveIssuesJsonShape, currentWeek: number) {
         const issueWeekNumber = deadlineDate
           ? getWeekNumberFromISOString(deadlineDate.toISOString())
           : undefined;
-        if (currentWeek === issueWeekNumber) {
+        if (
+          issueWeekNumber !== undefined &&
+          (currentWeek === issueWeekNumber || currentWeek > issueWeekNumber)
+        ) {
           addTodoObject("This Week", issue, returnObject);
         } else if (currentWeek + 1 === issueWeekNumber) {
           addTodoObject("Next Week", issue, returnObject);
@@ -624,7 +627,7 @@ function completedAsPlanned(issue: SelectiveIssue) {
 }
 function filterToDoIssues(
   arrayIn: SelectiveIssuesJsonShape,
-  includeLastWeekGTM = true,
+  includeLastWeekGTM = true
 ) {
   return arrayIn
     .toReversed()
@@ -640,7 +643,7 @@ function filterToDoIssues(
             issueIsGTM(issue) &&
             issue.closed_at &&
             completedAsPlanned(issue) &&
-            dateIsLastFortnight(issue.closed_at))),
+            dateIsLastFortnight(issue.closed_at)))
     );
 }
 export function issueIsBlocked(issue: SelectiveIssue) {
