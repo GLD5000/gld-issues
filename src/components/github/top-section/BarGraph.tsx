@@ -1,6 +1,6 @@
 // import { BarPlot } from './BarPlot';
 import { BarPlotV2 } from "./BarPlotV2";
-import { SelectiveIssuesJsonShape } from "./useIssues/useIssuesTypes";
+import { SelectiveIssuesJsonShape } from "../useIssues/useIssuesTypes";
 
 export default function BarGraph({
   subTitle,

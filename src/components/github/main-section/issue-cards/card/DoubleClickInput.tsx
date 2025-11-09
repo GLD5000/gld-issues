@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "../../../LoadingSpinner";
 
 export default function DoubleClickInput({
   onBlurHandler,

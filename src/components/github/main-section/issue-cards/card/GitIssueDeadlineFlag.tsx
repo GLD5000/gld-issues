@@ -1,12 +1,12 @@
 "use client";
 
-import { getProgressState } from "./GitIssueDeadlineDivider";
 import { adjustDateToPreviousWorkday } from "@/utils/dates";
-import { SelectiveIssue } from "./useIssues/useIssuesTypes";
+import { SelectiveIssue } from "../../../useIssues/useIssuesTypes";
 import {
   getAdjustedDeadlineDate,
   issueIsGTM,
-} from "./useIssues/useIssuesUtils";
+} from "../../../useIssues/useIssuesUtils";
+import { getProgressState } from "./GitIssueDeadlineDoubleButton";
 
 export default function GitIssueDeadlineFlag({
   issue,

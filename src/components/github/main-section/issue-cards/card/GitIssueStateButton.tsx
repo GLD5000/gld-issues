@@ -4,9 +4,9 @@ import {
   getWeekNumberFromISOString,
   getWeekNumberFromMilliseconds,
 } from "@/utils/dates";
-import LoadingSpinner from "./LoadingSpinner";
-import { getIssueDeadlineDateObject } from "./useIssues/useIssuesUtils";
-import { SelectiveIssue } from "./useIssues/useIssuesTypes";
+import LoadingSpinner from "@/components/github/LoadingSpinner";
+import { SelectiveIssue } from "@/components/github/useIssues/useIssuesTypes";
+import { getIssueDeadlineDateObject } from "@/components/github/useIssues/useIssuesUtils";
 
 const optionsArray = [
   "Completed",

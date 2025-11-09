@@ -8,18 +8,18 @@ import {
   getWeekNumberFromMilliseconds,
   timeDiffWorkDays,
 } from "@/utils/dates";
-import DeadlineFlagButton from "./DeadlineFlagButton";
-import DeadlineModeButton from "./DeadlineModeButton";
 import {
   getAdjustedDeadlineDate,
   getIssueDeadlineDateComboString,
   issueIsGTM,
-} from "./useIssues/useIssuesUtils";
-import { SelectiveIssue } from "./useIssues/useIssuesTypes";
+} from "../../../useIssues/useIssuesUtils";
+import { SelectiveIssue } from "../../../useIssues/useIssuesTypes";
 import {
   useDateMode,
   useDeadlineViewMode,
-} from "./useIssues/useIssuesParameterHooks";
+} from "../../../useIssues/useIssuesParameterHooks";
+import DeadlineFlagButton from "../../categories/DeadlineFlagButton";
+import DeadlineModeButton from "../../categories/DeadlineModeButton";
 
 export default function GitIssueDeadlineDoubleButton({
   issue,

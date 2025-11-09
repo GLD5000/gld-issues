@@ -8,7 +8,7 @@ import MoonSvg from "@/components/assets/MoonSvg";
 import SunSvg from "@/components/assets/SunSvg";
 import NavigationV2 from "./NavigationV2";
 import SvgButtonHeader from "./SvgButtonHeader";
-import TasksMainHeader from "../TasksMainHeader";
+import TasksMainHeader from "./TasksMainHeader";
 import { getCurrentWeekNumber } from "@/utils/dates";
 
 export default function HeaderV2({}: {}) {

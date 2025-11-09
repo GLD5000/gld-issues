@@ -13,9 +13,9 @@ import {
   getAdjustedDeadlineDate,
   getIssueDeadlineDateComboString,
   issueIsGTM,
-} from "./useIssues/useIssuesUtils";
-import { SelectiveIssue } from "./useIssues/useIssuesTypes";
-import { useSortMode } from "./useIssues/useIssuesParameterHooks";
+} from "../useIssues/useIssuesUtils";
+import { SelectiveIssue } from "../useIssues/useIssuesTypes";
+import { useSortMode } from "../useIssues/useIssuesParameterHooks";
 
 export default function GitIssueDeadlineDivider({
   issue,

@@ -1,6 +1,6 @@
-import GitIssueCardTask from "./GitIssueCardTask";
+import GitIssueCardBodyTodo from "./GitIssueCardBodyTodo";
 
-export default function GitIssueTaskList({
+export default function GitIssueBodyTodoList({
   taskList,
   issueNumber,
   setIssues,
@@ -22,7 +22,7 @@ export default function GitIssueTaskList({
         Task List
       </h3>
       {taskList.map((task, index) => (
-        <GitIssueCardTask
+        <GitIssueCardBodyTodo
           key={`task-${index}`}
           task={task}
           issueNumber={issueNumber}

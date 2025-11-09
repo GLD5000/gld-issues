@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
-import CategoryCards from "./CategoryCards";
-import { SelectiveIssuesJsonShape } from "./useIssues/useIssuesTypes";
+import { SelectiveIssuesJsonShape } from "../useIssues/useIssuesTypes";
+import CategoryCards from "./categories/CategoryCards";
 // import IssueCards from './IssueCards';
 
 export default function IssueElements({

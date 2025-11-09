@@ -1,12 +1,10 @@
 import { ComponentProps, useState } from "react";
-import GitIssueStateButton from "./GitIssueStateButton";
 import { convertIsoDateToDayDateComboString } from "@/utils/dates";
 import DoubleClickInput from "./DoubleClickInput";
 import TickSvg from "@/icons/TickSvg";
 import UnTicked from "@/icons/UnTicked";
 import GitIssueDeadlineDoubleButton from "./GitIssueDeadlineDoubleButton";
-import CategoryAddIssueButton from "./CategoryAddIssueButton";
-import GitIssueTaskList from "./GitIssueTaskList";
+import GitIssueBodyTodoList from "./GitIssueBodyTodoList";
 import { classMerge } from "@/utils/twUtils";
 import {
   getIssueDeadline,
@@ -14,8 +12,10 @@ import {
   getIssueDeadlineDateComboString,
   reBuildIssueTitle,
   getStringDeadlineDate,
-} from "./useIssues/useIssuesUtils";
-import { SelectiveIssue } from "./useIssues/useIssuesTypes";
+} from "../../../useIssues/useIssuesUtils";
+import { SelectiveIssue } from "../../../useIssues/useIssuesTypes";
+import CategoryAddIssueButton from "../../categories/CategoryAddIssueButton";
+import GitIssueStateButton from "./GitIssueStateButton";
 
 interface GitIssueCardProps extends ComponentProps<"details"> {
   issue: SelectiveIssue;
@@ -182,7 +182,7 @@ export default function GitIssueCard({
             title={issue.title}
           />
         </div>
-        <GitIssueTaskList
+        <GitIssueBodyTodoList
           issueNumber={issue.number}
           setIssues={setIssues}
           taskList={taskList}

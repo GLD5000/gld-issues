@@ -13,12 +13,11 @@ import {
   getCategoryData,
 } from "./useIssues/useIssuesObjects";
 
-import BarGraph from "./BarGraph";
-import TasksTopButtons from "./TasksTopButtons";
-import IssueElements from "./IssueElements";
-import TasksPrioritySection from "./TasksPrioritySection";
-import TasksCategoryFilter from "./TasksCategoryFilter";
-import TasksTitleFilter from "./TasksTitleFilter";
+import BarGraph from "./top-section/BarGraph";
+import TasksTopButtons from "./top-section/TasksTopButtons";
+import IssueElements from "./main-section/IssueElements";
+import TasksCategoryFilter from "./top-section/TasksCategoryFilter";
+import TasksTitleFilter from "./top-section/TasksTitleFilter";
 import { SelectiveIssuesJsonShape } from "./useIssues/useIssuesTypes";
 import { makeWeeklyToDoObject } from "./useIssues/useIssuesUtils";
 import {
@@ -29,6 +28,7 @@ import {
   useTitleFilter,
   useViewMode,
 } from "./useIssues/useIssuesParameterHooks";
+import TasksPrioritySection from "./top-section/TasksPrioritySection";
 
 export default function GitTasks() {
   const [issuesObject, setIssues] = useIssues();
