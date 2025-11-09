@@ -63,7 +63,7 @@ export async function PATCH(
   request: Request, //eslint-disable-line
   { params }: { params: { slug: string | undefined } },
 ): Promise<NextResponse> {
-  const slug = params.slug ? params.slug : undefined;
+  const {slug} = await params;//erroneous TS error (Next.js Route handler update)
 
   if (slug && slug === "patchTodo") {
     const res = await request.json();
@@ -110,6 +110,7 @@ async function patchIssue(params: { [key: string]: any }) {
   try {
     await octokit.request(
       "PATCH /repos/{owner}/{repo}/issues/{issue_number}",
+      // @ts-ignore erroneous type error (to be fixed)
       parameters,
     );
     return NextResponse.json(
