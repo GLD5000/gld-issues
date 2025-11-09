@@ -8,7 +8,7 @@ export default function TasksMainHeader({
   return (
     <a
       className="group"
-      href={`https://github.com/GLD5000/Dev-2.0/issues`}
+      href={`${process.env.NEXT_PUBLIC_GH_URL}issues`}
       target="_blank"
     >
       <h1>

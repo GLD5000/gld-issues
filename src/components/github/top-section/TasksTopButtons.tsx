@@ -80,7 +80,7 @@ function NewIssueButton() {
   return (
     <a
       target="_blank"
-      href="https://github.com/GLD5000/Dev-2.0/issues/new"
+      href={`${process.env.NEXT_PUBLIC_GH_URL}issues/new`}
       className="block text-center text-sm border-black dark:border-white border-2 border-solid py-1 px-2 rounded-lg bg-[#238636] text-white indent-0 transform-none  w-36 h-fit ml-auto box-border hover:scale-105 focus:scale-105 transition"
     >
       <span className="block m-auto p-0 pointer-events-none">New Issue</span>
