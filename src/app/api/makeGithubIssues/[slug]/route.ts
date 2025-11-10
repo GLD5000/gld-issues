@@ -15,7 +15,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(
   request: Request, //eslint-disable-line
-  { params }: { params: { slug: string | undefined } }
+  { params }: { params: { slug: string | undefined } },
 ): Promise<NextResponse> {
   const { slug } = await params;
   console.log("slug:", slug);
@@ -61,7 +61,7 @@ export async function POST(
 
 export async function PATCH(
   request: Request, //eslint-disable-line
-  { params }: { params: { slug: string | undefined } }
+  { params }: { params: { slug: string | undefined } },
 ): Promise<NextResponse> {
   const { slug } = await params; //erroneous TS error (Next.js Route handler update)
 
@@ -94,7 +94,7 @@ async function patchIssue(params: { [key: string]: any }) {
   if (!owner) {
     return NextResponse.json(
       { error: "Username is required" },
-      { status: 400 }
+      { status: 400 },
     );
   }
   console.log("params.labels:", params.labels);
@@ -111,11 +111,11 @@ async function patchIssue(params: { [key: string]: any }) {
     await octokit.request(
       "PATCH /repos/{owner}/{repo}/issues/{issue_number}",
       // @ts-ignore erroneous type error (to be fixed)
-      parameters
+      parameters,
     );
     return NextResponse.json(
       { message: "Issue created successfully" },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     return handleError(error);
@@ -146,7 +146,7 @@ async function postIssue(request: Request) {
       {
         error: "Bad Request",
       },
-      { status: 400 }
+      { status: 400 },
     );
   }
   // const { title, body } = res;
@@ -157,7 +157,7 @@ async function postIssue(request: Request) {
   if (!owner) {
     return NextResponse.json(
       { error: "Username is required" },
-      { status: 400 }
+      { status: 400 },
     );
   }
   const parameters = {
@@ -173,14 +173,14 @@ async function postIssue(request: Request) {
   try {
     const response = await octokit.request(
       "POST /repos/{owner}/{repo}/issues",
-      parameters
+      parameters,
     );
 
     const issue = response.data;
 
     return NextResponse.json(
       { message: "Issue created successfully", issue },
-      { status: 201 }
+      { status: 201 },
     );
   } catch (error) {
     return handleError(error);

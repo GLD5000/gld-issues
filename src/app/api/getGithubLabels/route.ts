@@ -10,7 +10,7 @@ export async function GET(): Promise<NextResponse> {
   if (!username) {
     return NextResponse.json(
       { error: "Username is required" },
-      { status: 400 }
+      { status: 400 },
     );
   }
   try {
@@ -26,7 +26,7 @@ export async function GET(): Promise<NextResponse> {
       { labels },
       {
         status: 200,
-      }
+      },
     );
   } catch (error) {
     console.error("GitHub API error:", error);
