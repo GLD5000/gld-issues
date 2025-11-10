@@ -1,6 +1,7 @@
 // import { BarPlot } from './BarPlot';
 import { BarPlotV2 } from "./BarPlotV2";
 import { SelectiveIssuesJsonShape } from "../useIssues/useIssuesTypes";
+import EditCategories from "./EditCategories";
 
 export default function BarGraph({
   subTitle,
@@ -25,7 +26,7 @@ export default function BarGraph({
 }) {
   return (
     <details open className="hidden md:grid gap-0 w-full h-auto group/graph">
-      <summary className="w-full grid grid-cols-[auto_1fr] items-center rounded-none mb-2 cursor-pointer">
+      <summary className="w-full grid grid-cols-[auto_1fr_auto] items-center rounded-none mb-2 cursor-pointer">
         <span className="text-center right-0 top-1 ease-out duration-200 transition-transform group-open/graph:rotate-180 group-open/graph:ease-in rounded-[50%] w-8 h-8 p-1 box-border block ">
           <svg
             width="100%"
@@ -52,7 +53,8 @@ export default function BarGraph({
           Object.values(toDoObject)
             .flatMap((cat) => [...cat])
             .filter((issue) => issue.state !== "open").length
-        } / ${Object.values(toDoObject).flatMap((cat) => [...cat]).length} completed)`}</div>
+          } / ${Object.values(toDoObject).flatMap((cat) => [...cat]).length} completed)`}</div>
+        <EditCategories/>
       </summary>
       <BarPlotV2
         data={categoryData}
