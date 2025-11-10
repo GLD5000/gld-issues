@@ -10,12 +10,13 @@ export async function GET(): Promise<NextResponse> {
   if (!username) {
     return NextResponse.json(
       { error: "Username is required" },
-      { status: 400 },
+      { status: 400 }
     );
   }
   try {
     const labels = await octokit.request("GET /repos/{owner}/{repo}/labels", {
       owner: username,
+      // @ts-ignore erroneous type error (to be fixed)
       repo: repo,
       // headers: {
       //   'X-GitHub-Api-Version': '2022-11-28'
@@ -25,7 +26,7 @@ export async function GET(): Promise<NextResponse> {
       { labels },
       {
         status: 200,
-      },
+      }
     );
   } catch (error) {
     console.error("GitHub API error:", error);

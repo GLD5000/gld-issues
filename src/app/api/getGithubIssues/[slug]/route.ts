@@ -6,7 +6,7 @@ export async function GET(
   request: Request, //eslint-disable-line
   { params }: { params: { slug: string | undefined } },
 ): Promise<NextResponse> {
-  const slug = params.slug ? params.slug : undefined;
+  const {slug} = await params;
   if (!slug || slug === "tasks") {
     return await getAll();
   } else {
