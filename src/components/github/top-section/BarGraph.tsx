@@ -2,6 +2,7 @@
 import { BarPlotV2 } from "./BarPlotV2";
 import { SelectiveIssuesJsonShape } from "../useIssues/useIssuesTypes";
 import { useState } from "react";
+import { gldIssuesConfig } from "../../../../gitIssues.config";
 
 export default function BarGraph({
   subTitle,
@@ -24,7 +25,6 @@ export default function BarGraph({
     [key: string]: SelectiveIssuesJsonShape;
   };
 }) {
-  const [editCategories, setEditCategories] = useState(false);
   return (
     <details open className="hidden md:grid gap-0 w-full h-auto group/graph">
       <summary className="w-full grid grid-cols-[auto_1fr_auto] items-center rounded-none mb-2 cursor-pointer">
@@ -55,31 +55,12 @@ export default function BarGraph({
             .flatMap((cat) => [...cat])
             .filter((issue) => issue.state !== "open").length
         } / ${Object.values(toDoObject).flatMap((cat) => [...cat]).length} completed)`}</div>
-        <button
-          role="button"
-          className="text-xs font-bold cursor-pointer"
-          onClick={() => {
-            setEditCategories(!editCategories);
-          }}
-        >
-          Edit Categories
-        </button>
       </summary>
-      {!editCategories && (
         <BarPlotV2
           data={categoryData}
           categoryFilter={categoryFilter}
           setCategoryFilter={categorySetter}
         />
-      )}
-            {editCategories && (
-       <textarea className="bg-white text-black w-full h-20" placeholder="Hellooo"/>
-      )}
-      {/* <BarPlot
-                data={categoryData}
-                categoryFilter={categoryFilter}
-                setCategoryFilter={categorySetter}
-            /> */}
     </details>
   );
 }
