@@ -18,7 +18,7 @@ export default function Homepage() {
         data-testid="hero-heading"
         className="text-black dark:text-white text-4xl mx-auto"
       >
-        Welcome to Dev 2.0
+        Welcome to GLD Issues UI
       </h1>
       <p className="text-black dark:text-white text-2xl mx-auto">
         Please use the button above to log in!
