@@ -4,7 +4,7 @@ import { getIsoStringFromRelativeWeekNumber } from "@/utils/dates";
 
 export async function GET(
   request: Request, //eslint-disable-line
-  { params }: { params: { slug: string | undefined } },
+  { params }: { params: { slug: string } },
 ): Promise<NextResponse> {
   const { slug } = await params;
   if (!slug || slug === "tasks") {
