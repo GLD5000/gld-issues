@@ -4,7 +4,7 @@ import { getIsoStringFromRelativeWeekNumber } from "@/utils/dates";
 
 export async function GET(
   request: Request, //eslint-disable-line
-  { params }: { params: { slug: string } },
+  { params }: { params: Promise<{ slug: string }> }
 ): Promise<NextResponse> {
   const { slug } = await params;
   if (!slug || slug === "tasks") {
@@ -27,7 +27,7 @@ async function getAll() {
   if (!username) {
     return NextResponse.json(
       { error: "Username is required" },
-      { status: 400 },
+      { status: 400 }
     );
   }
   const openParameters = {
@@ -52,7 +52,7 @@ async function getAll() {
     { issues },
     {
       status: 200,
-    },
+    }
   );
 }
 async function getTask(slug: string) {
@@ -61,7 +61,7 @@ async function getTask(slug: string) {
   if (!username) {
     return NextResponse.json(
       { error: "Username is required" },
-      { status: 400 },
+      { status: 400 }
     );
   }
 
@@ -85,13 +85,13 @@ async function getSingleIssue(parameters: {
     console.error("Error:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
 async function fetchSingleIssue(
   parameters: { [key: string]: string | number | undefined },
-  url: string,
+  url: string
 ) {
   const octokit = new Octokit({ auth: process.env.GH_PAT });
 
@@ -103,7 +103,7 @@ async function fetchSingleIssue(
     { issues },
     {
       status: 200,
-    },
+    }
   );
 }
 
@@ -117,14 +117,14 @@ async function getIssues(parameters: {
     console.error("Error:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
 
 async function fetchIssuesLoop(
   parameters: { [key: string]: string | number | undefined },
-  url: string,
+  url: string
 ) {
   const octokit = new Octokit({ auth: process.env.GH_PAT });
   const issues = [];
@@ -140,6 +140,6 @@ async function fetchIssuesLoop(
     { issues },
     {
       status: 200,
-    },
+    }
   );
 }
