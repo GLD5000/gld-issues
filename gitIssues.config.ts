@@ -4,6 +4,6 @@ export const gldIssuesConfig = {
     "Targets",
     "CPD",
     "Issues",
-    "Dev 2.0 - collaboration",
+    "good first issue"
   ],
 };

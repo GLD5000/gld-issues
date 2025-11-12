@@ -76,16 +76,6 @@ export default function HeaderV2({}: {}) {
           >
             <GldSvg />
           </div>
-          {/* <span
-                        style={{ all: 'unset' }}
-                        className={` text-shadow-title mb-1 w-max ${
-                            colourTheme
-                                ? 'text-white border-white'
-                                : 'text-black border-black'
-                        }`}
-                    >
-                        Dev 2.0
-                    </span> */}
         </Link>
         <TasksMainHeader title={title} colourTheme={colourTheme} />
 

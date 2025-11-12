@@ -46,8 +46,10 @@ async function getAll() {
   };
   const closed = await getIssues(closedParameters);
   const closedResponse = await closed.json();
-  console.log("closedResponse.issues.length:", closedResponse.issues.length);
-  const issues = [...closedResponse.issues, ...openResponse.issues];
+  console.log('closedResponse:', closedResponse);
+  const issues = !!closedResponse.error
+    ? [...openResponse.issues]
+    : [...closedResponse.issues, ...openResponse.issues];
   return NextResponse.json(
     { issues },
     {
