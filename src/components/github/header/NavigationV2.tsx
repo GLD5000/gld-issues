@@ -1,5 +1,5 @@
 "use client";
-import { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const routesObject: { [key: string]: Record<string, string> } = {
@@ -21,21 +21,14 @@ const routesObject: { [key: string]: Record<string, string> } = {
   },
 };
 export default function NavigationV2() {
-  const [searchValue, setSearchValue] = useState("");
-  useEffect(() => {
-    let run = true;
-    if (run && window.location.pathname) {
-      const path = window.location.pathname;
-      const location =
-        path.length === 1 ? "home" : path.replace("/", "").split("/")[0];
+  const [searchValue, setSearchValue] = useState(() => {
+    if (typeof window === "undefined") return ""; // SSR safety
+    const path = window.location.pathname;
+    const location =
+      path.length === 1 ? "home" : path.replace("/", "").split("/")[0];
 
-      setSearchValue(routesObject[location].title);
-    }
-
-    return () => {
-      run = false;
-    };
-  }, []);
+    return routesObject[location].title;
+  });
 
   const options = Object.values(routesObject).map((entry) => (
     <option key={entry.url}>{entry.title}</option>
@@ -64,7 +57,7 @@ export default function NavigationV2() {
   });
 
   const lookupUrls = Object.fromEntries(
-    Object.values(routesObject).map((entry) => [entry.title, entry.url]),
+    Object.values(routesObject).map((entry) => [entry.title, entry.url])
   );
   const router = useRouter();
 
