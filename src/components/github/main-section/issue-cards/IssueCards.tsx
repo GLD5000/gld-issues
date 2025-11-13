@@ -10,15 +10,14 @@ export default function IssueCards({
 }: {
   issueArray: SelectiveIssue[];
   setIssues: (
-    //eslint-disable-next-line
     type?: string,
-    //eslint-disable-next-line
+
     body?: {
       [key: string]: string;
     },
-  ) => {};
+  ) => void;
   priorityList: string[];
-  //eslint-disable-next-line
+
   setPriorityList: (valueIn: string | string[]) => void;
   lastUpdated: string;
 }) {

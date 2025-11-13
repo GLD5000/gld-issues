@@ -20,14 +20,13 @@ import GitIssueStateButton from "./GitIssueStateButton";
 interface GitIssueCardProps extends ComponentProps<"details"> {
   issue: SelectiveIssue;
   setIssues: (
-    type?: string, //eslint-disable-line
-    body?: //eslint-disable-line
-    {
+    type?: string,
+    body?: {
       [key: string]: string;
     },
-  ) => {};
+  ) => void;
   priorityList: string[];
-  //eslint-disable-next-line
+
   setPriorityList: (valueIn: string | string[]) => void;
   lastUpdated: string;
 }

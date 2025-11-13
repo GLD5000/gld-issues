@@ -10,8 +10,8 @@ export default function TasksPrioritySection({
 }: {
   priorityList: string[];
   issues: SelectiveIssuesJsonShape;
-  setIssues: (type?: string, body?: { [key: string]: string }) => {}; //eslint-disable-line
-  setPriorityList: (valueIn: string | string[]) => void; //eslint-disable-line
+  setIssues: (type?: string, body?: { [key: string]: string }) => void;
+  setPriorityList: (valueIn: string | string[]) => void;
   lastUpdated: string;
 }): React.ReactNode {
   if (priorityList.length === 0) return null;

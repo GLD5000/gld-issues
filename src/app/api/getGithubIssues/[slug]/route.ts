@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { getIsoStringFromRelativeWeekNumber } from "@/utils/dates";
 
 export async function GET(
-  request: Request, //eslint-disable-line
+  request: Request,
   { params }: { params: Promise<{ slug: string }> },
 ): Promise<NextResponse> {
   const { slug } = await params;

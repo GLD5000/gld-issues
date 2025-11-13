@@ -1,3 +1,4 @@
+import { ReactElement, ReactNode } from "react";
 import FilterButtonSmall from "./FilterButtonSmall";
 import TasksSortButton from "./TasksSortButton";
 
@@ -8,15 +9,12 @@ export default function SubCategoryFilters({
   incrementSortMode,
   sortMode,
 }: {
-  titleFilterElement: React.ReactElement<
-    any,
-    string | React.JSXElementConstructor<any>
-  >;
+  titleFilterElement: ReactElement;
   subCategoryFilter: string[];
-  setSubCategoryFilter: (value: string) => void; //eslint-disable-line
-  incrementSortMode: (value?: string) => void; //eslint-disable-line
+  setSubCategoryFilter: (value: string) => void;
+  incrementSortMode: (value?: string) => void;
   sortMode: string;
-}): React.ReactNode {
+}): ReactNode {
   return (
     <>
       {titleFilterElement}

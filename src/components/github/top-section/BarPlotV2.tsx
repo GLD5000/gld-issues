@@ -10,7 +10,7 @@ type BarPlotProps = {
     testing: number;
   }[];
   categoryFilter: string;
-  setCategoryFilter: (valueIn: string) => void; // eslint-disable-line
+  setCategoryFilter: (valueIn: string) => void;
 };
 
 export const BarPlotV2 = ({

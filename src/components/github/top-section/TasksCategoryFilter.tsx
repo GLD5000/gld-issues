@@ -11,11 +11,9 @@ export default function TasksCategoryFilter({
   clearAllFilters,
 }: {
   categoryFilter: string;
-  categorySetter: (input: string) => void; //eslint-disable-line
+  categorySetter: (input: string) => void;
   toDoObject: { [key: string]: SelectiveIssuesJsonShape };
-  // setCategoryFilter: (value: string) => void; //eslint-disable-line
-  // setSubCategoryFilter: (value: string) => void; //eslint-disable-line
-  clearAllFilters: (excludeCategory?: boolean) => void; //eslint-disable-line
+  clearAllFilters: (excludeCategory?: boolean) => void;
 }) {
   return (
     <div className="w-fit flex gap-2 flex-wrap items-center">

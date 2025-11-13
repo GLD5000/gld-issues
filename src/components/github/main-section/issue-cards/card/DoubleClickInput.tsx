@@ -12,9 +12,8 @@ export default function DoubleClickInput({
   textAlign = "text-left",
   isLoading = false,
 }: {
-  // eslint-disable-next-line
   onBlurHandler: (e: React.FocusEvent<HTMLInputElement>) => void;
-  // eslint-disable-next-line
+
   onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClickHandler?: () => void;
   inputValue: string;
@@ -22,7 +21,7 @@ export default function DoubleClickInput({
   placeHolder?: string;
   width?: string;
   textAlign?: string;
-  isLoading?: Boolean;
+  isLoading?: boolean;
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -89,7 +88,7 @@ export default function DoubleClickInput({
           className={`block text-black dark:text-white bg-transparent ${width} text-ellipsis ${textAlign} border-none whitespace-pre overflow-clip cursor-text`}
           onDoubleClick={() => {
             handleDoubleClick();
-            onClickHandler && onClickHandler();
+            if (onClickHandler) onClickHandler();
           }}
           onClick={(e) => {
             // e.stopPropagation();

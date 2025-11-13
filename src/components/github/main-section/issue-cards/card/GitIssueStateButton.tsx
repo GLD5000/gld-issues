@@ -26,12 +26,11 @@ export default function GitIssueStateButton({
 }: {
   issue: SelectiveIssue;
   setIssues: (
-    type?: string, //eslint-disable-line
-    body?: //eslint-disable-line
-    {
+    type?: string,
+    body?: {
       [key: string]: string;
     },
-  ) => {};
+  ) => void;
   lastUpdated: string;
 }) {
   const [previousUpdated, setPreviousUpdated] = useState("");
@@ -56,7 +55,7 @@ export default function GitIssueStateButton({
           </option>
         ));
   function handleClick(e: SyntheticEvent<HTMLSelectElement>) {
-    let newValue = e.currentTarget.value;
+    const newValue = e.currentTarget.value;
     if (newValue === "Completed" || newValue === "Open") {
       setIssues("close", {
         issue_number: `${issue.number}`,

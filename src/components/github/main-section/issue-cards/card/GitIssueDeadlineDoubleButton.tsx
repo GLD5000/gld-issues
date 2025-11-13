@@ -90,7 +90,7 @@ export function getProgressState(deadlineDate: Date) {
   }
 }
 
-function getDueMessage(days: number, isWeekend: Boolean, isFriday: Boolean) {
+function getDueMessage(days: number, isWeekend: boolean, isFriday: boolean) {
   if (days < 0) {
     return "Overdue";
   } else if (days === 0) {

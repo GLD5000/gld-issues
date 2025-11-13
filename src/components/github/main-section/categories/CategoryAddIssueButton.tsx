@@ -14,14 +14,14 @@ export default function CategoryAddIssueButton({
   label: string;
   width?: string;
   textAlign?: string;
-  // isLoading?: Boolean;
+  // isLoading?: boolean;
   setIssues: (
-    type?: string, //eslint-disable-line
-    //eslint-disable-next-line
+    type?: string,
+
     body?: {
-      [key: string]: string; //eslint-disable-line
-    }, //eslint-disable-line
-  ) => {}; //eslint-disable-line
+      [key: string]: string;
+    },
+  ) => void;
   title?: string;
   displayText?: string;
 }) {

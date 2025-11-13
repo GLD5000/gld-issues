@@ -1,7 +1,5 @@
 import {
-  adjustDateToPreviousWorkday,
   adjustDateToWorkday,
-  dateIsLastFortnight,
   dateIsThisWeek,
   getCurrentCentury,
   getWeekNumberFromISOString,
@@ -165,10 +163,7 @@ export function makeWeeklyToDoObject(
 function completedAsPlanned(issue: SelectiveIssue) {
   return issue.state !== "open" && issue.state_reason !== "not_planned";
 }
-function filterToDoIssues(
-  arrayIn: SelectiveIssuesJsonShape,
-  includeLastWeekGTM = true,
-) {
+function filterToDoIssues(arrayIn: SelectiveIssuesJsonShape) {
   return arrayIn
     .toReversed()
     .filter(
@@ -241,13 +236,13 @@ function getLinksTasksFromBodyString(body: string): SelectiveIssueBody {
 
   const tasksRegex = /- \[[x ]{1}\][^\r\n]+/g;
   const tasksArray = body?.match(tasksRegex);
-  let taskLists: string[] = [];
+  const taskLists: string[] = [];
   if (tasksArray && Array.isArray(tasksArray)) {
     tasksArray.forEach((task) => taskLists.push(task));
   }
 
   const webLinks = body?.match(webLinkRegex);
-  let links: string[] = [];
+  const links: string[] = [];
   if (webLinks && Array.isArray(webLinks)) {
     webLinks.forEach((link) => links.push(link));
   }
@@ -258,5 +253,9 @@ function addTodoObject(
   issue: SelectiveIssue,
   toDoObject: { [key: string]: SelectiveIssuesJsonShape },
 ) {
-  toDoObject[key] ? toDoObject[key].push(issue) : (toDoObject[key] = [issue]);
+  if (toDoObject[key]) {
+    toDoObject[key].push(issue);
+  } else {
+    toDoObject[key] = [issue];
+  }
 }

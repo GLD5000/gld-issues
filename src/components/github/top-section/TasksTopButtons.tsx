@@ -12,7 +12,7 @@ export default function TasksTopButtons({
   isLoading: boolean;
   setPreviousUpdate: React.Dispatch<React.SetStateAction<string>>;
   lastUpdated: string;
-  setIssues: (type?: string, body?: { [key: string]: string }) => {}; //eslint-disable-line
+  setIssues: (type?: string, body?: { [key: string]: string }) => void;
   date: string;
   time: string;
 }) {
@@ -41,7 +41,7 @@ function UpdateIssuesButton({
   isLoading: boolean;
   setPreviousUpdate: Dispatch<SetStateAction<string>>;
   lastUpdated: string;
-  setIssues: (type?: string, body?: { [key: string]: string }) => {};
+  setIssues: (type?: string, body?: { [key: string]: string }) => void;
   date: string;
   time: string;
 }) {

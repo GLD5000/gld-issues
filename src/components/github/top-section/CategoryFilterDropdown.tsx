@@ -6,11 +6,11 @@ export default function CategoryFilterDropdown({
   optionsArray,
 }: {
   categoryFilter: string;
-  setCategoryFilter: (valueIn: string) => void; // eslint-disable-line
+  setCategoryFilter: (valueIn: string) => void;
   optionsArray: string[];
 }) {
   function handleClick(e: SyntheticEvent<HTMLSelectElement>) {
-    let newValue = e.currentTarget.value;
+    const newValue = e.currentTarget.value;
     setCategoryFilter(newValue === "Select Category" ? "" : newValue);
   }
   const options = ["Select Category", ...optionsArray].map((name, index) => (

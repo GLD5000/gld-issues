@@ -6,15 +6,14 @@ import SignIn from "@/auth/SignIn";
 import GldSvg from "@/components/assets/GldSvg";
 import MoonSvg from "@/components/assets/MoonSvg";
 import SunSvg from "@/components/assets/SunSvg";
-import NavigationV2 from "./NavigationV2";
 import SvgButtonHeader from "./SvgButtonHeader";
 import TasksMainHeader from "./TasksMainHeader";
 import { getCurrentWeekNumber } from "@/utils/dates";
 
-export default function HeaderV2({}: {}) {
-  function setThemeToLocalStorage(themeBoolean: boolean) {
+export default function HeaderV2() {
+  function setThemeToLocalStorage(themeboolean: boolean) {
     if (typeof window !== "undefined") {
-      sessionStorage.setItem("theme", themeBoolean.toString());
+      sessionStorage.setItem("theme", themeboolean.toString());
     }
   }
 

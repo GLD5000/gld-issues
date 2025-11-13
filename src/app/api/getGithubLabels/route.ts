@@ -16,7 +16,7 @@ export async function GET(): Promise<NextResponse> {
   try {
     const labels = await octokit.request("GET /repos/{owner}/{repo}/labels", {
       owner: username,
-      // @ts-ignore erroneous type error (to be fixed)
+      //@ts-expect-error due to octokit types issue
       repo: repo,
       // headers: {
       //   'X-GitHub-Api-Version': '2022-11-28'

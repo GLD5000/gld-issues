@@ -6,12 +6,12 @@ export default function TasksTitleFilter({
   titleFilter,
   clearAllFilters,
 }: {
-  setTitleFilter: (value: string) => void; //eslint-disable-line
-  // setCategoryFilter: (value: string) => void; //eslint-disable-line
-  // setViewMode: (value: string) => void; //eslint-disable-line
-  // setSubCategoryFilter: (value: string) => void; //eslint-disable-line
+  setTitleFilter: (value: string) => void;
+  // setCategoryFilter: (value: string) => void;
+  // setViewMode: (value: string) => void;
+  // setSubCategoryFilter: (value: string) => void;
   titleFilter: string;
-  clearAllFilters: (excludeCategory?: boolean) => void; //eslint-disable-line
+  clearAllFilters: (excludeCategory?: boolean) => void;
 }) {
   return (
     <div className="w-fit flex gap-2 flex-wrap text-sm items-center">

@@ -43,7 +43,6 @@ function makeUrl(searchParams: URLSearchParams) {
 
 export function useQueryParamsArray(
   paramKey: string,
-  //eslint-disable-next-line
 ): [string[], (valueIn: string | string[]) => void] {
   const [state, setState] = useQueryParams(paramKey);
   function updateState(newValue: string | string[]) {
@@ -84,7 +83,7 @@ export function useQueryParamsArray(
 // export function useQueryParams(
 //     paramKey: string,
 //     initialValue?: string
-//     // eslint-disable-next-line
+//
 // ): [string, (valueIn: string) => void] {
 //     const [state, setState] = useState<string>(initialValue || '');
 //     useEffect(() => {
@@ -133,7 +132,6 @@ export function useQueryParamsArray(
 export function useQueryParams(
   paramKey: string,
   initialValue?: string,
-  // eslint-disable-next-line
 ): [string, (value: string) => void] {
   const searchParams = useSearchParams();
   const state = searchParams?.get(paramKey) || initialValue || "";
@@ -148,7 +146,6 @@ export function useQueryParams(
 export function useQueryParamsNumber(
   paramKey: string,
   initialValue?: number,
-  // eslint-disable-next-line
 ): [number, (value: number) => void] {
   const searchParams = useSearchParams();
   const state = searchParams?.get(paramKey) || initialValue || "";
@@ -160,10 +157,9 @@ export function useQueryParamsNumber(
     },
   ];
 }
-export function useQueryParamsBoolean(
+export function useQueryParamsboolean(
   paramKey: string,
   initialValue?: boolean,
-  // eslint-disable-next-line
 ): [boolean, (value: boolean) => void] {
   const searchParams = useSearchParams();
   const state = searchParams?.get(paramKey) || initialValue || "";
@@ -192,7 +188,6 @@ function setState(value: string, paramKey: string) {
 export function useQueryParamsToggle(
   paramKey: string,
   optionsArray: string[],
-  // eslint-disable-next-line
 ): [string, (value?: string) => void] {
   const searchParams = useSearchParams();
   const initialValue = optionsArray[0];
@@ -201,7 +196,7 @@ export function useQueryParamsToggle(
 
   return [
     decodeURIComponent(state),
-    // eslint-disable-next-line
+
     (value?: string) => {
       setState(value || optionSwitcher[state], paramKey);
     },

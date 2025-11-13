@@ -36,7 +36,7 @@ export default function SvgButtonHeader({
 }: {
   type?: "button" | "submit" | "reset";
 
-  clickFunction: ((e: MouseEvent<HTMLButtonElement>) => void) | (() => void); // eslint-disable-line
+  clickFunction: ((e: MouseEvent<HTMLButtonElement>) => void) | (() => void);
   id?: string | undefined;
   name?: string | undefined;
   showTextIn?: boolean | undefined;

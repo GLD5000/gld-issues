@@ -1,8 +1,6 @@
 // import { BarPlot } from './BarPlot';
 import { BarPlotV2 } from "./BarPlotV2";
 import { SelectiveIssuesJsonShape } from "../useIssues/useIssuesTypes";
-import { useState } from "react";
-import { gldIssuesConfig } from "../../../../gitIssues.config";
 
 export default function BarGraph({
   subTitle,
@@ -20,7 +18,7 @@ export default function BarGraph({
     testing: number;
   }[];
   categoryFilter: string;
-  categorySetter: (input: string) => void; //eslint-disable-line
+  categorySetter: (input: string) => void;
   toDoObject: {
     [key: string]: SelectiveIssuesJsonShape;
   };

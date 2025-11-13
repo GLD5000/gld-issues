@@ -39,12 +39,11 @@ function addFetchedIssuesToSessionStorageObject(
 export function useIssues(): [
   IssuesSessionObject | null,
   (
-    type?: string, //eslint-disable-line
-    body?: //eslint-disable-line
-    {
+    type?: string,
+    body?: {
       [key: string]: string;
     },
-  ) => {},
+  ) => object,
 ] {
   const [state, setState] = useState<IssuesSessionObject | null>(null);
   const { accessLevel } = useStore((state) => state);
@@ -122,10 +121,7 @@ export function useIssues(): [
     ? [state, refreshValue]
     : [
         state,
-        (
-          type = "refresh",
-          body?: Record<string, string>, // eslint-disable-line
-        ) => {
+        (type = "refresh", body?: Record<string, string>) => {
           console.log("accessLevel:", accessLevel);
           console.log(type);
           console.log("body:", JSON.stringify(body));

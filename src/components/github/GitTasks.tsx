@@ -7,7 +7,6 @@ import {
   dateIsBST,
   getCurrentWeekNumber,
 } from "@/utils/dates";
-import { useQueryParams, useQueryParamsArray } from "@/utils/searchParamsURL";
 import {
   GetFilteredTodoObject,
   getCategoryData,
@@ -186,7 +185,7 @@ export default function GitTasks() {
   }
   function clearAllFilters(excludeCategory = false) {
     setTitleFilter("");
-    !excludeCategory && setCategoryFilter("");
+    if (!excludeCategory) setCategoryFilter("");
     setViewMode("Category");
     setSubCategoryFilter("DELETE");
     incrementSortMode("Deadline");
@@ -218,7 +217,7 @@ function getIsLoading(lastUpdated: string, previousUpdate: string) {
   return lastUpdated === previousUpdate;
 }
 function getLastUpdated(lastUpdated: string): string[] {
-  let date = new Date(lastUpdated);
+  const date = new Date(lastUpdated);
   const isBst = dateIsBST(date);
   if (isBst) {
     date.setHours(date.getHours() + 1);

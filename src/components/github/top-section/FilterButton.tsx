@@ -6,7 +6,7 @@ export default function FilterButton({
   message,
 }: {
   categoryFilter: string;
-  setCategoryFilter: (valueIn: string) => void; // eslint-disable-line
+  setCategoryFilter: (valueIn: string) => void;
   message?: string;
 }) {
   const [viewMode] = useQueryParams("vm", "Category");

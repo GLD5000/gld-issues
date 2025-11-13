@@ -9,12 +9,11 @@ export default function GitIssueCardBodyTodo({
   task: string;
   issueNumber: number;
   setIssues: (
-    type?: string, //eslint-disable-line
-    body?: //eslint-disable-line
-    {
+    type?: string,
+    body?: {
       [key: string]: string;
     },
-  ) => {};
+  ) => void;
 }) {
   return (
     <button

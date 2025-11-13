@@ -8,12 +8,11 @@ export default function GitIssueBodyTodoList({
   taskList?: string[];
   issueNumber: number;
   setIssues: (
-    type?: string, //eslint-disable-line
-    body?: //eslint-disable-line
-    {
+    type?: string,
+    body?: {
       [key: string]: string;
     },
-  ) => {};
+  ) => void;
 }) {
   if (!taskList || taskList.length === 0) return null;
   return (

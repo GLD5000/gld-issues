@@ -28,18 +28,18 @@ export default function IssueElements({
   // viewMode: string;
   filteredToDoObject: [string, SelectiveIssuesJsonShape][];
   subCategoryFilter: string[];
-  setSubCategoryFilter: (value: string) => void; //eslint-disable-line
-  incrementSortMode: (value?: string) => void; //eslint-disable-line
+  setSubCategoryFilter: (value: string) => void;
+  incrementSortMode: (value?: string) => void;
   sortMode: string;
   setIssues: (
-    type?: string, //eslint-disable-line
-    //eslint-disable-next-line
+    type?: string,
+
     body?: {
-      [key: string]: string; //eslint-disable-line
-    }, //eslint-disable-line
-  ) => {}; //eslint-disable-line
+      [key: string]: string;
+    },
+  ) => void;
   priorityList: string[];
-  setPriorityList: (value: string | string[]) => void; //eslint-disable-line
+  setPriorityList: (value: string | string[]) => void;
   titleFilter: string;
   filterSettings: {
     notFiltering: boolean;
