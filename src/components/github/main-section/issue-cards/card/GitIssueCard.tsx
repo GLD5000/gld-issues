@@ -91,8 +91,8 @@ export default function GitIssueCard({
       )}
       {...props}
     >
-      <summary className="cursor-pointer p-0.5 flex flex-wrap gap-2 items-center w-full box-border bg-neutral-100 dark:bg-neutral-800">
-        <span className="text-center text-black dark:text-white right-0 top-1 ease-out duration-200 transition-transform group-open:rotate-180 group-open:ease-in rounded-[50%] w-8 h-8 p-1 box-border block ">
+      <summary className="cursor-pointer p-0.5 flex flex-wrap gap-1 items-center w-full box-border bg-neutral-100 dark:bg-neutral-800">
+        <span className="text-center text-black dark:text-white right-0 top-1 ease-out duration-200 transition-transform group-open:rotate-180 group-open:ease-in rounded-[50%] w-6 h-6 p-0.5 box-border block ">
           <svg
             width="100%"
             height="100%"
@@ -115,14 +115,14 @@ export default function GitIssueCard({
           </svg>
         </span>
         <a
-          className="text-neutral-500 dark:text-neutral-400 text-xs w-[4.5em] transition hover:underline focus:underline hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white font-bold"
+          className="text-neutral-500 dark:text-neutral-400 text-xs min-w-[3.5em] transition hover:underline focus:underline hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white font-bold overflow-hidden"
           href={`${process.env.NEXT_PUBLIC_GH_URL}issues/${issue.number}`}
           target="_blank"
         >
-          #{issue.number} &rarr;
+          #{issue.number}
         </a>
         <button
-          className="text-inherit text-center text-sm border-none w-8 h-8 p-1.5 rounded-lg bg-transparent hover:scale-105 focus:scale-105 transition box-border"
+          className="text-inherit text-center text-sm border-none w-5 h-5 p-0.5 rounded-lg bg-transparent hover:scale-105 focus:scale-105 transition box-border"
           type="button"
           onClick={() => {
             const issueNumberString = `${issue.number}`;
