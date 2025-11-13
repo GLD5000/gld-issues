@@ -86,9 +86,7 @@ function convertDateToDayDateComboString(dateIn: Date) {
 export function getAdjustedDeadlineDate(issue: SelectiveIssue) {
   const deadline = getIssueDeadline(issue) || undefined;
   if (!deadline) return null;
-  return issueIsGTM(issue)
-    ? adjustDateToPreviousWorkday(getDeadlineDate(deadline) || new Date())
-    : adjustDateToWorkday(getDeadlineDate(deadline) || new Date());
+  return adjustDateToWorkday(getDeadlineDate(deadline) || new Date());
 }
 function makeTimeObject(issues: SelectiveIssuesJsonShape, currentWeek: number) {
   const returnObject: { [key: string]: SelectiveIssuesJsonShape } = {
@@ -180,12 +178,7 @@ function filterToDoIssues(
           (completedAsPlanned(issue) && dateIsThisWeek(issue.created_at)) ||
           (completedAsPlanned(issue) &&
             issue.closed_at &&
-            dateIsThisWeek(issue.closed_at)) ||
-          (includeLastWeekGTM &&
-            issueIsGTM(issue) &&
-            issue.closed_at &&
-            completedAsPlanned(issue) &&
-            dateIsLastFortnight(issue.closed_at))),
+            dateIsThisWeek(issue.closed_at))),
     );
 }
 export function issueIsBlocked(issue: SelectiveIssue) {
@@ -199,9 +192,6 @@ export function issueIsTesting(issue: SelectiveIssue) {
     issue.state === "open" &&
     issue.labels.some((label) => label.name === "testing")
   );
-}
-export function issueIsGTM(issue: SelectiveIssue) {
-  return issue.labels.some((label) => label.name === "Website - GTM");
 }
 export function issueIsParent(issue: SelectiveIssue) {
   return issue.labels.some((label) => label.name === "parent project");

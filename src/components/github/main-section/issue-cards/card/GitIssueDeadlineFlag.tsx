@@ -4,7 +4,6 @@ import { adjustDateToPreviousWorkday } from "@/utils/dates";
 import { SelectiveIssue } from "../../../useIssues/useIssuesTypes";
 import {
   getAdjustedDeadlineDate,
-  issueIsGTM,
 } from "../../../useIssues/useIssuesUtils";
 import { getProgressState } from "./GitIssueDeadlineDoubleButton";
 
@@ -15,9 +14,7 @@ export default function GitIssueDeadlineFlag({
 }) {
   const deadlineDate = getAdjustedDeadlineDate(issue);
   if (!deadlineDate || issue.state === "closed") return null;
-  const progressState = issueIsGTM(issue)
-    ? getProgressState(adjustDateToPreviousWorkday(deadlineDate))
-    : getProgressState(deadlineDate);
+  const progressState = getProgressState(deadlineDate);
   if (!progressState) return null;
   return (
     <div

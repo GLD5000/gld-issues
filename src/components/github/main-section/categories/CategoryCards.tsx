@@ -8,7 +8,6 @@ import {
   getIssueDeadline,
   issueIsBlocked,
   issueIsTesting,
-  issueIsGTM,
   issueIsParent,
   getIssueDeadlineSortValue,
   getIssueUpdatedSortValue,
@@ -233,7 +232,6 @@ export default function CategoryCards({
     if (sortMode === "Deadline") {
       return issueArray
         .sort((a, b) => a.state.localeCompare(b.state))
-        .sort((a, b) => -1 + 2 * Number(issueIsGTM(a) === issueIsGTM(b)))
         .sort((a, b) => {
           if (issueIsParent(a) || issueIsParent(b)) {
             return -1 * a.title.localeCompare(b.title);

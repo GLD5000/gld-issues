@@ -10,73 +10,31 @@ import {
 } from "@/utils/dates";
 import {
   getAdjustedDeadlineDate,
-  getIssueDeadlineDateComboString,
-  issueIsGTM,
 } from "../../../useIssues/useIssuesUtils";
 import { SelectiveIssue } from "../../../useIssues/useIssuesTypes";
 import {
-  useDateMode,
   useDeadlineViewMode,
 } from "../../../useIssues/useIssuesParameterHooks";
 import DeadlineFlagButton from "../../categories/DeadlineFlagButton";
-import DeadlineModeButton from "../../categories/DeadlineModeButton";
 
 export default function GitIssueDeadlineDoubleButton({
   issue,
 }: {
   issue: SelectiveIssue;
 }) {
-  const [dateMode, toggleDateMode] = useDateMode();
   const [deadlineViewMode, toggleDeadlineViewMode] = useDeadlineViewMode();
   const deadlineDate = getAdjustedDeadlineDate(issue);
   if (!deadlineDate || issue.state === "closed") return null;
   const deadlineData = getProgressState(deadlineDate);
-  const isGTM = issueIsGTM(issue);
   if (!deadlineData) return null;
-  if (!isGTM) {
-    return (
-      <div
-        className={`flex gap-0 text-sm w-fit ml-auto mr-0.5 h-7 justify-end box-border rounded-none border-none p-0`}
-      >
-        <DeadlineModeButton />
-        <DeadlineFlagButton
-          handleDeadlineViewClick={toggleDeadlineViewMode}
-          deadlineFlagColour={deadlineData.border}
-          deadlineFlagValue={
-            deadlineViewMode === "days" ? deadlineData.msg : deadlineData.week
-          }
-        />
-      </div>
-    );
-  }
-  const buildData = getProgressState(adjustDateToPreviousWorkday(deadlineDate));
-  const liveData = getIssueDeadlineDateComboString(issue);
 
-  const lookupDeadlineData: { [key: string]: Record<string, string> } = {
-    live: {
-      type: "Live:",
-      value: liveData || "",
-    },
-    test: {
-      type: "Testing:",
-      value: deadlineViewMode === "days" ? deadlineData.msg : deadlineData.week,
-    },
-    build: {
-      type: "Due:",
-      value: deadlineViewMode === "days" ? buildData.msg : buildData.week,
-    },
-  };
-  const deadlineFlagValue = lookupDeadlineData[dateMode || "build"].value;
+  const buildData = getProgressState(adjustDateToPreviousWorkday(deadlineDate));
+  const deadlineFlagValue = deadlineViewMode === "days" ? buildData.msg : buildData.week;
   const deadlineFlagColour = deadlineData.border;
-  const dateModeValue = lookupDeadlineData[dateMode || "build"].type;
   return (
     <div
       className={`flex justify-end gap-0 text-sm w-fit ml-auto mr-0.5 box-border rounded-none border-none p-0`}
     >
-      <DeadlineModeButton
-        handleDateModeClick={toggleDateMode}
-        dateModeValue={dateModeValue}
-      />
       <DeadlineFlagButton
         handleDeadlineViewClick={toggleDeadlineViewMode}
         deadlineFlagColour={deadlineFlagColour}
@@ -87,7 +45,6 @@ export default function GitIssueDeadlineDoubleButton({
 }
 
 export function getProgressState(deadlineDate: Date) {
-  // const goLive = deadlineDate;
   const buildDay = deadlineDate;
   const currentDay = new Date(new Date().toISOString().split("T")[0]);
   const isWeekend = dateIsSatSun(currentDay);
@@ -106,17 +63,9 @@ export function getProgressState(deadlineDate: Date) {
   if (isOverdue) {
     return {
       week: weekMessage,
-
       msg: dueMessage,
       border: "border-red-300",
-      // days: JSON.stringify({
-      //     currentDay: currentDay.valueOf(),
-      //     deadlineDate: deadlineDate.valueOf()-currentDay.valueOf(),//.split('T')[0],
-      //     buildDay: buildDay.valueOf()-currentDay.valueOf(),//.split('T')[0],
-      //     testingDay: testingDay.valueOf()-currentDay.valueOf(),//.split('T')[0],
-      //     daysToBuild
-      //  }),
-    }; // JSON.stringify(buildDay).split('T')[0]};
+    }; 
   } else if (isDueThisWeek) {
     return {
       week: weekMessage,
