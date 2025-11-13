@@ -115,7 +115,7 @@ export default function GitIssueCard({
           </svg>
         </span>
         <a
-          className="text-neutral-500 dark:text-neutral-400 text-sm w-[4.5em] transition hover:underline focus:underline hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white font-bold"
+          className="text-neutral-500 dark:text-neutral-400 text-xs w-[4.5em] transition hover:underline focus:underline hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white font-bold"
           href={`${process.env.NEXT_PUBLIC_GH_URL}issues/${issue.number}`}
           target="_blank"
         >
