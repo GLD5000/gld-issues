@@ -8,13 +8,9 @@ import {
   getWeekNumberFromMilliseconds,
   timeDiffWorkDays,
 } from "@/utils/dates";
-import {
-  getAdjustedDeadlineDate,
-} from "../../../useIssues/useIssuesUtils";
+import { getAdjustedDeadlineDate } from "../../../useIssues/useIssuesUtils";
 import { SelectiveIssue } from "../../../useIssues/useIssuesTypes";
-import {
-  useDeadlineViewMode,
-} from "../../../useIssues/useIssuesParameterHooks";
+import { useDeadlineViewMode } from "../../../useIssues/useIssuesParameterHooks";
 import DeadlineFlagButton from "../../categories/DeadlineFlagButton";
 
 export default function GitIssueDeadlineDoubleButton({
@@ -29,7 +25,8 @@ export default function GitIssueDeadlineDoubleButton({
   if (!deadlineData) return null;
 
   const buildData = getProgressState(adjustDateToPreviousWorkday(deadlineDate));
-  const deadlineFlagValue = deadlineViewMode === "days" ? buildData.msg : buildData.week;
+  const deadlineFlagValue =
+    deadlineViewMode === "days" ? buildData.msg : buildData.week;
   const deadlineFlagColour = deadlineData.border;
   return (
     <div
@@ -65,7 +62,7 @@ export function getProgressState(deadlineDate: Date) {
       week: weekMessage,
       msg: dueMessage,
       border: "border-red-300",
-    }; 
+    };
   } else if (isDueThisWeek) {
     return {
       week: weekMessage,

@@ -15,7 +15,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(
   request: Request, //eslint-disable-line
-   { params }: { params: Promise<{ slug: string }> },
+  { params }: { params: Promise<{ slug: string }> },
 ): Promise<NextResponse> {
   const { slug } = await params;
   console.log("slug:", slug);
@@ -61,7 +61,7 @@ export async function POST(
 
 export async function PATCH(
   request: Request, //eslint-disable-line
-   { params }: { params: Promise<{ slug: string }> },
+  { params }: { params: Promise<{ slug: string }> },
 ): Promise<NextResponse> {
   const { slug } = await params; //erroneous TS error (Next.js Route handler update)
 

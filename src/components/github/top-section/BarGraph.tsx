@@ -56,11 +56,11 @@ export default function BarGraph({
             .filter((issue) => issue.state !== "open").length
         } / ${Object.values(toDoObject).flatMap((cat) => [...cat]).length} completed)`}</div>
       </summary>
-        <BarPlotV2
-          data={categoryData}
-          categoryFilter={categoryFilter}
-          setCategoryFilter={categorySetter}
-        />
+      <BarPlotV2
+        data={categoryData}
+        categoryFilter={categoryFilter}
+        setCategoryFilter={categorySetter}
+      />
     </details>
   );
 }
