@@ -69,7 +69,7 @@ export default function GitTasks() {
 
   const filterSettings = getFilterSettings(categoryFilter);
   return (
-    <div className="text-black dark:text-white px-1 sm:px-6 md:px-8 max-w-7xl w-full mx-auto">
+    <div className="text-black dark:text-white px-1 max-w-7xl w-full mx-auto">
       <div className="text-inherit text-base sm:p-3 grid gap-2 w-full">
         {/* <TasksMainHeader title={title} /> */}
         <div className="flex flex-wrap gap-2 w-full">

@@ -141,7 +141,7 @@ export default function GitIssueCard({
           inputValue={shortTitle}
           displayValue={getTitleNoDeadline(issue)}
           isLoading={titleIsLoading}
-          width="w-[10em] md:w-[12em] lg:w-[17em] xl:w-[30em]"
+          width="w-[55vw] md:w-[25vw] lg:w-[44vw] xl:w-[50vw] xl:max-w-[45rem]"
         />
         <DoubleClickInput
           onBlurHandler={deadlineOnBlurHandler}
