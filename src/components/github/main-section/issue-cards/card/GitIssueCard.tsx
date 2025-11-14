@@ -107,6 +107,7 @@ export default function GitIssueCard({
           displayValue={getTitleNoDeadline(issue)}
           isLoading={titleIsLoading}
           width="w-[calc(92vw-24px)] md:w-[25vw] lg:w-[44vw] xl:w-[50vw] xl:max-w-[45rem]"
+          textAlign="p-[2px] md:p-0 text-center md:text-left"
         />
         <div className="mx-auto md:ml-auto gap-2 grid md:grid-cols-3 w-36 md:w-108 items-center ">
           <DoubleClickInput
