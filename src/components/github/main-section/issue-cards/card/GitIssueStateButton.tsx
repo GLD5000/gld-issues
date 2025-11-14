@@ -85,7 +85,7 @@ export default function GitIssueStateButton({
   return (
     <select
       aria-label="Issue State"
-      className={`appearance-none block cursor-pointer p-1 box-border w-36 h-[30px] text-center rounded-none border-none text-black ${progressState.bg || "bg-black"} hover:bg-white focus:bg-white`}
+      className={`appearance-none block cursor-pointer p-1 box-border w-36 h-[30px] text-center rounded-none border-none text-black ${progressState.bg || "bg-black"}  `}
       value={progressState.msg}
       onChange={handleClick}
     >

@@ -24,7 +24,7 @@ export default function LayoutClient({
   return (
     <div
       id="theme-wrapper"
-      className={`min-h-screen w-full  ${
+      className={`min-h-screen w-full  transition ${
         colourTheme ? "dark bg-black" : "bg-white"
       }`}
     >

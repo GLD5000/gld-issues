@@ -49,14 +49,14 @@ export default function HeaderV2() {
 
   return (
     <header
-      className={`relative left-0 top-0 z-997 h-fit grid w-full border-x-0 border-solid border-b ${
+      className={`relative left-0 top-0 z-997 h-fit grid w-full border-x-0 border-solid border-b transition ${
         colourTheme
           ? "dark:border-b-white dark:bg-black"
           : "border-b-black bg-white"
       }`}
     >
       <nav
-        className={`mx-auto w-full p-2 h-fit grid md:grid-cols-[auto_1fr_auto] md:gap-8 items-center  justify-center  text-base text-white lg:w-body
+        className={`mx-auto w-full p-2 h-fit grid md:grid-cols-[auto_1fr_auto] md:gap-8 items-center transition justify-center  text-base text-white lg:w-body
                ${
                  colourTheme
                    ? "dark:border-b-white dark:bg-black"
@@ -66,12 +66,12 @@ export default function HeaderV2() {
       >
         <Link
           href="https://github.com/GLD5000"
-          className={`my-auto mx-auto lg:ml-0 lg:mr-auto flex h-10 w-fit content-center items-center justify-center gap-2 rounded border-2 border-transparent p-1 text-center text-3xl text-black hover:border-current hover:transition dark:text-white  dark:hover:border-white ${
+          className={`my-auto mx-auto lg:ml-0 lg:mr-auto flex h-10 w-fit content-center items-center justify-center gap-2 rounded border-2 border-transparent p-1 text-center text-3xl text-black hover:border-current hover:transition dark:text-white  dark:hover:border-white transition ${
             colourTheme ? "text-white" : "text-black"
           }`}
         >
           <div
-            className={`h-10 w-10 ${colourTheme ? "text-white" : "text-black"}`}
+            className={`h-10 w-10 transition ${colourTheme ? "text-white" : "text-black"}`}
           >
             <GldSvg />
           </div>

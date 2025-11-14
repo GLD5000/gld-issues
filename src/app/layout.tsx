@@ -19,7 +19,7 @@ export default async function RootLayout({
   const { accessLevel } = await showLoginPage();
   return (
     <html lang="en" className={`scroll-smooth w-full`}>
-      <body className={`${inter.className} scroll-smooth w-full bg-black`}>
+      <body className={`${inter.className} scroll-smooth w-full`}>
         <Providers>
           <LayoutClient accessLevel={accessLevel}>{children}</LayoutClient>
         </Providers>
