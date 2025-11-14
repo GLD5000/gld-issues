@@ -11,9 +11,9 @@ import TasksMainHeader from "./TasksMainHeader";
 import { getCurrentWeekNumber } from "@/utils/dates";
 
 export default function HeaderV2() {
-  function setThemeToLocalStorage(themeboolean: boolean) {
+  function setThemeToLocalStorage(themeBoolean: boolean) {
     if (typeof window !== "undefined") {
-      sessionStorage.setItem("theme", themeboolean.toString());
+      sessionStorage.setItem("theme", themeBoolean.toString());
     }
   }
 
