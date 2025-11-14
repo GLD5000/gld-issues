@@ -114,14 +114,14 @@ export default function GitIssueCard({
           </svg>
         </span>
         <a
-          className="text-neutral-500 dark:text-neutral-400 text-xs min-w-[3.5em] transition hover:underline focus:underline hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white font-bold overflow-hidden"
+          className="hidden md:block text-neutral-500 dark:text-neutral-400 text-xs min-w-[3.5em] transition hover:underline focus:underline hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white font-bold overflow-hidden"
           href={`${process.env.NEXT_PUBLIC_GH_URL}issues/${issue.number}`}
           target="_blank"
         >
           #{issue.number}
         </a>
         <button
-          className="text-inherit text-center text-sm border-none w-5 h-5 p-0.5 rounded-lg bg-transparent hover:scale-105 focus:scale-105 transition box-border"
+          className="hidden md:block text-inherit text-center text-sm border-none w-5 h-5 p-0.5 rounded-lg bg-transparent hover:scale-105 focus:scale-105 transition box-border"
           type="button"
           onClick={() => {
             const issueNumberString = `${issue.number}`;
@@ -141,7 +141,7 @@ export default function GitIssueCard({
           inputValue={shortTitle}
           displayValue={getTitleNoDeadline(issue)}
           isLoading={titleIsLoading}
-          width="w-[55vw] md:w-[25vw] lg:w-[44vw] xl:w-[50vw] xl:max-w-[45rem]"
+          width="w-[calc(90vw-8em-32px)] md:w-[25vw] lg:w-[44vw] xl:w-[50vw] xl:max-w-[45rem]"
         />
         <DoubleClickInput
           onBlurHandler={deadlineOnBlurHandler}
