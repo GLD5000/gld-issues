@@ -116,7 +116,7 @@ export default function CategoryCards({
               className="grid gap-0 w-full h-auto group/subsection box-border"
               key={`${entry[0]}${index}`}
             >
-              <summary className="w-full grid grid-cols-[1fr_auto] items-center rounded-lg rounded-b-none mb-2 cursor-pointer border-x-none border-t-none border-b-2 border-b-solid border-transparent hover:border-current p-1 bg-neutral-100 dark:bg-neutral-800">
+              <summary className="w-full grid grid-cols-[1fr_auto] items-center rounded-lg rounded-b-none cursor-pointer border-x-none border-t-none border-b-2 border-b-solid border-transparent hover:border-current p-1 bg-neutral-100 dark:bg-neutral-800">
                 {sectionTitle}
                 <span className="text-center text-black dark:text-white right-0 top-1 ease-out duration-200 transition-transform group-open/subsection:rotate-180 group-open/subsection:ease-in rounded-[50%] w-8 h-8 p-1 box-border block">
                   <svg
@@ -148,13 +148,15 @@ export default function CategoryCards({
             </div>
           </Fragment>
         ) : (
-          <Fragment key={`${entry[0]}${index}`}>
-            {sectionTitle}
+          <div key={`${entry[0]}${index}`}>
+            <div className="p-1 rounded-lg rounded-b-none bg-neutral-100 dark:bg-neutral-800">
+              {sectionTitle}
+            </div>
             {issueCards}
             <div className="w-full grid justify-center p-1">
               <CategoryAddIssueButton label={entry[0]} setIssues={setIssues} />
             </div>
-          </Fragment>
+          </div>
         );
       })}
     </>
