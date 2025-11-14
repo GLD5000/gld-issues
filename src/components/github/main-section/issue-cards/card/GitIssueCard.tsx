@@ -84,8 +84,8 @@ export default function GitIssueCard({
   const taskList = issue.body?.taskLists || undefined;
   const summaryId = `${shortTitle}`; // Make unique with ${issue.number} -
   return (
-    <div className="relative">
-      <div className="p-0.5 mr-6 flex flex-wrap gap-1 items-center w-[calc(100%-26px)] box-border bg-neutral-100 dark:bg-neutral-800">
+    <div className="relative w-full">
+      <div className="p-0.5 mr-6 md:mr-0 flex flex-wrap lg:grid lg:grid-cols-[auto_1fr_auto_auto] gap-1 items-center w-[calc(100%-26px)] lg:w-full box-border bg-neutral-100 dark:bg-neutral-800">
         <button
           className="hidden md:block text-inherit text-center text-sm border-none w-4.5 h-4.5 p-0.5 rounded-lg bg-transparent hover:scale-105 focus:scale-105 transition box-border"
           type="button"
@@ -107,8 +107,8 @@ export default function GitIssueCard({
           inputValue={shortTitle}
           displayValue={getTitleNoDeadline(issue)}
           isLoading={titleIsLoading}
-          width="w-[calc(92vw-24px)] md:w-[25vw] lg:w-[44vw] xl:w-[50vw] xl:max-w-[45rem]"
-          textAlign="p-[2px] md:p-0 text-center md:text-left"
+          width="w-[calc(92vw-24px)] md:w-[calc(87vw-442px)] xl:w-full box-border"
+          textAlign="p-[2px] md:p-0 text-center md:text-left text-sm"
         />
         <div className="mx-auto md:ml-auto gap-2 grid md:grid-cols-3 w-36 md:w-108 items-center ">
           <DoubleClickInput
@@ -133,6 +133,7 @@ export default function GitIssueCard({
             lastUpdated={lastUpdated}
           />
         </div>
+        <div className="w-6"></div>
       </div>
       <details
         className={classMerge(
