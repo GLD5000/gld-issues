@@ -82,6 +82,7 @@ export default function GitIssueCard({
       link.indexOf("sharepoint") === -1,
   );
   const taskList = issue.body?.taskLists || undefined;
+  const summaryId = `${shortTitle}`; // Make unique with ${issue.number} -
   return (
     <div className="relative">
       <div className="p-0.5 mr-6 flex flex-wrap gap-1 items-center w-[calc(100%-26px)] box-border bg-neutral-100 dark:bg-neutral-800">
@@ -140,8 +141,11 @@ export default function GitIssueCard({
         )}
         {...props}
       >
-        <summary className="cursor-pointer p-0.5 absolute top-1 right-0.5 flex flex-wrap gap-1 items-center w-6 box-border ">
-          <span className="text-center text-black dark:text-white right-0 top-1 ease-out duration-200 transition-transform group-open:rotate-180 group-open:ease-in rounded-[50%] w-6 h-6 box-border block ">
+        <summary
+          aria-label={`${summaryId}`}
+          className="cursor-pointer p-0.5 absolute top-1 right-0.5 flex flex-wrap gap-1 items-center w-6 box-border "
+        >
+          <span className="text-center text-black dark:text-white right-0 top-1 ease-out duration-200 transition-transform group-open:rotate-180 group-open:ease-in rounded-[50%] w-6 h-6 box-border block  pointer-events-none">
             <svg
               width="100%"
               height="100%"
