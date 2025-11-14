@@ -2,7 +2,7 @@
 
 import { SelectiveIssue } from "../../../useIssues/useIssuesTypes";
 import { getAdjustedDeadlineDate } from "../../../useIssues/useIssuesUtils";
-import { getProgressState } from "./GitIssueDeadlineDoubleButton";
+import { getProgressState } from "./GitIssueDeadlineButton";
 
 export default function GitIssueDeadlineFlag({
   issue,

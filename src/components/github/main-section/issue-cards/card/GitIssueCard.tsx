@@ -3,7 +3,7 @@ import { convertIsoDateToDayDateComboString } from "@/utils/dates";
 import DoubleClickInput from "./DoubleClickInput";
 import TickSvg from "@/icons/TickSvg";
 import UnTicked from "@/icons/UnTicked";
-import GitIssueDeadlineDoubleButton from "./GitIssueDeadlineDoubleButton";
+import GitIssueDeadlineButton from "./GitIssueDeadlineButton";
 import GitIssueBodyTodoList from "./GitIssueBodyTodoList";
 import { classMerge } from "@/utils/twUtils";
 import {
@@ -83,45 +83,10 @@ export default function GitIssueCard({
   );
   const taskList = issue.body?.taskLists || undefined;
   return (
-    <details
-      className={classMerge(
-        `text-sm w-full box-border rounded-none group`,
-        className,
-      )}
-      {...props}
-    >
-      <summary className="cursor-pointer p-0.5 flex flex-wrap gap-1 items-center w-full box-border bg-neutral-100 dark:bg-neutral-800">
-        <span className="text-center text-black dark:text-white right-0 top-1 ease-out duration-200 transition-transform group-open:rotate-180 group-open:ease-in rounded-[50%] w-6 h-6 p-0.5 box-border block ">
-          <svg
-            width="100%"
-            height="100%"
-            viewBox="0 0 16 16"
-            className="rotate-90 w-full h-auto"
-          >
-            <path
-              className="dark:stroke-neutral-400 stroke-neutral-500"
-              id="faq-arrow"
-              style={{
-                fill: "none",
-                strokeWidth: "1.5",
-                strokeLinecap: "round",
-                strokeLinejoin: "round",
-                strokeDasharray: "none",
-                strokeOpacity: 1,
-              }}
-              d="m 7,5 4,3 -4,3"
-            />
-          </svg>
-        </span>
-        <a
-          className="hidden md:block text-neutral-500 dark:text-neutral-400 text-xs min-w-[3.5em] transition hover:underline focus:underline hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white font-bold overflow-hidden"
-          href={`${process.env.NEXT_PUBLIC_GH_URL}issues/${issue.number}`}
-          target="_blank"
-        >
-          #{issue.number}
-        </a>
+    <div className="relative">
+      <div className="p-0.5 mr-6 flex flex-wrap gap-1 items-center w-[calc(100%-26px)] box-border bg-neutral-100 dark:bg-neutral-800">
         <button
-          className="hidden md:block text-inherit text-center text-sm border-none w-5 h-5 p-0.5 rounded-lg bg-transparent hover:scale-105 focus:scale-105 transition box-border"
+          className="hidden md:block text-inherit text-center text-sm border-none w-4.5 h-4.5 p-0.5 rounded-lg bg-transparent hover:scale-105 focus:scale-105 transition box-border"
           type="button"
           onClick={() => {
             const issueNumberString = `${issue.number}`;
@@ -143,19 +108,22 @@ export default function GitIssueCard({
           isLoading={titleIsLoading}
           width="w-[calc(90vw-8em-32px)] md:w-[25vw] lg:w-[44vw] xl:w-[50vw] xl:max-w-[45rem]"
         />
-        <DoubleClickInput
-          onBlurHandler={deadlineOnBlurHandler}
-          onChangeHandler={deadlineOnChangeHandler}
-          onClickHandler={deadlineOnClickHandler}
-          inputValue={deadline || ""}
-          displayValue={getIssueDeadlineDateComboString(issue)}
-          placeHolder="dd/mm/yy"
-          width="w-[8em]"
-          textAlign="text-center text-sm"
-          isLoading={titleIsLoading}
-        />
-        <div className="ml-auto gap-2 flex flex-wrap w-fit items-center ">
-          <GitIssueDeadlineDoubleButton issue={issue} />
+        <div className="ml-auto gap-2 grid md:grid-cols-3 md:w-108 items-center ">
+          <DoubleClickInput
+            onBlurHandler={deadlineOnBlurHandler}
+            onChangeHandler={deadlineOnChangeHandler}
+            onClickHandler={deadlineOnClickHandler}
+            inputValue={deadline || ""}
+            displayValue={getIssueDeadlineDateComboString(issue)}
+            placeHolder="dd/mm/yy"
+            width="w-[8em] mx-auto"
+            textAlign="text-center text-sm"
+            isLoading={titleIsLoading}
+          />
+          <div className="hidden md:block">
+            {" "}
+            <GitIssueDeadlineButton issue={issue} />
+          </div>
 
           <GitIssueStateButton
             issue={issue}
@@ -163,104 +131,136 @@ export default function GitIssueCard({
             lastUpdated={lastUpdated}
           />
         </div>
-      </summary>
-      <div className="grid gap-4 text-sm w-full box-border p-4 newDesktop:p-8">
-        <div className="flex flex-wrap items-center">
-          <DoubleClickInput
-            onBlurHandler={fullTitleOnBlurHandler}
-            onChangeHandler={fullTitleOnChangeHandler}
-            onClickHandler={fullTitleOnClickHandler}
-            inputValue={fullTitle || ""}
-            displayValue={issue.title}
-            width="w-[20em] sm:w-[30em] md:w-[40em] lg:w-[50em] newDesktop:w-[60em]"
-            isLoading={titleIsLoading}
-          />
-          <CategoryAddIssueButton
-            label={issue.labels.map((label) => label.name).join(",")}
-            setIssues={setIssues}
-            title={issue.title}
-          />
-        </div>
-        <GitIssueBodyTodoList
-          issueNumber={issue.number}
-          setIssues={setIssues}
-          taskList={taskList}
-        />
-        <a
-          className="block text-inherit transition hover:underline focus:underline w-fit"
-          href={`${process.env.NEXT_PUBLIC_GH_URL}issues/${issue.number}`}
-          target="_blank"
-        >
-          Github.com Issue #{issue.number} &rarr;
-        </a>
-        {mondayLinks &&
-          mondayLinks.map((link, index) => (
-            <a
-              className="block text-inherit transition hover:underline focus:underline w-fit"
-              href={link}
-              target="_blank"
-              key={`link-${index}`}
-            >
-              Monday.com {link.slice(link.lastIndexOf("/") + 1)} &rarr;
-            </a>
-          ))}
-        {jiraLinks &&
-          jiraLinks.map((link, index) => (
-            <a
-              className="block text-inherit transition hover:underline focus:underline w-fit"
-              href={link}
-              target="_blank"
-              key={`link-${index}`}
-            >
-              JIRA {link.slice(link.lastIndexOf("/") + 1)} &rarr;
-            </a>
-          ))}
-        {sharepointLinks &&
-          sharepointLinks.map((link, index) => (
-            <a
-              className="block text-inherit transition hover:underline focus:underline w-fit"
-              href={link}
-              target="_blank"
-              key={`link-${index}`}
-            >
-              SharePoint {link.slice(link.lastIndexOf("/") + 1)} &rarr;
-            </a>
-          ))}
-        {otherLinks &&
-          otherLinks.map((link, index) => (
-            <a
-              className="block text-inherit transition hover:underline focus:underline w-fit"
-              href={link}
-              target="_blank"
-              key={`link-${index}`}
-            >
-              {
-                link
-                  .replace("https", "")
-                  .replace("http", "")
-                  .replace("://", "")
-                  .split("/")[0]
-              }{" "}
-              &rarr;
-            </a>
-          ))}
-        <a
-          className="block text-inherit transition hover:underline focus:underline w-fit"
-          href={`${process.env.NEXT_PUBLIC_GH_URL}issues/${issue.number}`}
-          target="_blank"
-        >
-          {"Comments: " + issue.comments}
-        </a>
-        <div className="flex flex-wrap justify-center gap-2 w-fit">
-          {labels}
-        </div>
-        <div className="flex gap-4 font-light text-neutral-500 dark:text-neutral-400 text-sm">
-          <span>{`Created: ${created}`}</span>
-          <span>{`Updated: ${lastUpdate}`}</span>
-          {issue.state !== "open" && <span>{`Closed: ${closedAt}`}</span>}
-        </div>
       </div>
-    </details>
+      <details
+        className={classMerge(
+          `text-sm w-full box-border rounded-none group`,
+          className,
+        )}
+        {...props}
+      >
+        <summary className="cursor-pointer p-0.5 absolute top-1 right-0.5 flex flex-wrap gap-1 items-center w-6 box-border ">
+          <span className="text-center text-black dark:text-white right-0 top-1 ease-out duration-200 transition-transform group-open:rotate-180 group-open:ease-in rounded-[50%] w-6 h-6 box-border block ">
+            <svg
+              width="100%"
+              height="100%"
+              viewBox="0 0 16 16"
+              className="rotate-90 w-full h-auto"
+            >
+              <path
+                className="dark:stroke-neutral-400 stroke-neutral-500"
+                id="faq-arrow"
+                style={{
+                  fill: "none",
+                  strokeWidth: "1.5",
+                  strokeLinecap: "round",
+                  strokeLinejoin: "round",
+                  strokeDasharray: "none",
+                  strokeOpacity: 1,
+                }}
+                d="m 7,5 4,3 -4,3"
+              />
+            </svg>
+          </span>
+        </summary>
+        <div className="grid gap-4 text-sm w-full box-border p-4 newDesktop:p-8">
+          <div className="flex flex-wrap items-center">
+            <DoubleClickInput
+              onBlurHandler={fullTitleOnBlurHandler}
+              onChangeHandler={fullTitleOnChangeHandler}
+              onClickHandler={fullTitleOnClickHandler}
+              inputValue={fullTitle || ""}
+              displayValue={issue.title}
+              width="w-[20em] sm:w-[30em] md:w-[40em] lg:w-[50em] newDesktop:w-[60em]"
+              isLoading={titleIsLoading}
+            />
+            <CategoryAddIssueButton
+              label={issue.labels.map((label) => label.name).join(",")}
+              setIssues={setIssues}
+              title={issue.title}
+            />
+          </div>
+          <GitIssueBodyTodoList
+            issueNumber={issue.number}
+            setIssues={setIssues}
+            taskList={taskList}
+          />
+          <a
+            className="block text-inherit transition hover:underline focus:underline w-fit"
+            href={`${process.env.NEXT_PUBLIC_GH_URL}issues/${issue.number}`}
+            target="_blank"
+          >
+            Github.com Issue #{issue.number} &rarr;
+          </a>
+          {mondayLinks &&
+            mondayLinks.map((link, index) => (
+              <a
+                className="block text-inherit transition hover:underline focus:underline w-fit"
+                href={link}
+                target="_blank"
+                key={`link-${index}`}
+              >
+                Monday.com {link.slice(link.lastIndexOf("/") + 1)} &rarr;
+              </a>
+            ))}
+          {jiraLinks &&
+            jiraLinks.map((link, index) => (
+              <a
+                className="block text-inherit transition hover:underline focus:underline w-fit"
+                href={link}
+                target="_blank"
+                key={`link-${index}`}
+              >
+                JIRA {link.slice(link.lastIndexOf("/") + 1)} &rarr;
+              </a>
+            ))}
+          {sharepointLinks &&
+            sharepointLinks.map((link, index) => (
+              <a
+                className="block text-inherit transition hover:underline focus:underline w-fit"
+                href={link}
+                target="_blank"
+                key={`link-${index}`}
+              >
+                SharePoint {link.slice(link.lastIndexOf("/") + 1)} &rarr;
+              </a>
+            ))}
+          {otherLinks &&
+            otherLinks.map((link, index) => (
+              <a
+                className="block text-inherit transition hover:underline focus:underline w-fit"
+                href={link}
+                target="_blank"
+                key={`link-${index}`}
+              >
+                {
+                  link
+                    .replace("https", "")
+                    .replace("http", "")
+                    .replace("://", "")
+                    .split("/")[0]
+                }{" "}
+                &rarr;
+              </a>
+            ))}
+          <a
+            className="block text-inherit transition hover:underline focus:underline w-fit"
+            href={`${process.env.NEXT_PUBLIC_GH_URL}issues/${issue.number}`}
+            target="_blank"
+          >
+            {"Comments: " + issue.comments}
+          </a>
+          <div className="flex flex-wrap justify-center gap-2 w-fit">
+            {labels}
+          </div>
+          <div className="flex gap-4 font-light text-neutral-500 dark:text-neutral-400 text-sm">
+            <span>{`Created: ${created}`}</span>
+            <span>{`Updated: ${lastUpdate}`}</span>
+            {issue.state !== "open" && <span>{`Closed: ${closedAt}`}</span>}
+          </div>
+        </div>
+      </details>
+    </div>
   );
   function setTitlesToLoad() {
     setPreviousUpdate(`title-${lastUpdated}`);

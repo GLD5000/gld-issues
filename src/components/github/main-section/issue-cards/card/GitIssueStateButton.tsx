@@ -78,14 +78,14 @@ export default function GitIssueStateButton({
   }
   if (previousUpdated === lastUpdated)
     return (
-      <div className="ml-auto w-36 h-7 box-border p-1 text-center rounded-none border-none bg-neutral-500">
+      <div className="ml-auto w-full h-7 box-border p-1 text-center rounded-none border-none bg-neutral-500">
         <LoadingSpinner />
       </div>
     );
   return (
     <select
       aria-label="Issue State"
-      className={`appearance-none block cursor-pointer p-1 box-border w-36 h-[30px] text-center rounded-none border-none text-black ${progressState.bg || "bg-black"}  `}
+      className={`appearance-none block cursor-pointer p-1 box-border w-full h-[30px] text-center rounded-none border-none text-black ${progressState.bg || "bg-black"}  `}
       value={progressState.msg}
       onChange={handleClick}
     >
