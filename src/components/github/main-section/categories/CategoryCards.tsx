@@ -110,7 +110,7 @@ export default function CategoryCards({
           </div>
         );
         return !categoryFilter ? (
-          <>
+          <Fragment key={`${entry[0]}${index}`}>
             <details
               open
               className="grid gap-0 w-full h-auto group/subsection box-border"
@@ -146,7 +146,7 @@ export default function CategoryCards({
             <div className="w-full grid justify-center p-1">
               <CategoryAddIssueButton label={entry[0]} setIssues={setIssues} />
             </div>
-          </>
+          </Fragment>
         ) : (
           <Fragment key={`${entry[0]}${index}`}>
             {sectionTitle}
