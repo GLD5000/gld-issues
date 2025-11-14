@@ -36,7 +36,7 @@ export default function DoubleClickInput({
   if (isLoading)
     return (
       <div
-        className={`block text-black dark:text-white bg-transparent ${width} text-ellipsis ${textAlign} border-none`}
+        className={`block font-normal text-black dark:text-white bg-transparent ${width} text-ellipsis ${textAlign} border-none`}
       >
         <LoadingSpinner />
       </div>
@@ -47,7 +47,7 @@ export default function DoubleClickInput({
         <input
           placeholder={placeHolder}
           ref={inputRef}
-          className={`block text-black dark:text-white bg-transparent ${width} text-ellipsis ${textAlign} border-none`}
+          className={`block font-normal text-black dark:text-white bg-transparent ${width} text-ellipsis ${textAlign} border-none`}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               e.currentTarget.blur();
@@ -85,7 +85,7 @@ export default function DoubleClickInput({
         ></input>
       ) : (
         <span
-          className={`block text-black dark:text-white bg-transparent ${width} text-ellipsis ${textAlign} border-none whitespace-pre overflow-clip cursor-text`}
+          className={`block font-normal text-black dark:text-white bg-transparent ${width} text-ellipsis ${textAlign} border-none whitespace-pre overflow-clip cursor-text`}
           onDoubleClick={() => {
             handleDoubleClick();
             if (onClickHandler) onClickHandler();
