@@ -106,9 +106,9 @@ export default function GitIssueCard({
           inputValue={shortTitle}
           displayValue={getTitleNoDeadline(issue)}
           isLoading={titleIsLoading}
-          width="w-[calc(90vw-8em-32px)] md:w-[25vw] lg:w-[44vw] xl:w-[50vw] xl:max-w-[45rem]"
+          width="w-[calc(92vw-24px)] md:w-[25vw] lg:w-[44vw] xl:w-[50vw] xl:max-w-[45rem]"
         />
-        <div className="ml-auto gap-2 grid md:grid-cols-3 md:w-108 items-center ">
+        <div className="mx-auto md:ml-auto gap-2 grid md:grid-cols-3 w-36 md:w-108 items-center ">
           <DoubleClickInput
             onBlurHandler={deadlineOnBlurHandler}
             onChangeHandler={deadlineOnChangeHandler}
