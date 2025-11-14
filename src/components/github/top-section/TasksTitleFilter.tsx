@@ -16,6 +16,7 @@ export default function TasksTitleFilter({
   return (
     <div className="w-fit flex gap-2 flex-wrap text-sm items-center">
       <input
+        id="Filter Titles"
         className="text-black text-sm placeholder:text-sm placeholder:text-neutral-400 bg-neutral-100 w-60 h-fit px-2 py-1 my-1 leading-[0.8]"
         placeholder="Filter Titles"
         onClick={() => {

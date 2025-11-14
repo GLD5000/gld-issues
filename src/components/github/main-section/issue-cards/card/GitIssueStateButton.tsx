@@ -88,6 +88,7 @@ export default function GitIssueStateButton({
       className={`appearance-none block cursor-pointer p-1 box-border w-full h-[30px] text-center rounded-none border-none text-black ${progressState.bg || "bg-black"}  `}
       value={progressState.msg}
       onChange={handleClick}
+      id={`State Select Issue ${issue.number}`}
     >
       {options}
     </select>
