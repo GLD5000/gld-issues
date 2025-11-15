@@ -35,7 +35,6 @@ export default function BarGraph({
           >
             <path
               className="dark:stroke-neutral-400 stroke-neutral-500"
-              id="faq-arrow"
               style={{
                 fill: "none",
                 strokeWidth: "1",

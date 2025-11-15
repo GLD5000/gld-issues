@@ -155,7 +155,6 @@ export default function GitIssueCard({
             >
               <path
                 className="stroke-current"
-                id="faq-arrow"
                 style={{
                   fill: "none",
                   strokeWidth: "1.5",

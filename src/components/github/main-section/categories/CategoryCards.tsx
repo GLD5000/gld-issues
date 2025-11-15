@@ -137,7 +137,6 @@ export default function CategoryCards({
                     >
                       <path
                         className="stroke-current"
-                        id="faq-arrow"
                         style={{
                           fill: "none",
                           strokeWidth: "1",
