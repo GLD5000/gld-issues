@@ -124,7 +124,6 @@ export function useIssues(): [
         (type = "refresh", body?: Record<string, string>) => {
           console.log("accessLevel:", accessLevel);
           console.log(type);
-          console.log("body:", JSON.stringify(body));
           return refreshValue();
         },
       ];
