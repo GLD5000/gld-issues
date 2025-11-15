@@ -114,7 +114,7 @@ export default function CategoryCards({
             className="bg-neutral-100 dark:bg-neutral-800 rounded-lg grid grid-cols-[auto_1fr]"
             key={`${entry[0]}${index}`}
           >
-            <div className="w-4 h-full bg-amber-300 rounded-l-lg"> </div>
+            <div className="w-1.5 h-full bg-amber-300 rounded-l-lg"> </div>
             <div>
               {" "}
               <details
