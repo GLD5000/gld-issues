@@ -115,7 +115,7 @@ export default function CategoryCards({
             key={`${entry[0]}${index}`}
           >
             <div
-              className={`w-1.5 h-full ${index % 2 === 0 ? "bg-purple-300" : "bg-red-400"} rounded-l-lg`}
+              className={`w-1.5 h-full ${index % 2 === 0 ? "bg-green-600 dark:bg-green-800" : "bg-purple-600 dark:bg-purple-800"} rounded-l-lg`}
             >
               {" "}
             </div>
