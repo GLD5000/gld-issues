@@ -14,6 +14,7 @@ import {
 } from "../../useIssues/useIssuesUtils";
 import IssueCards from "../issue-cards/IssueCards";
 import CategoryAddIssueButton from "./CategoryAddIssueButton";
+import TasksBarPlot from "../../top-section/TasksBarPlot";
 
 export default function CategoryCards({
   filteredToDoObject,
@@ -66,14 +67,19 @@ export default function CategoryCards({
         sortMode={sortMode}
       />
       {filteredToDoObject.map((entry, index) => {
+        const closedIssues = entry[1].filter(
+          (issue) => issue.state === "closed",
+        ).length;
+        const totalIssues = entry[1].length;
+        const openIssues = totalIssues - closedIssues;
         const sectionTitle = (
-          <div className="grid w-full">
+          <div className="grid w-fit">
             <div className="flex flex-wrap gap-2 w-full justify-between">
               <div className="flex flex-wrap w-full gap-6 justify-between items-center">
                 <h2 className="block normal-case text-left m-0 w-fit h-auto">
                   {entry[0]}
                   <span className="font-light text-neutral-500 dark:text-neutral-400 text-sm">
-                    {` (${entry[1].filter((issue) => issue.state === "closed").length}/${entry[1].length})`}
+                    {` (${closedIssues}/${totalIssues})`}
                   </span>
                 </h2>
               </div>
@@ -127,7 +133,23 @@ export default function CategoryCards({
                 key={`${entry[0]}${index}`}
               >
                 <summary className="w-full grid grid-cols-[1fr_auto] items-center border-b border-b-neutral-300 dark:border-b-neutral-600 cursor-pointer group p-1">
-                  {sectionTitle}
+                  <div className="flex flex-wrap items-center gap-2 px-2 justify-center md:justify-start">
+                    {" "}
+                    {sectionTitle}
+                    <TasksBarPlot
+                      className="w-40 rounded-none"
+                      barNumbers={[
+                        closedIssues / totalIssues,
+                        openIssues / totalIssues,
+                      ]}
+                      barColours={[
+                        "bg-blue-400 dark:bg-blue-300",
+                        "bg-green-400 dark:bg-green-300",
+                      ]}
+                      height={12}
+                    />
+                  </div>
+
                   <span className="text-center text-neutral-500 dark:text-neutral-400 group-hover:text-black group-focus:text-black group-hover:dark:text-white group-focus:dark:text-white right-0 top-1 ease-out duration-200 transition-transform group-open/subsection:rotate-180 group-open/subsection:ease-in rounded-[50%] w-8 h-8 p-1 box-border block">
                     <svg
                       width="100%"

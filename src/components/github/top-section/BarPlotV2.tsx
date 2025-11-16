@@ -43,7 +43,7 @@ export const BarPlotV2 = ({
         >
           <span className="block w-[300px] text-neutral-500 dark:text-neutral-400 text-base tracking-tighter box-border text-left group-hover:underline underline-offset-2 font-bold">{`${group.title} (${group.closed} / ${group.total})`}</span>
           <TasksBarPlot
-            bars={[
+            barNumbers={[
               group.closed / group.total,
               group.testing / group.total,
               (group.total - group.closed - group.blocked - group.testing) /
