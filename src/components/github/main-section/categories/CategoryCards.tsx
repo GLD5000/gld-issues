@@ -185,7 +185,21 @@ export default function CategoryCards({
         ) : (
           <div key={`${entry[0]}${index}`}>
             <div className="p-1 rounded-lg rounded-b-none bg-neutral-100 dark:bg-neutral-800">
-              {sectionTitle}
+              <div className="flex flex-wrap items-center gap-2 px-2 justify-center md:justify-start">
+                {sectionTitle}
+                <TasksBarPlot
+                  className="w-40 rounded-none"
+                  barNumbers={[
+                    closedIssues / totalIssues,
+                    openIssues / totalIssues,
+                  ]}
+                  barColours={[
+                    "bg-blue-400 dark:bg-blue-300",
+                    "bg-green-400 dark:bg-green-300",
+                  ]}
+                  height={12}
+                />
+              </div>
             </div>
             {issueCards}
             <div className="w-full grid justify-center p-1">
