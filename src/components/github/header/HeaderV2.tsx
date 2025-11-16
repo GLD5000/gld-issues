@@ -51,18 +51,12 @@ export default function HeaderV2() {
     <header
       className={`relative left-0 top-0 z-997 h-fit grid w-full border-x-0 border-solid border-b transition ${
         colourTheme
-          ? "dark:border-b-white dark:bg-black"
-          : "border-b-black bg-white"
+          ? "dark:border-b-neutral-600 dark:bg-black"
+          : "border-b-neutral-300 bg-white"
       }`}
     >
       <nav
-        className={`mx-auto w-full p-2 h-fit grid md:grid-cols-[auto_1fr_auto] md:gap-8 items-center transition justify-center  text-base text-white lg:w-body
-               ${
-                 colourTheme
-                   ? "dark:border-b-white dark:bg-black"
-                   : "border-b-black bg-white"
-               }
-        `}
+        className={`mx-auto w-full p-2 h-fit grid md:grid-cols-[auto_1fr_auto] md:gap-8 items-center transition justify-center  text-base text-white lg:w-body`}
       >
         <Link
           href="https://github.com/GLD5000"

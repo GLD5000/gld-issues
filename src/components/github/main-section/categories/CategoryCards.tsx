@@ -126,7 +126,7 @@ export default function CategoryCards({
                 className="grid gap-0 w-full h-auto group/subsection box-border"
                 key={`${entry[0]}${index}`}
               >
-                <summary className="w-full grid grid-cols-[1fr_auto] items-center border-b border-b-neutral-500 dark:border-b-neutral-400 cursor-pointer group p-1">
+                <summary className="w-full grid grid-cols-[1fr_auto] items-center border-b border-b-neutral-300 dark:border-b-neutral-600 cursor-pointer group p-1">
                   {sectionTitle}
                   <span className="text-center text-neutral-500 dark:text-neutral-400 group-hover:text-black group-focus:text-black group-hover:dark:text-white group-focus:dark:text-white right-0 top-1 ease-out duration-200 transition-transform group-open/subsection:rotate-180 group-open/subsection:ease-in rounded-[50%] w-8 h-8 p-1 box-border block">
                     <svg

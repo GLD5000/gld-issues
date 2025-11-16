@@ -21,12 +21,6 @@ export default function IssueCards({
   setPriorityList: (valueIn: string | string[]) => void;
   lastUpdated: string;
 }) {
-  //border border-solid border-neutral-400 dark:border-neutral-500
-  // className={
-  //           index === issueArray.length - 1
-  //             ? ""
-  //             : "border-0 border-b border-solid border-b-neutral-400 dark:border-b-neutral-500"
-  //         }
   return (
     <div className="grid gap-0 rounded p-0 overflow-clip">
       {issueArray.map((issue, index) => {
@@ -38,7 +32,7 @@ export default function IssueCards({
             priorityList={priorityList}
             setPriorityList={setPriorityList}
             lastUpdated={lastUpdated}
-            className="border-0 border-b border-solid border-b-neutral-400 dark:border-b-neutral-500"
+            className="border-0 border-b border-solid border-b-neutral-300 dark:border-b-neutral-600"
           />
         );
       })}
