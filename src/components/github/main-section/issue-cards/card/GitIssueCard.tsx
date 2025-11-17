@@ -137,16 +137,16 @@ export default function GitIssueCard({
       </div>
       <details
         className={classMerge(
-          `text-sm w-full box-border rounded-none group`,
+          `text-sm w-full box-border rounded-none group bg-white dark:bg-black`,
           className,
         )}
         {...props}
       >
         <summary
           aria-label={`${summaryId}`}
-          className="cursor-pointer p-0.5 absolute top-1 right-0.5 flex flex-wrap gap-1 items-center w-6 box-border text-neutral-500 dark:text-neutral-400 hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white"
+          className="cursor-pointer p-1 absolute top-0 right-0 bottom-0 flex flex-wrap gap-1 items-center w-7 box-border bg-white dark:bg-black group focus-within:outline-0"
         >
-          <span className="text-center  right-0 top-1 ease-out duration-200 transition-transform group-open:rotate-180 group-open:ease-in rounded-[50%] w-6 h-6 box-border block  pointer-events-none">
+          <span className="text-center ease-out duration-200 group-open:rotate-180 group-open:ease-in rounded-[50%] w-full aspect-square box-border block text-neutral-500 dark:text-neutral-400 group-hover:text-black group-focus-within:text-black group-hover:dark:text-white group-focus-within:dark:text-white group-hover:border-current group-focus-within:border-current border-transparent border border-solid pointer-events-none transition">
             <svg
               width="100%"
               height="100%"
