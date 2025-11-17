@@ -115,7 +115,7 @@ export default function CategoryCards({
             />
           </div>
         );
-        return !categoryFilter ? (
+        return (
           <div
             className="bg-neutral-100 dark:bg-neutral-800 rounded-lg grid grid-cols-[auto_1fr]"
             key={`${entry[0]}${index}`}
@@ -174,36 +174,12 @@ export default function CategoryCards({
                 </summary>
                 {issueCards}
               </details>
-              <div className="w-full grid justify-center p-1">
+              <div className="w-full grid justify-center p-2">
                 <CategoryAddIssueButton
                   label={entry[0]}
                   setIssues={setIssues}
                 />
               </div>
-            </div>
-          </div>
-        ) : (
-          <div key={`${entry[0]}${index}`}>
-            <div className="p-1 rounded-lg rounded-b-none bg-neutral-100 dark:bg-neutral-800">
-              <div className="flex flex-wrap items-center gap-2 px-2 justify-center md:justify-start">
-                {sectionTitle}
-                <TasksBarPlot
-                  className="w-32 rounded-none border border-current border-solid"
-                  barNumbers={[
-                    closedIssues / totalIssues,
-                    openIssues / totalIssues,
-                  ]}
-                  barColours={[
-                    "bg-current", //  "bg-blue-400 dark:bg-blue-300",
-                    "bg-transparent", // "bg-green-400 dark:bg-green-300",
-                  ]}
-                  height={12}
-                />
-              </div>
-            </div>
-            {issueCards}
-            <div className="w-full grid justify-center p-1">
-              <CategoryAddIssueButton label={entry[0]} setIssues={setIssues} />
             </div>
           </div>
         );
