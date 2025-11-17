@@ -1,8 +1,8 @@
 import { ComponentProps, useState } from "react";
 import { convertIsoDateToDayDateComboString } from "@/utils/dates";
 import DoubleClickInput from "./DoubleClickInput";
-import TickSvg from "@/icons/TickSvg";
-import UnTicked from "@/icons/UnTicked";
+// import TickSvg from "@/icons/TickSvg";
+// import UnTicked from "@/icons/UnTicked";
 import GitIssueDeadlineButton from "./GitIssueDeadlineButton";
 import GitIssueBodyTodoList from "./GitIssueBodyTodoList";
 import { classMerge } from "@/utils/twUtils";

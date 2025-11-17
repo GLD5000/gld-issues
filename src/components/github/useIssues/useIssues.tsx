@@ -121,7 +121,8 @@ export function useIssues(): [
     ? [state, refreshValue]
     : [
         state,
-        (type = "refresh", body?: Record<string, string>) => {
+        (type = "refresh") => {
+          //, body?: Record<string, string>
           console.log("accessLevel:", accessLevel);
           console.log(type);
           return refreshValue();

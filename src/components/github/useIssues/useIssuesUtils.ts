@@ -1,6 +1,6 @@
 import {
   adjustDateToWorkday,
-  dateIsThisWeek,
+  // dateIsThisWeek,
   getCurrentCentury,
   getWeekNumberFromISOString,
 } from "@/utils/dates";
@@ -160,21 +160,20 @@ export function makeWeeklyToDoObject(
   return { categoriesObject, timeObject };
 }
 
-function completedAsPlanned(issue: SelectiveIssue) {
-  return issue.state !== "open" && issue.state_reason !== "not_planned";
-}
+// function completedAsPlanned(issue: SelectiveIssue) {
+//   return issue.state !== "open" && issue.state_reason !== "not_planned";
+// }
 function filterToDoIssues(arrayIn: SelectiveIssuesJsonShape) {
-  return arrayIn
-    .toReversed()
-    .filter(
-      (issue) =>
-        !issueIsTodo(issue) &&
-        (issue.state === "open" ||
-          (completedAsPlanned(issue) && dateIsThisWeek(issue.created_at)) ||
-          (completedAsPlanned(issue) &&
-            issue.closed_at &&
-            dateIsThisWeek(issue.closed_at))),
-    );
+  return arrayIn.toReversed();
+  // .filter(
+  // (issue) =>
+  // !issueIsTodo(issue) &&
+  // (issue.state === "open" ||
+  //   (completedAsPlanned(issue) && dateIsThisWeek(issue.created_at)) ||
+  //   (completedAsPlanned(issue) &&
+  //     issue.closed_at &&
+  //     dateIsThisWeek(issue.closed_at))),
+  // );
 }
 export function issueIsBlocked(issue: SelectiveIssue) {
   return (
