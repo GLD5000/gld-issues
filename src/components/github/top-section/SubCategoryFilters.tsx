@@ -21,20 +21,16 @@ export default function SubCategoryFilters({
       <div className="flex flex-wrap gap-1 items-center justify-between">
         <div className="flex flex-wrap gap-1 items-center">
           <span className="text-sm font-light">Show:</span>
-          {[
-            "Deadlines",
-            "Completed",
-            "Testing",
-            "Blocked",
-            // 'Other',
-          ].map((value, index) => (
-            <FilterButtonSmall
-              key={`${index}${value}`}
-              state={subCategoryFilter.filter((item) => item === value)[0]}
-              setState={setSubCategoryFilter}
-              message={value}
-            />
-          ))}
+          {["Deadlines", "Completed", "Testing", "Blocked", "Open"].map(
+            (value, index) => (
+              <FilterButtonSmall
+                key={`${index}${value}`}
+                state={subCategoryFilter.filter((item) => item === value)[0]}
+                setState={setSubCategoryFilter}
+                message={value}
+              />
+            ),
+          )}
         </div>
         <TasksSortButton
           incrementSortMode={incrementSortMode}

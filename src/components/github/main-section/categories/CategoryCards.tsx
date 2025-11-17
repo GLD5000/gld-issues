@@ -213,18 +213,27 @@ export default function CategoryCards({
   function getSubCategoryFilterRules() {
     const subCategoryFilterActive = subCategoryFilter.length > 0;
     const showDeadlines =
-      subCategoryFilterActive && subCategoryFilter.includes("Deadlines");
+      subCategoryFilterActive &&
+      (subCategoryFilter.includes("Deadlines") ||
+        subCategoryFilter.includes("Open"));
     const showCompleted =
       subCategoryFilterActive && subCategoryFilter.includes("Completed");
     const showTesting =
-      subCategoryFilterActive && subCategoryFilter.includes("Testing");
+      subCategoryFilterActive &&
+      (subCategoryFilter.includes("Testing") ||
+        subCategoryFilter.includes("Open"));
     const showBlocked =
-      subCategoryFilterActive && subCategoryFilter.includes("Blocked");
+      subCategoryFilterActive &&
+      (subCategoryFilter.includes("Blocked") ||
+        subCategoryFilter.includes("Open"));
+    const showOpen =
+      subCategoryFilterActive && subCategoryFilter.includes("Open");
     return {
       showDeadlines,
       showCompleted,
       showTesting,
       showBlocked,
+      showOpen,
     };
   }
   function filterCategory(issue: SelectiveIssue) {
@@ -232,7 +241,7 @@ export default function CategoryCards({
 
     const { notFiltering, isFilteringBlocked, isFilteringDeadline } =
       filterSettings;
-    const { showDeadlines, showCompleted, showTesting, showBlocked } =
+    const { showDeadlines, showCompleted, showTesting, showBlocked, showOpen } =
       subCategoryRules;
     // const shouldShowOpen =
     //     showOpen &&
@@ -245,13 +254,16 @@ export default function CategoryCards({
       if (!issueIsOpen && showCompleted) {
         return true;
       }
-      if (issueHasBlocked && showBlocked) {
+      if (issueIsOpen && issueHasBlocked && showBlocked) {
         return true;
       }
-      if (issueHasTesting && showTesting) {
+      if (issueIsOpen && issueHasTesting && showTesting) {
         return true;
       }
-      if (issueHasDeadline && showDeadlines) {
+      if (issueIsOpen && issueHasDeadline && showDeadlines) {
+        return true;
+      }
+      if (issueIsOpen && showOpen) {
         return true;
       }
       return false;
