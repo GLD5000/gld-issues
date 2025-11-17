@@ -57,12 +57,14 @@ export default function GitIssueCard({
     : undefined;
   const titleIsLoading = previousUpdate === `title-${lastUpdated}`;
   const labels = issue.labels.map((label) => (
-    <div
-      key={label.name}
-      className="rounded-full border border-solid w-fit h-fit py-0 px-2 font-normal text-sm"
-      style={{ borderColor: `#${label.color}` }}
-    >
-      {label.name}
+    <div className="bg-neutral-50 w-fit h-auto rounded-md">
+      <div
+        key={label.name}
+        className="w-fit h-fit p-1.5 font-semibold text-sm text-black rounded-md"
+        style={{ backgroundColor: `#${label.color}70` }}
+      >
+        {label.name}
+      </div>
     </div>
   ));
   if (!issue) return null;
