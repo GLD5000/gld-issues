@@ -23,8 +23,8 @@ export default function TasksCategoryFilter({
           "Categories",
           // 'This Week',
           // 'Next Week',
-          "All",
           "Deadlines",
+          "Open",
           // 'Completed',
           // 'Blocked',
         ].map((value, index) => (

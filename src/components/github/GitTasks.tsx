@@ -155,7 +155,7 @@ export default function GitTasks() {
       setViewMode("Category");
       incrementSortMode("Deadline");
       setSubCategoryFilter("DELETE");
-    } else if (input === "All") {
+    } else if (input === "Open") {
       setCategoryFilter("");
       setTitleFilter("");
       setViewMode("Open");
