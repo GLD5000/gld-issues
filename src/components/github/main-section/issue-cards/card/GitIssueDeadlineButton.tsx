@@ -2,6 +2,7 @@
 
 import {
   adjustDateToPreviousWorkday,
+  adjustDateToWorkday,
   dateIsFri,
   dateIsSatSun,
   getDayOfWeekShort,
@@ -23,7 +24,7 @@ export default function GitIssueDeadlineButton({
   if (!deadlineDate || issue.state === "closed") return <div></div>;
   const deadlineData = getProgressState(deadlineDate);
   if (!deadlineData) return <div></div>;
-  const buildData = getProgressState(adjustDateToPreviousWorkday(deadlineDate));
+  const buildData = getProgressState(adjustDateToWorkday(deadlineDate));
   const deadlineFlagValue =
     deadlineViewMode === "days" ? buildData.msg : buildData.week;
   const deadlineFlagColour = deadlineData.border;
