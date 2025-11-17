@@ -27,7 +27,6 @@ export default function CategoryCards({
   setPriorityList,
   titleFilter,
   filterSettings,
-  categoryFilter,
   titleFilterElement,
   lastUpdated,
 }: {
