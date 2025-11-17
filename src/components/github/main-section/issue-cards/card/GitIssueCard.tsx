@@ -110,7 +110,7 @@ export default function GitIssueCard({
           width="w-[calc(92vw-24px)] md:w-[calc(87vw-442px)] xl:w-full box-border"
           textAlign="p-[2px] md:p-0 text-center md:text-left text-sm"
         />
-        <div className="mx-auto md:ml-auto gap-2 grid md:grid-cols-3 w-36 md:w-108 items-center ">
+        <div className="mx-auto md:ml-auto gap-2 grid md:grid-cols-3 w-full md:w-108 items-center ">
           <DoubleClickInput
             onBlurHandler={deadlineOnBlurHandler}
             onChangeHandler={deadlineOnChangeHandler}
