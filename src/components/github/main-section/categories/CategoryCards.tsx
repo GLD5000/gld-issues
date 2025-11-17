@@ -150,7 +150,7 @@ export default function CategoryCards({
                     />
                   </div>
 
-                  <span className="text-center text-neutral-500 dark:text-neutral-400 group-hover:text-black group-focus:text-black group-hover:dark:text-white group-focus:dark:text-white right-0 top-1 ease-out duration-200 transition-transform group-open/subsection:rotate-180 group-open/subsection:ease-in rounded-[50%] w-8 h-8 p-1 box-border block">
+                  <span className="text-center text-neutral-500 dark:text-neutral-400 group-hover:text-black group-focus-visible:text-black group-hover:dark:text-white group-focus-visible:dark:text-white right-0 top-1 ease-out duration-200 transition-transform group-open/subsection:rotate-180 group-open/subsection:ease-in rounded-[50%] w-8 h-8 p-1 box-border block">
                     <svg
                       width="100%"
                       height="100%"
