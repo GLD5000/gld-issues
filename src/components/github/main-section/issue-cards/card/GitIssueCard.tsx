@@ -12,11 +12,13 @@ import {
   getIssueDeadlineDateComboString,
   reBuildIssueTitle,
   getStringDeadlineDate,
+  getLinksTasksFromBodyString,
 } from "../../../useIssues/useIssuesUtils";
 import { SelectiveIssue } from "../../../useIssues/useIssuesTypes";
 import CategoryAddIssueButton from "../../categories/CategoryAddIssueButton";
 import GitIssueStateButton from "./GitIssueStateButton";
 import TickSvgV2 from "@/icons/TickSvgV2";
+import DoubleClickTextArea from "./DoubleClickTextArea";
 
 interface GitIssueCardProps extends ComponentProps<"details"> {
   issue: SelectiveIssue;
@@ -45,6 +47,7 @@ export default function GitIssueCard({
   const [shortTitle, setShortTitle] = useState(getTitleNoDeadline(issue));
   const [previousUpdate, setPreviousUpdate] = useState("");
   const [fullTitle, setFullTitle] = useState(issue.title);
+  const [fullBody, setFullBody] = useState(issue.title);
   const lastUpdate = issue.updated_at
     ? convertIsoDateToDayDateComboString(issue.updated_at)
     : undefined;
@@ -57,9 +60,8 @@ export default function GitIssueCard({
     : undefined;
   const titleIsLoading = previousUpdate === `title-${lastUpdated}`;
   const labels = issue.labels.map((label) => (
-    <div className="bg-neutral-50 w-fit h-auto rounded-md">
+    <div key={label.name} className="bg-neutral-50 w-fit h-auto rounded-md">
       <div
-        key={label.name}
         className="w-fit h-fit p-1.5 font-semibold text-sm text-black rounded-md"
         style={{ backgroundColor: `#${label.color}70` }}
       >
@@ -68,29 +70,29 @@ export default function GitIssueCard({
     </div>
   ));
   if (!issue) return null;
-
-  const mondayLinks = issue.body?.links?.filter(
-    (link) => link.toLowerCase().indexOf("monday") > -1,
+  const { body } = issue;
+  const { links, taskLists } = body ? getLinksTasksFromBodyString(body) : {};
+  const mondayLinks = links?.filter(
+    (link) => `${link}`.toLowerCase().indexOf("monday") > -1,
   );
-  const jiraLinks = issue.body?.links?.filter(
-    (link) => link.toLowerCase().indexOf("jira") > -1,
+  const jiraLinks = links?.filter(
+    (link) => `${link}`.toLowerCase().indexOf("jira") > -1,
   );
-  const sharepointLinks = issue.body?.links?.filter(
-    (link) => link.toLowerCase().indexOf("sharepoint") > -1,
+  const sharepointLinks = links?.filter(
+    (link) => `${link}`.toLowerCase().indexOf("sharepoint") > -1,
   );
-  const otherLinks = issue.body?.links?.filter(
+  const otherLinks = links?.filter(
     (link) =>
-      link.indexOf("monday") === -1 &&
-      link.indexOf("jira") === -1 &&
-      link.indexOf("sharepoint") === -1,
+      `${link}`.indexOf("monday") === -1 &&
+      `${link}`.indexOf("jira") === -1 &&
+      `${link}`.indexOf("sharepoint") === -1,
   );
-  const taskList = issue.body?.taskLists || undefined;
+  const taskList = taskLists || undefined;
   const summaryId = `${shortTitle}`; // Make unique with ${issue.number} -
   return (
     <div className="relative w-full">
       <div className="mr-6 md:mr-0 flex flex-wrap lg:grid lg:grid-cols-[auto_1fr_auto_auto] gap-1 items-center w-[calc(100%-26px)] lg:w-full box-border bg-neutral-100 dark:bg-neutral-800">
         <div className="w-fit h-full p-1">
-          {" "}
           <button
             className="m-0.5 hidden md:block  text-center text-sm border border-current border-solid w-4.5 h-4.5  rounded-md bg-transparent text-neutral-500 dark:text-neutral-400 hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white transition box-border"
             type="button"
@@ -187,11 +189,6 @@ export default function GitIssueCard({
               title={issue.title}
             />
           </div>
-          <GitIssueBodyTodoList
-            issueNumber={issue.number}
-            setIssues={setIssues}
-            taskList={taskList}
-          />
           <a
             className="block text-inherit transition hover:underline focus:underline w-fit"
             href={`${process.env.NEXT_PUBLIC_GH_URL}issues/${issue.number}`}
@@ -199,6 +196,22 @@ export default function GitIssueCard({
           >
             Github.com Issue #{issue.number} &rarr;
           </a>
+          {body && (
+            <DoubleClickTextArea
+              onBlurHandler={fullBodyOnBlurHandler}
+              onChangeHandler={fullBodyOnChangeHandler}
+              onClickHandler={fullBodyOnClickHandler}
+              inputValue={fullBody || ""}
+              displayValue={body}
+              width="w-[20em] sm:w-[30em] md:w-[40em] lg:w-[50em] newDesktop:w-[60em]"
+              isLoading={titleIsLoading}
+            />
+          )}
+          <GitIssueBodyTodoList
+            issueNumber={issue.number}
+            setIssues={setIssues}
+            taskList={taskList}
+          />
           {mondayLinks &&
             mondayLinks.map((link, index) => (
               <a
@@ -328,5 +341,23 @@ export default function GitIssueCard({
   }
   function fullTitleOnClickHandler() {
     setFullTitle(issue.title);
+  }
+  function fullBodyOnBlurHandler(e: React.FocusEvent<HTMLTextAreaElement>) {
+    const newBody = e.currentTarget.value.trim();
+    if (newBody && newBody !== issue.body) {
+      setIssues("patchTodo", {
+        issue_number: `${issue.number}`,
+        body: newBody,
+      });
+      //  setTitlesToLoad();
+      setFullBody(newBody);
+    }
+  }
+  function fullBodyOnChangeHandler(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    const newValue = e.currentTarget.value;
+    setFullBody(newValue);
+  }
+  function fullBodyOnClickHandler() {
+    setFullBody(issue.body);
   }
 }

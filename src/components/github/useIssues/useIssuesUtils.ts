@@ -232,12 +232,13 @@ function convertIssueToSelectiveIssue(issue: Issue): SelectiveIssue {
     created_at,
     updated_at,
     closed_at,
-    body: getLinksTasksFromBodyString(body),
+    body: body, //getLinksTasksFromBodyString(body),
     state_reason,
   };
   return convertedIssue;
 }
-function getLinksTasksFromBodyString(body: string): SelectiveIssueBody {
+export function getLinksTasksFromBodyString(body: string): SelectiveIssueBody {
+  console.log("body:", body);
   const webLinkRegex = /https:[^\n\r]+/g;
 
   const tasksRegex = /- \[[x ]{1}\][^\r\n]+/g;

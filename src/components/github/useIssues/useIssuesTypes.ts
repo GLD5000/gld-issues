@@ -148,7 +148,7 @@ export type SelectiveIssue = {
   created_at: string;
   updated_at: string;
   closed_at: string;
-  body: SelectiveIssueBody; //Strip out task list and links
+  body: string; //Strip out task list and links
   state_reason: string;
 };
 
