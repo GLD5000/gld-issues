@@ -170,6 +170,7 @@ export default function GitTasks() {
     } else if (
       input === "Deadlines" ||
       input === "Later" ||
+      input === "Earlier" ||
       input.toLowerCase().indexOf("week") > -1
     ) {
       setCategoryFilter(input);

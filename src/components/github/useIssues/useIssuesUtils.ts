@@ -93,6 +93,7 @@ function makeTimeObject(issues: SelectiveIssuesJsonShape, currentWeek: number) {
     [`Week ${currentWeek + 2}`]: [],
     [`Week ${currentWeek + 3}`]: [],
     Later: [],
+    Earlier: [],
   };
 
   const filteredIssues = filterToDoIssues(issues);
@@ -104,9 +105,10 @@ function makeTimeObject(issues: SelectiveIssuesJsonShape, currentWeek: number) {
         const issueWeekNumber = deadlineDate
           ? getWeekNumberFromISOString(deadlineDate.toISOString())
           : undefined;
-        if (
+        if (issueWeekNumber === undefined) {
+        } else if (
           issueWeekNumber !== undefined &&
-          (currentWeek === issueWeekNumber || currentWeek > issueWeekNumber)
+          currentWeek === issueWeekNumber
         ) {
           addTodoObject("This Week", issue, returnObject);
         } else if (currentWeek + 1 === issueWeekNumber) {
@@ -115,8 +117,13 @@ function makeTimeObject(issues: SelectiveIssuesJsonShape, currentWeek: number) {
           addTodoObject(`Week ${currentWeek + 2}`, issue, returnObject);
         } else if (currentWeek + 3 === issueWeekNumber) {
           addTodoObject(`Week ${currentWeek + 3}`, issue, returnObject);
-        } else if (issue.state === "open") {
+        } else if (
+          issue.state === "open" &&
+          issueWeekNumber > currentWeek + 3
+        ) {
           addTodoObject(`Later`, issue, returnObject);
+        } else if (issue.state === "open" && issueWeekNumber < currentWeek) {
+          addTodoObject(`Earlier`, issue, returnObject);
         }
       } catch (e) {
         console.log("issue.title:", issue.title);
