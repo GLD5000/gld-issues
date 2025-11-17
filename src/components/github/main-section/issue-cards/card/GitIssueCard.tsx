@@ -197,17 +197,18 @@ export default function GitIssueCard({
           >
             Github.com Issue #{issue.number} &rarr;
           </a>
-          {body && (
+          {
             <DoubleClickTextArea
               onBlurHandler={fullBodyOnBlurHandler}
               onChangeHandler={fullBodyOnChangeHandler}
               onClickHandler={fullBodyOnClickHandler}
+              placeHolder="Enter your body text here..."
               inputValue={fullBody || ""}
               displayValue={body}
               width="w-[20em] sm:w-[30em] md:w-[40em] lg:w-[50em] newDesktop:w-[60em]"
               isLoading={bodyIsLoading}
             />
-          )}
+          }
           <GitIssueBodyTodoList
             issueNumber={issue.number}
             setIssues={setIssues}
@@ -348,7 +349,7 @@ export default function GitIssueCard({
   }
   function fullBodyOnBlurHandler(e: React.FocusEvent<HTMLTextAreaElement>) {
     const newBody = e.currentTarget.value.trim();
-    if (newBody && newBody !== issue.body) {
+    if (newBody !== issue.body) {
       setIssues("patchTodo", {
         issue_number: `${issue.number}`,
         body: newBody,
