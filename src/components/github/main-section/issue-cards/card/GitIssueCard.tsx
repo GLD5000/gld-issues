@@ -59,6 +59,7 @@ export default function GitIssueCard({
     ? convertIsoDateToDayDateComboString(issue.created_at)
     : undefined;
   const titleIsLoading = previousUpdate === `title-${lastUpdated}`;
+  const bodyIsLoading = previousUpdate === `body-${lastUpdated}`;
   const labels = issue.labels.map((label) => (
     <div key={label.name} className="bg-neutral-50 w-fit h-auto rounded-md">
       <div
@@ -204,7 +205,7 @@ export default function GitIssueCard({
               inputValue={fullBody || ""}
               displayValue={body}
               width="w-[20em] sm:w-[30em] md:w-[40em] lg:w-[50em] newDesktop:w-[60em]"
-              isLoading={titleIsLoading}
+              isLoading={bodyIsLoading}
             />
           )}
           <GitIssueBodyTodoList
@@ -285,6 +286,9 @@ export default function GitIssueCard({
   function setTitlesToLoad() {
     setPreviousUpdate(`title-${lastUpdated}`);
   }
+  function setBodyToLoad() {
+    setPreviousUpdate(`body-${lastUpdated}`);
+  }
   function shortTitleOnBlurHandler(e: React.FocusEvent<HTMLInputElement>) {
     const newValue = e.currentTarget.value;
     const newTitle = reBuildIssueTitle(newValue, deadline);
@@ -349,7 +353,7 @@ export default function GitIssueCard({
         issue_number: `${issue.number}`,
         body: newBody,
       });
-      //  setTitlesToLoad();
+      setBodyToLoad();
       setFullBody(newBody);
     }
   }
