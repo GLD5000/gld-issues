@@ -2,10 +2,9 @@ import {
   adjustDateToWorkday,
   // dateIsThisWeek,
   getCurrentCentury,
+  getCurrentWeekNumber,
   getWeekNumberFromISOString,
 } from "@/utils/dates";
-
-import { gldIssuesConfig } from "../../../../gitIssues.config";
 import {
   SelectiveIssue,
   SelectiveIssuesJsonShape,
@@ -13,9 +12,9 @@ import {
   Issue,
   SelectiveIssueLabel,
   SelectiveIssueBody,
+  IssuesSessionObject,
 } from "./useIssuesTypes";
-
-const { githubIssueCategories } = gldIssuesConfig;
+import { gldIssuesConfig } from "../../../../gitIssues.config";
 
 export function getIssueDeadlineSortValue(issueIn: SelectiveIssue) {
   const deadline = getIssueDeadline(issueIn) || "";
@@ -137,32 +136,46 @@ function makeTimeObject(issues: SelectiveIssuesJsonShape, currentWeek: number) {
   return returnObject;
 }
 
-export function makeWeeklyToDoObject(
-  issues: SelectiveIssuesJsonShape,
-  currentWeek: number,
-) {
+export function makeWeeklyToDoObject(issuesObject: IssuesSessionObject) {
+  const { issues, labels } = issuesObject;
+  const currentWeek = getCurrentWeekNumber();
+
   const categoriesObject: { [key: string]: SelectiveIssuesJsonShape } = {
     // 'This Week': [],
     // 'Next Week': [],
     // Blocked: [],
   };
-  const timeObject = makeTimeObject(issues, currentWeek);
-  githubIssueCategories.forEach((key) => {
-    categoriesObject[key] = [];
-  });
-  const filteredIssues = filterToDoIssues(issues);
-  filteredIssues.forEach((issue) => {
-    if (
-      !githubIssueCategories.some((label) => {
-        if (issue.labels?.some((item) => item.name === label)) {
-          addTodoObject(label, issue, categoriesObject);
-          return true;
-        }
-      })
-    ) {
-      addTodoObject("Uncategorised", issue, categoriesObject);
-    }
-  });
+  let timeObject: { [key: string]: SelectiveIssuesJsonShape } = {
+    // 'This Week': [],
+    // 'Next Week': [],
+    // Blocked: [],
+  };
+  const categories = labels
+    ?.map((label) => label.name)
+    .filter(
+      (label) => !gldIssuesConfig.githubIssueCategoriesExclude.includes(label),
+    ) as string[];
+  console.log("categories:", categories);
+  if (issues) {
+    timeObject = makeTimeObject(issues, currentWeek);
+
+    categories.forEach((key) => {
+      categoriesObject[key] = [];
+    });
+    const filteredIssues = filterToDoIssues(issues);
+    filteredIssues.forEach((issue) => {
+      if (
+        !categories.some((label) => {
+          if (issue.labels?.some((item) => item.name === label)) {
+            addTodoObject(label, issue, categoriesObject);
+            return true;
+          }
+        })
+      ) {
+        addTodoObject("Uncategorised", issue, categoriesObject);
+      }
+    });
+  }
 
   return { categoriesObject, timeObject };
 }

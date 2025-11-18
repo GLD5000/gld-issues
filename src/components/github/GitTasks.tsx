@@ -2,11 +2,7 @@
 import { useIssues } from "./useIssues/useIssues";
 import { useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
-import {
-  convertDateToDayDateComboString,
-  dateIsBST,
-  getCurrentWeekNumber,
-} from "@/utils/dates";
+import { convertDateToDayDateComboString, dateIsBST } from "@/utils/dates";
 import {
   GetFilteredTodoObject,
   getCategoryData,
@@ -39,7 +35,6 @@ export default function GitTasks() {
   const [viewMode, setViewMode] = useViewMode();
   const [sortMode, incrementSortMode] = useSortMode();
   if (!issuesObject) return <LoadingSpinner />;
-  const currentWeek = getCurrentWeekNumber();
   const {
     issues,
     metadata: { lastUpdated },
@@ -50,10 +45,8 @@ export default function GitTasks() {
   const hasNoIssues = !issues || issues.length === 0 || issues === null;
   if (hasNoIssues) return <LoadingSpinner />;
 
-  const { categoriesObject: toDoObject, timeObject } = makeWeeklyToDoObject(
-    issues,
-    currentWeek,
-  );
+  const { categoriesObject: toDoObject, timeObject } =
+    makeWeeklyToDoObject(issuesObject);
   const [date, time] = getLastUpdated(lastUpdated);
   const isLoading = getIsLoading(lastUpdated, previousUpdate);
   const openIssues = getOpenIssues(issues);

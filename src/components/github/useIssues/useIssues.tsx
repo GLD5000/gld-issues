@@ -4,6 +4,7 @@ import {
   IssuesSessionObject,
   SelectiveIssuesJsonShape,
   IssuesJsonShape,
+  LabelsJsonShape,
 } from "./useIssuesTypes";
 import { convertIssuesToSelectiveIssues } from "./useIssuesUtils";
 
@@ -133,18 +134,20 @@ async function storeNewValue(
   setState: Dispatch<SetStateAction<IssuesSessionObject | null>>,
   slug?: string,
 ) {
-  const fetchedValue = await fetchGithubTasks(slug);
-  if (!fetchedValue) return;
+  const fetchedTasks = await fetchGithubTasks(slug);
+  const fetchedLabels = await fetchGithubLabels();
+  if (!fetchedTasks) return;
   const selectiveValue = slug
     ? addFetchedIssuesToSessionStorageObject(
-        convertIssuesToSelectiveIssues(fetchedValue),
+        convertIssuesToSelectiveIssues(fetchedTasks),
       )
-    : convertIssuesToSelectiveIssues(fetchedValue);
+    : convertIssuesToSelectiveIssues(fetchedTasks);
   const newObject: IssuesSessionObject = {
     metadata: {
       lastUpdated: new Date().toISOString(),
     },
     issues: selectiveValue,
+    labels: fetchedLabels,
   };
   setState(newObject);
   setSessionStorageIssues(newObject);
@@ -162,6 +165,22 @@ async function fetchGithubTasks(slug?: string) {
     return issues as IssuesJsonShape;
   } catch (error) {
     console.error("Error fetching log file:", error);
+    return null;
+  }
+}
+async function fetchGithubLabels() {
+  console.log("Fetch labels running...");
+  try {
+    const response = await fetch(`/api/getGithubLabels/`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch log file");
+    }
+    const {
+      labels: { data },
+    } = await response.json();
+    return data as LabelsJsonShape;
+  } catch (error) {
+    console.error("Error fetching labels file:", error);
     return null;
   }
 }

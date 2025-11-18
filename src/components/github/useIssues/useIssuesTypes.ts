@@ -1,3 +1,13 @@
+export type Label = {
+  id: number;
+  node_id: string;
+  url: string;
+  name: string;
+  color: string;
+  default: false;
+  description: string;
+};
+
 export type Issue = {
   url: string;
   repository_url: string;
@@ -30,26 +40,7 @@ export type Issue = {
     user_view_type: string;
     site_admin: false;
   };
-  labels: [
-    {
-      id: number;
-      node_id: string;
-      url: string;
-      name: string;
-      color: string;
-      default: false;
-      description: string;
-    },
-    {
-      id: number;
-      node_id: string;
-      url: string;
-      name: string;
-      color: string;
-      default: false;
-      description: string;
-    },
-  ];
+  labels: Label[];
   state: string;
   locked: false;
   assignee: {
@@ -123,15 +114,17 @@ export type Issue = {
 };
 // Define the type for an array of issues
 
-export type SelectiveIssueLabel = {
-  // id: number;
-  // node_id: string;
-  // url: string;
-  name: string;
-  color: string;
-  // default: false;
-  description: string;
-};
+export type SelectiveIssueLabel = Pick<Label, "name" | "color" | "description">;
+
+//   {
+//   // id: number;
+//   // node_id: string;
+//   // url: string;
+//   name: string;
+//   color: string;
+//   // default: false;
+//   description: string;
+// };
 export type SelectiveIssueBody = {
   links: string[];
   taskLists: string[];
@@ -154,8 +147,10 @@ export type SelectiveIssue = {
 
 export type IssuesJsonShape = Issue[];
 export type SelectiveIssuesJsonShape = SelectiveIssue[];
+export type LabelsJsonShape = Label[];
 
 export type IssuesSessionObject = {
   metadata: { lastUpdated: string };
   issues: SelectiveIssuesJsonShape | null;
+  labels: LabelsJsonShape | null;
 };
