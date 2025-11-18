@@ -36,7 +36,7 @@ export default function DoubleClickTextArea({
   if (isLoading)
     return (
       <div
-        className={`block font-normal text-black dark:text-white bg-transparent ${width} text-ellipsis ${textAlign} border-none`}
+        className={`block font-normal text-black dark:text-white bg-transparent ${width} ${textAlign} border-none`}
       >
         <LoadingSpinner />
       </div>
@@ -47,7 +47,7 @@ export default function DoubleClickTextArea({
         <textarea
           placeholder={placeHolder}
           ref={inputRef}
-          className={`block font-normal text-black dark:text-white bg-transparent ${width} text-ellipsis ${textAlign} border-none h-40`}
+          className={`block font-normal text-black dark:text-white bg-transparent ${width} ${textAlign} border-none h-40`}
           onKeyDown={(e) => {
             if (e.key === "Enter" && e.ctrlKey) {
               e.currentTarget.blur();
@@ -85,7 +85,7 @@ export default function DoubleClickTextArea({
         ></textarea>
       ) : (
         <pre
-          className={`block font-normal text-black dark:text-white bg-transparent ${width} text-ellipsis ${textAlign} border-none whitespace-pre overflow-clip cursor-text`}
+          className={`block font-normal text-black dark:text-white bg-transparent ${width} ${textAlign} border-none whitespace-pre overflow-clip cursor-text h-fit`}
           onDoubleClick={() => {
             handleDoubleClick();
             if (onClickHandler) onClickHandler();
