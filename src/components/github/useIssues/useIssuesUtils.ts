@@ -252,7 +252,7 @@ function convertIssueToSelectiveIssue(issue: Issue): SelectiveIssue {
 }
 export function getLinksTasksFromBodyString(body: string): SelectiveIssueBody {
   console.log("body:", body);
-  const webLinkRegex = /https:[^\n\r\)]+/g;
+  const webLinkRegex = /https?:[^\n\r\) ]+/g;
 
   const tasksRegex = /- \[[x ]{1}\][^\r\n]+/g;
   const tasksArray = body?.match(tasksRegex);
