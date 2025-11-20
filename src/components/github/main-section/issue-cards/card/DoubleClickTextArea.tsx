@@ -55,11 +55,6 @@ export default function DoubleClickTextArea({
           }}
           onBlur={(e) => {
             onBlurHandler(e);
-            // setTimeout(() => {
-            //     if (inputRef && inputRef.current) {
-            //         inputRef.current.blur();
-            //     }
-            // }, 0)
             setIsEditing(false);
           }}
           onChange={(e) => {
@@ -90,12 +85,8 @@ export default function DoubleClickTextArea({
             handleDoubleClick();
             if (onClickHandler) onClickHandler();
           }}
-          onClick={(e) => {
-            // e.stopPropagation();
-            e.preventDefault();
-          }}
         >
-          {displayValue || placeHolder || inputValue}
+            {displayValue || placeHolder || inputValue}
         </pre>
       )}
     </>
