@@ -47,7 +47,7 @@ export default function DoubleClickTextArea({
         <textarea
           placeholder={placeHolder}
           ref={inputRef}
-          className={`block font-normal text-black dark:text-white bg-transparent ${width} ${textAlign} border-none h-40`}
+          className={`block p-2 font-normal text-black dark:text-white bg-transparent w-[calc(100%-2rem)] ${textAlign} text-wrap border-none h-40`}
           onKeyDown={(e) => {
             if (e.key === "Enter" && e.ctrlKey) {
               e.currentTarget.blur();
@@ -85,7 +85,7 @@ export default function DoubleClickTextArea({
         ></textarea>
       ) : (
         <pre
-          className={`block font-normal text-black dark:text-white bg-transparent ${width} ${textAlign} border-none whitespace-pre overflow-clip cursor-text h-fit`}
+          className={`block p-1 font-normal text-black dark:text-white bg-transparent w-fit max-w-[calc(100%-2rem)] overflow-x-auto ${textAlign} border-none whitespace-pre overflow-clip cursor-text h-fit`}
           onDoubleClick={() => {
             handleDoubleClick();
             if (onClickHandler) onClickHandler();
