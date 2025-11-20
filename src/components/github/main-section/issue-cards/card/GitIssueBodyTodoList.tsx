@@ -16,7 +16,7 @@ export default function GitIssueBodyTodoList({
 }) {
   if (!taskList || taskList.length === 0) return null;
   return (
-    <div className="grid border border-neutral-500 dark:border-neutral-400 mx-auto border-solid p-3 rounded-lg w-fit max-w-full">
+    <div className="grid border border-neutral-500 dark:border-neutral-400 mx-auto border-solid p-3 rounded-lg w-[calc(100%-2rem)] overflow-x-auto">
       <h3 className="text-base text-inherit underline underline-offset-4">
         Task List
       </h3>

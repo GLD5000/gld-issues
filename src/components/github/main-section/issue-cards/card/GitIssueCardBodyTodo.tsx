@@ -21,7 +21,7 @@ export default function GitIssueCardBodyTodo({
       onClick={clickHandler}
       className="border-none items-center text-sm p-0 m-0 font-inherit bg-transparent h-auto w-full text-left grid grid-cols-[auto_1fr]"
     >
-      <span className="block h-7 w-7 p-1.5">
+      <span className="block h-7 w-7 p-1.5 mb-auto">
         {task.indexOf("[x]") > -1 ? <TickSvg /> : <UnTicked />}
       </span>
       <span className="block">{task.replace(/- \[[ x]\]/, "")}</span>
