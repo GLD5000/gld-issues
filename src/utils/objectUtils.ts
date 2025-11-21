@@ -12,8 +12,6 @@ export function spreadChildObjects(targetObject: {
 }
 
 export function differenceArray(a: string[], b: string[]) {
-  // console.log('a:', a);
-  // console.log('b:', b);
   return [...new Set(a).difference(new Set(b))];
 }
 

@@ -26,7 +26,7 @@ interface GitIssueCardProps extends ComponentProps<"details"> {
     type?: string,
     body?: {
       [key: string]: string;
-    },
+    }
   ) => void;
   priorityList: string[];
 
@@ -74,19 +74,19 @@ export default function GitIssueCard({
   const { body } = issue;
   const { links, taskLists } = body ? getLinksTasksFromBodyString(body) : {};
   const mondayLinks = links?.filter(
-    (link) => `${link}`.toLowerCase().indexOf("monday") > -1,
+    (link) => `${link}`.toLowerCase().indexOf("monday") > -1
   );
   const jiraLinks = links?.filter(
-    (link) => `${link}`.toLowerCase().indexOf("jira") > -1,
+    (link) => `${link}`.toLowerCase().indexOf("jira") > -1
   );
   const sharepointLinks = links?.filter(
-    (link) => `${link}`.toLowerCase().indexOf("sharepoint") > -1,
+    (link) => `${link}`.toLowerCase().indexOf("sharepoint") > -1
   );
   const otherLinks = links?.filter(
     (link) =>
       `${link}`.indexOf("monday") === -1 &&
       `${link}`.indexOf("jira") === -1 &&
-      `${link}`.indexOf("sharepoint") === -1,
+      `${link}`.indexOf("sharepoint") === -1
   );
   const taskList = taskLists || undefined;
   const summaryId = `${shortTitle}`; // Make unique with ${issue.number} -
@@ -143,7 +143,7 @@ export default function GitIssueCard({
       <details
         className={classMerge(
           `text-sm w-full box-border rounded-none group bg-white dark:bg-black`,
-          className,
+          className
         )}
         {...props}
       >
@@ -190,28 +190,8 @@ export default function GitIssueCard({
               title={issue.title}
             />
           </div>
-          <a
-            className="block text-inherit transition hover:underline focus:underline w-fit"
-            href={`${process.env.NEXT_PUBLIC_GH_URL}issues/${issue.number}`}
-            target="_blank"
-          >
-            Github.com Issue #{issue.number} &rarr;
-          </a>
-          {
-            <DoubleClickTextArea
-              onBlurHandler={fullBodyOnBlurHandler}
-              onChangeHandler={fullBodyOnChangeHandler}
-              onClickHandler={fullBodyOnClickHandler}
-              placeHolder="Enter your body text here..."
-              inputValue={fullBody || ""}
-              displayValue={body}
-              width="w-[20em] sm:w-[30em] md:w-[40em] lg:w-[50em] newDesktop:w-[60em]"
-              isLoading={bodyIsLoading}
-            />
-          }
           <GitIssueBodyTodoList
-            issueNumber={issue.number}
-            setIssues={setIssues}
+            todoTaskClickHandler={todoTaskClickHandler}
             taskList={taskList}
           />
           {mondayLinks &&
@@ -265,6 +245,18 @@ export default function GitIssueCard({
                 &rarr;
               </a>
             ))}
+          {
+            <DoubleClickTextArea
+              onBlurHandler={fullBodyOnBlurHandler}
+              onChangeHandler={fullBodyOnChangeHandler}
+              onClickHandler={fullBodyOnClickHandler}
+              placeHolder="Enter your body text here..."
+              inputValue={fullBody || ""}
+              displayValue={body}
+              width="w-[20em] sm:w-[30em] md:w-[40em] lg:w-[50em] newDesktop:w-[60em]"
+              isLoading={bodyIsLoading}
+            />
+          }
           <a
             className="block text-inherit transition hover:underline focus:underline w-fit"
             href={`${process.env.NEXT_PUBLIC_GH_URL}issues/${issue.number}`}
@@ -280,6 +272,13 @@ export default function GitIssueCard({
             <span>{`Updated: ${lastUpdate}`}</span>
             {issue.state !== "open" && <span>{`Closed: ${closedAt}`}</span>}
           </div>
+          <a
+            className="block transition hover:underline focus:underline w-fit text-xs font-medium text-neutral-500 dark:text-neutral-400"
+            href={`${process.env.NEXT_PUBLIC_GH_URL}issues/${issue.number}`}
+            target="_blank"
+          >
+            Github.com Issue #{issue.number} &rarr;
+          </a>
         </div>
       </details>
     </div>
@@ -364,5 +363,20 @@ export default function GitIssueCard({
   }
   function fullBodyOnClickHandler() {
     setFullBody(issue.body);
+  }
+  function todoTaskClickHandler(task: string) {
+    const isTicked = task.indexOf("[x]") > -1;
+
+    return () => {
+      const updatedTask = isTicked
+        ? task.replace("[x]", "[ ]")
+        : task.replace("[ ]", "[x]");
+      const newBody = issue.body.replace(task, updatedTask);
+      setIssues("patchTodo", {
+        issue_number: `${issue.number}`,
+        body: newBody,
+      });
+      setFullBody(newBody);
+    };
   }
 }

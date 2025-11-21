@@ -2,17 +2,10 @@ import GitIssueCardBodyTodo from "./GitIssueCardBodyTodo";
 
 export default function GitIssueBodyTodoList({
   taskList,
-  issueNumber,
-  setIssues,
+  todoTaskClickHandler,
 }: {
   taskList?: string[];
-  issueNumber: number;
-  setIssues: (
-    type?: string,
-    body?: {
-      [key: string]: string;
-    },
-  ) => void;
+  todoTaskClickHandler: (task: string) => () => void;
 }) {
   if (!taskList || taskList.length === 0) return null;
   return (
@@ -24,8 +17,7 @@ export default function GitIssueBodyTodoList({
         <GitIssueCardBodyTodo
           key={`task-${index}`}
           task={task}
-          issueNumber={issueNumber}
-          setIssues={setIssues}
+          clickHandler={todoTaskClickHandler(task)}
         />
       ))}
     </div>

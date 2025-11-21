@@ -155,7 +155,6 @@ export function makeWeeklyToDoObject(issuesObject: IssuesSessionObject) {
     .filter(
       (label) => !gldIssuesConfig.githubIssueCategoriesExclude.includes(label),
     ) as string[];
-  console.log("categories:", categories);
   if (issues) {
     timeObject = makeTimeObject(issues, currentWeek);
 
@@ -251,7 +250,6 @@ function convertIssueToSelectiveIssue(issue: Issue): SelectiveIssue {
   return convertedIssue;
 }
 export function getLinksTasksFromBodyString(body: string): SelectiveIssueBody {
-  console.log("body:", body);
   const webLinkRegex = /https?:[^\n\r\) ]+/g;
 
   const tasksRegex = /- \[[x ]{1}\][^\r\n]+/g;
