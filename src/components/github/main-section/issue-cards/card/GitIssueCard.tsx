@@ -127,7 +127,6 @@ export default function GitIssueCard({
             isLoading={titleIsLoading}
           />
           <div className="hidden md:block">
-            {" "}
             <GitIssueDeadlineButton issue={issue} />
           </div>
 

@@ -13,7 +13,7 @@ export default function GitIssueCardBodyTodo({
     <button
       type="button"
       onClick={clickHandler}
-      className="border-none items-center text-sm p-0 m-0 font-inherit bg-transparent h-auto w-full text-left grid grid-cols-[auto_1fr] cursor-pointer"
+      className="border-none items-center text-sm p-0 m-0 font-medium bg-transparent h-auto w-full text-left grid grid-cols-[auto_1fr] cursor-pointer"
     >
       <span className="block h-7 w-7 p-1.5 mb-auto">
         {isTicked ? <TickSvg /> : <UnTicked />}
