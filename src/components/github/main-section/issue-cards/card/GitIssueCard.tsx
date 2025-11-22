@@ -148,7 +148,7 @@ export default function GitIssueCard({
       >
         <summary
           aria-label={`${summaryId}`}
-          className="cursor-pointer p-1 absolute top-0 right-0 bottom-0 flex flex-wrap gap-1 items-center w-7 box-border bg-white dark:bg-black group focus-visible:outline-0"
+          className="cursor-pointer p-1 absolute top-0 right-0 bottom-0 flex flex-wrap gap-1 items-center w-7 box-border bg-white dark:bg-black hover:bg-neutral-100 hover:dark:bg-neutral-800 group focus-visible:outline-0"
         >
           <span className="text-center ease-out duration-200 group-open:rotate-180 group-open:ease-in rounded-[50%] w-full aspect-square box-border block text-neutral-500 dark:text-neutral-400 group-hover:text-black group-focus-visible:text-black group-hover:dark:text-white group-focus-visible:dark:text-white group-focus-visible:border-current border-transparent border border-solid pointer-events-none transition">
             <svg
