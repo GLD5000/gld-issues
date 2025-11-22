@@ -116,7 +116,7 @@ export default function CategoryCards({
         );
         return (
           <div
-            className="bg-neutral-100 dark:bg-neutral-800 rounded-lg grid grid-cols-[auto_1fr]"
+            className="bg-neutral-100 dark:bg-neutral-900 rounded-lg grid grid-cols-[auto_1fr]"
             key={`${entry[0]}${index}`}
           >
             <div

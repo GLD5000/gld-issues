@@ -91,7 +91,7 @@ export default function GitIssueCard({
   const summaryId = `${shortTitle}`; // Make unique with ${issue.number} -
   return (
     <div className="relative w-full">
-      <div className="mr-6 md:mr-0 flex flex-wrap lg:grid lg:grid-cols-[auto_1fr_auto_24px] items-center w-[calc(100%-26px)] lg:w-full box-border bg-neutral-100 dark:bg-neutral-800">
+      <div className="mr-6 md:mr-0 flex flex-wrap lg:grid lg:grid-cols-[auto_1fr_auto_24px] items-center w-[calc(100%-26px)] lg:w-full box-border bg-neutral-100 dark:bg-neutral-900">
         <div className="w-fit h-full p-1">
           <button
             className="m-0.5 hidden md:block  text-center text-sm border border-current border-solid w-4.5 h-4.5  rounded-md bg-transparent text-neutral-500 dark:text-neutral-400 hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white transition box-border"
@@ -146,7 +146,7 @@ export default function GitIssueCard({
       >
         <summary
           aria-label={`${summaryId}`}
-          className="cursor-pointer absolute top-0 right-0 bottom-0 flex flex-wrap gap-1 items-center w-6 box-border bg-white dark:bg-black hover:bg-neutral-100 hover:dark:bg-neutral-800 group focus-visible:outline-0"
+          className="cursor-pointer absolute top-0 right-0 bottom-0 flex flex-wrap gap-1 items-center w-6 box-border bg-white dark:bg-black hover:bg-neutral-100 hover:dark:bg-neutral-900 group focus-visible:outline-0"
         >
           <span className="text-center ease-out duration-200 group-open:rotate-180 group-open:ease-in rounded-[50%] w-full aspect-square box-border block text-neutral-500 dark:text-neutral-400 group-hover:text-black group-focus-visible:text-black group-hover:dark:text-white group-focus-visible:dark:text-white group-focus-visible:border-current border-transparent border border-solid pointer-events-none transition">
             <svg
