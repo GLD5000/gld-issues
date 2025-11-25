@@ -13,17 +13,19 @@ export default function GitIssueCardBodyTodo({
 }) {
   const isTicked = task.indexOf("[x]") > -1;
   return (
-    <div className="flex w-fit gap-4 align-middle justify-items-start">
-      <button
-        type="button"
-        onClick={todoTaskClickHandler}
-        className="border-none items-center text-sm p-0 m-0 font-medium    h-auto w-full text-left grid grid-cols-[auto_1fr] cursor-pointer"
-      >
-        <span className="block h-4.5 w-4.5 rounded-md bg-transparent mb-auto border border-current border-solid text-neutral-500 dark:text-neutral-400 hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white transition box-border">
-          {isTicked && <TickSvgV2 />}
-        </span>
-      </button>
-      <span className="block">{task.replace(/- \[[ x]\]/, "")}</span>
+    <div className="flex w-full gap-4 align-middle justify-between">
+      <div className="flex w-full justify-start gap-4">
+        <button
+          type="button"
+          onClick={todoTaskClickHandler}
+          className="border-none items-center text-sm p-0 m-0 font-medium    h-auto w-fit text-left grid grid-cols-[auto_1fr] cursor-pointer"
+        >
+          <span className="block h-4.5 w-4.5 rounded-md bg-transparent mb-auto border border-current border-solid text-neutral-500 dark:text-neutral-400 hover:text-black focus:text-black hover:dark:text-white focus:dark:text-white transition box-border">
+            {isTicked && <TickSvgV2 />}
+          </span>
+        </button>
+        <span className="block">{task.replace(/- \[[ x]\]/, "")}</span>
+      </div>
       <button
         type="button"
         onClick={deleteTodoClickHandler}
