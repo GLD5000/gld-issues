@@ -5,7 +5,6 @@ export default function TickSvgV2({
 }) {
   return (
     <svg
-      id="tick-svg"
       role="img"
       aria-label="Toggle On"
       width="100%"

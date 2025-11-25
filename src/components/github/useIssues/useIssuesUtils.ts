@@ -277,3 +277,12 @@ function addTodoObject(
     toDoObject[key] = [issue];
   }
 }
+export function getTodoListFromBodyString(body: string) {
+    const tasksRegex = /- \[[x ]{1}\][^\r\n]+/g;
+  const tasksArray = body?.match(tasksRegex);
+  const todoList: string[] = [];
+  if (tasksArray && Array.isArray(tasksArray)) {
+    tasksArray.forEach((task) => todoList.push(task));
+  }
+  return todoList;
+}

@@ -55,11 +55,6 @@ export default function DoubleClickInput({
           }}
           onBlur={(e) => {
             onBlurHandler(e);
-            // setTimeout(() => {
-            //     if (inputRef && inputRef.current) {
-            //         inputRef.current.blur();
-            //     }
-            // }, 0)
             setIsEditing(false);
           }}
           onChange={(e) => {
@@ -82,7 +77,7 @@ export default function DoubleClickInput({
             }
           }}
           value={inputValue}
-        ></input>
+        />
       ) : (
         <span
           className={`block font-normal text-black dark:text-white bg-transparent ${width} text-ellipsis ${textAlign} border-none whitespace-pre overflow-clip cursor-text`}
