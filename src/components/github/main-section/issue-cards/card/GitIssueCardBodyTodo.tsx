@@ -1,6 +1,4 @@
-import TickSvg from "@/icons/TickSvg";
 import TickSvgV2 from "@/icons/TickSvgV2";
-import UnTicked from "@/icons/UnTicked";
 
 export default function GitIssueCardBodyTodo({
   task,

@@ -87,7 +87,6 @@ export default function GitIssueCard({
       `${link}`.indexOf("jira") === -1 &&
       `${link}`.indexOf("sharepoint") === -1
   );
-  const taskList = taskLists || undefined;
   const summaryId = `${shortTitle}`; // Make unique with ${issue.number} -
   return (
     <div className="relative w-full">
