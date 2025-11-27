@@ -4,7 +4,7 @@ import DoubleClickInput from "./DoubleClickInput";
 // import TickSvg from "@/icons/TickSvg";
 // import UnTicked from "@/icons/UnTicked";
 import GitIssueDeadlineButton from "./GitIssueDeadlineButton";
-import GitIssueBodyTodoList from "./GitIssueBodyTodoList";
+import TodoList from "./todo-list/TodoList";
 import { classMerge } from "@/utils/twUtils";
 import {
   getIssueDeadline,
@@ -187,7 +187,7 @@ export default function GitIssueCard({
                 title={issue.title}
               />
             </div>
-            <GitIssueBodyTodoList
+            <TodoList
               issue={issue}
               setIssues={setIssues}
               setFullBody={setFullBody}
