@@ -31,6 +31,7 @@ export default function TodoList({
               task={task}
               todoTaskClickHandler={todoTaskClickHandler(task)}
               deleteTodoClickHandler={deleteTodoClickHandler(task)}
+              todoEditTaskBlurHandler={todoEditTaskBlurHandler(task)}
             />
             {index === taskList.length - 1 && (
               <AddNewTodo onBlurHandler={todoAddTaskBlurHandler(task)} />
@@ -82,6 +83,22 @@ export default function TodoList({
         task.length > 0
           ? oldBody.replace(task, newTask)
           : oldBody + "\n" + newTask;
+      setIssues("patchTodo", {
+        issue_number: `${issue.number}`,
+        body: newBody,
+      });
+      setFullBody(newBody);
+    };
+  }
+  function todoEditTaskBlurHandler(task: string) {
+    return (e: React.FocusEvent<HTMLInputElement>) => {
+      const newValue = e.currentTarget.value;
+      if (newValue.length === 0) return;
+      const taskBodyOld = task.replace(/- \[[ x]\]/, "");
+      const taskPrefix = task.replace(taskBodyOld, "");
+      const newTask = taskPrefix + e.currentTarget.value;
+      const oldBody = issue.body || "";
+      const newBody = oldBody.replace(task, newTask);
       setIssues("patchTodo", {
         issue_number: `${issue.number}`,
         body: newBody,

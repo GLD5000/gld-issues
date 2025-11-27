@@ -6,10 +6,12 @@ export default function Todo({
   task,
   todoTaskClickHandler,
   deleteTodoClickHandler,
+  todoEditTaskBlurHandler,
 }: {
   task: string;
   todoTaskClickHandler: () => void;
   deleteTodoClickHandler: () => void;
+  todoEditTaskBlurHandler: (e: React.FocusEvent<HTMLInputElement>) => void;
 }) {
   const isTicked = task.indexOf("[x]") > -1;
   return (
@@ -19,8 +21,8 @@ export default function Todo({
           todoTaskClickHandler={todoTaskClickHandler}
           isTicked={isTicked}
         />
-        <span className="block">{task.replace(/- \[[ x]\]/, "")}</span>
-        <EditTodo/>
+        {/* <span className="block">{task.replace(/- \[[ x]\]/, "")}</span> */}
+        <EditTodo task={task} onBlurHandler={todoEditTaskBlurHandler} />
       </div>
       <DeleteTodo deleteTodoClickHandler={deleteTodoClickHandler} />
     </div>
