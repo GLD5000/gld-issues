@@ -86,7 +86,7 @@ export default function DoubleClickTextArea({
             if (onClickHandler) onClickHandler();
           }}
         >
-            {displayValue || placeHolder || inputValue}
+          {displayValue || placeHolder || inputValue}
         </pre>
       )}
     </>

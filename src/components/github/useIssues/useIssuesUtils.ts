@@ -278,7 +278,7 @@ function addTodoObject(
   }
 }
 export function getTodoListFromBodyString(body: string) {
-    const tasksRegex = /- \[[x ]{1}\][^\r\n]+/g;
+  const tasksRegex = /- \[[x ]{1}\][^\r\n]+/g;
   const tasksArray = body?.match(tasksRegex);
   const todoList: string[] = [];
   if (tasksArray && Array.isArray(tasksArray)) {

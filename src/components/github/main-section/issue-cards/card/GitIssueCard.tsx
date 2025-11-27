@@ -26,7 +26,7 @@ interface GitIssueCardProps extends ComponentProps<"details"> {
     type?: string,
     body?: {
       [key: string]: string;
-    }
+    },
   ) => void;
   priorityList: string[];
 
@@ -73,19 +73,19 @@ export default function GitIssueCard({
   const { body } = issue;
   const { links, taskLists } = body ? getLinksTasksFromBodyString(body) : {};
   const mondayLinks = links?.filter(
-    (link) => `${link}`.toLowerCase().indexOf("monday") > -1
+    (link) => `${link}`.toLowerCase().indexOf("monday") > -1,
   );
   const jiraLinks = links?.filter(
-    (link) => `${link}`.toLowerCase().indexOf("jira") > -1
+    (link) => `${link}`.toLowerCase().indexOf("jira") > -1,
   );
   const sharepointLinks = links?.filter(
-    (link) => `${link}`.toLowerCase().indexOf("sharepoint") > -1
+    (link) => `${link}`.toLowerCase().indexOf("sharepoint") > -1,
   );
   const otherLinks = links?.filter(
     (link) =>
       `${link}`.indexOf("monday") === -1 &&
       `${link}`.indexOf("jira") === -1 &&
-      `${link}`.indexOf("sharepoint") === -1
+      `${link}`.indexOf("sharepoint") === -1,
   );
   const summaryId = `${shortTitle}`; // Make unique with ${issue.number} -
   return (
@@ -139,7 +139,7 @@ export default function GitIssueCard({
       <details
         className={classMerge(
           `text-sm w-full box-border rounded-none group bg-white dark:bg-black`,
-          className
+          className,
         )}
         {...props}
       >

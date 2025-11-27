@@ -10,7 +10,7 @@ export default function EditTodo({
   const [value, setValue] = useState(`${task.replace(/- \[[ x]\]/, "")}`);
   return (
     <input
-    //   placeholder={"Add new task..."}
+      //   placeholder={"Add new task..."}
       className={`block font-normal text-black dark:text-white bg-transparent w-full text-ellipsis border-none`}
       onKeyDown={(e) => {
         if (e.key === "Enter") {

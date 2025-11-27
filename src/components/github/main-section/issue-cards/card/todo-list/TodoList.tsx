@@ -15,7 +15,7 @@ export default function TodoList({
     type?: string,
     body?: {
       [key: string]: string;
-    }
+    },
   ) => void;
   setFullBody: Dispatch<SetStateAction<string>>;
 }) {
