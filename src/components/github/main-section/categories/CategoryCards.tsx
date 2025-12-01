@@ -1,4 +1,4 @@
-import { Fragment, ReactElement } from "react";
+import { ReactElement } from "react";
 import SubCategoryFilters from "../../top-section/SubCategoryFilters";
 import {
   SelectiveIssuesJsonShape,
