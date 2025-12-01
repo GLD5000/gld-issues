@@ -40,7 +40,6 @@ export default function GitTasks() {
     metadata: { lastUpdated },
   } = issuesObject;
   const currentDate = new Date();
-  // const title = `Tasks and Issues Week ${currentWeek}`;
   const subTitle = convertDateToDayDateComboString(currentDate);
   const hasNoIssues = !issues || issues.length === 0 || issues === null;
   if (hasNoIssues) return <LoadingSpinner />;
@@ -106,9 +105,6 @@ export default function GitTasks() {
         />
         {issues && (
           <IssueElements
-            hasNoIssues={hasNoIssues}
-            issues={issues}
-            // openIssues={openIssues}
             setIssues={setIssues}
             priorityList={priorityList}
             setPriorityList={setPriorityList}
@@ -117,7 +113,6 @@ export default function GitTasks() {
             setSubCategoryFilter={setSubCategoryFilter}
             incrementSortMode={incrementSortMode}
             sortMode={sortMode}
-            // viewMode={viewMode}
             titleFilter={titleFilter}
             filterSettings={filterSettings}
             categoryFilter={categoryFilter}

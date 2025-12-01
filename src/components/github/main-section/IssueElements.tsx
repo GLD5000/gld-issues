@@ -1,31 +1,8 @@
 import { ReactElement } from "react";
 import { SelectiveIssuesJsonShape } from "../useIssues/useIssuesTypes";
 import CategoryCards from "./categories/CategoryCards";
-// import IssueCards from './IssueCards';
 
-export default function IssueElements({
-  hasNoIssues,
-  issues,
-  // openIssues,
-  // viewMode,
-  filteredToDoObject,
-  subCategoryFilter,
-  setSubCategoryFilter,
-  incrementSortMode,
-  sortMode,
-  setIssues,
-  priorityList,
-  setPriorityList,
-  titleFilter,
-  filterSettings,
-  categoryFilter,
-  titleFilterElement,
-  lastUpdated,
-}: {
-  hasNoIssues: boolean;
-  issues: SelectiveIssuesJsonShape | null;
-  // openIssues: SelectiveIssuesJsonShape;
-  // viewMode: string;
+interface IssueElementsProps {
   filteredToDoObject: [string, SelectiveIssuesJsonShape][];
   subCategoryFilter: string[];
   setSubCategoryFilter: (value: string) => void;
@@ -36,7 +13,7 @@ export default function IssueElements({
 
     body?: {
       [key: string]: string;
-    },
+    }
   ) => void;
   priorityList: string[];
   setPriorityList: (value: string | string[]) => void;
@@ -50,8 +27,23 @@ export default function IssueElements({
   categoryFilter: string;
   titleFilterElement: ReactElement;
   lastUpdated: string;
-}) {
-  if (hasNoIssues || !issues) return null;
+}
+
+export default function IssueElements({
+  filteredToDoObject,
+  subCategoryFilter,
+  setSubCategoryFilter,
+  incrementSortMode,
+  sortMode,
+  setIssues,
+  priorityList,
+  setPriorityList,
+  titleFilter,
+  filterSettings,
+  categoryFilter,
+  titleFilterElement,
+  lastUpdated,
+}: IssueElementsProps) {
   return (
     <CategoryCards
       filteredToDoObject={filteredToDoObject}
