@@ -10,7 +10,7 @@
     "format": "clear && prettier \"src/**/*.{js,jsx,ts,tsx,css,scss}\" --write"
   },
   "dependencies": {
-    "next": "^16.0.5",
+    "next": "16.0.10",
     "next-auth": "^4.24.13",
     "octokit": "^5.0.5",
     "react": "^19.2.0",
