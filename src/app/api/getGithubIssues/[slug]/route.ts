@@ -38,7 +38,6 @@ async function getAll() {
 
   const closedParameters = {
     ...openParameters,
-    // since: isoStringForClosedIssues,
     state: "closed",
   };
   const closed = await getIssues(closedParameters);
