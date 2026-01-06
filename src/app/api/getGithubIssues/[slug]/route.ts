@@ -1,6 +1,6 @@
 import { Octokit } from "octokit";
 import { NextResponse } from "next/server";
-import { getIsoStringFromRelativeWeekNumber } from "@/utils/dates";
+// import { getIsoStringFromRelativeWeekNumber } from "@/utils/dates";
 
 export async function GET(
   request: Request,
@@ -22,8 +22,8 @@ export async function POST(): Promise<NextResponse> {
 async function getAll() {
   const username = process.env.GH_USER;
   const repo = process.env.GH_REPO;
-  const isoStringForClosedIssues = getIsoStringFromRelativeWeekNumber();
-  console.log("isoStringForClosedIssues:", isoStringForClosedIssues);
+  // const isoStringForClosedIssues = getIsoStringFromRelativeWeekNumber();
+  // console.log("isoStringForClosedIssues:", isoStringForClosedIssues);
   if (!username) {
     return NextResponse.json(
       { error: "Username is required" },
@@ -41,7 +41,7 @@ async function getAll() {
 
   const closedParameters = {
     ...openParameters,
-    since: isoStringForClosedIssues,
+    // since: isoStringForClosedIssues,
     state: "closed",
   };
   const closed = await getIssues(closedParameters);
