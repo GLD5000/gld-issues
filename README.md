@@ -6,6 +6,11 @@ This is a custom UI / Project management system that leverages [GitHub Issues](h
 
 It is still evolving but below are some of the current features.
 
+### New look
+
+- #### Fresh custom UI
+  Inspired by Monday.com, Github and Asana built from scratch for simplicity and ease of use.
+
 ### New ways to interact with issues
 
 - #### Easy topline editing
@@ -34,9 +39,12 @@ It is still evolving but below are some of the current features.
 
   Issue labels are used to make collaspible categories for issues that can be easily added to with one-click.
 
-- #### One-click filtering
+- #### Category one-click filtering
 
   The category section features progress bars showing the proportion of issues that are completed, blocked, progressing or testing. Clicking on a category will filter issues so that only that category can be seen.
+  - #### Status one-click filtering
+
+  Filter the issues within each category by status: open, completed, blocked, testing or issues with deadlines.
 
 - #### View modes
 
