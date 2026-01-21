@@ -28,7 +28,7 @@ It is still evolving but below are some of the current features.
 
 - #### Deadlines
 
-  Easily add deadlines to your issues by adding a dd/mm/yy to the end of the title, or using the dedicated deadline field.
+  Easily add deadlines to your issues by adding a dd/mm/yy to the end of the title, or using the dedicated deadline field. Each deadline will also give you an interactive countdown to show either which day and week number the deadline falls on, or the number of remaining business days until the deadline.
 
 - #### Categories
 
