@@ -1,5 +1,7 @@
 # GLD-ISSUES
 
+- [Features](#Features)
+
 This is a custom UI / Project management system that leverages [GitHub Issues](https://github.com/features/issues) for the backend.
 
 ## Features
