@@ -1,6 +1,9 @@
 # GLD-ISSUES
 
 - [Features](#Features)
+  - [New look](#new-look)
+  - [New ways to interact with issues](#new-ways-to-interact-with-issues)
+  - [New ways to organise issues](#new-ways-to-organise-issues)
 
 This is a custom UI / Project management system that leverages [GitHub Issues](https://github.com/features/issues) for the backend.
 
