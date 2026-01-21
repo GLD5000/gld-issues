@@ -58,3 +58,11 @@ It is still evolving but below are some of the current features.
 - #### Filter Titles
 
   Start typing to filter titles by keyword across categories.
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
