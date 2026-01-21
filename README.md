@@ -32,4 +32,16 @@ It is still evolving but below are some of the current features.
 
 - #### Categories
 
-  Issue labels are used to make collaspible categories for issues that can be easily added to
+  Issue labels are used to make collaspible categories for issues that can be easily added to with one-click.
+
+- #### One-click filtering
+
+  The category section features progress bars showing the proportion of issues that are completed, blocked, progressing or testing. Clicking on a category will filter issues so that only that category can be seen.
+
+- #### View modes
+
+  Change view mode to view issues either by category, deadline or open status.
+
+- #### Filter Titles
+
+  Start typing to filter titles by keyword across categories.
