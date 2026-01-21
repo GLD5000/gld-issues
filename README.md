@@ -61,7 +61,7 @@ It is still evolving but below are some of the current features.
 
 ```mermaid
 graph TD;
-    GitHub_Issues-->OAuth;
+    A[GitHub Issues]-->OAuth;
     OAuth-->Domain/Email\_Authorisation;
     Domain/Email\_Authorisation-->UI;
     UI-->Domain/Email\_Authorisation;
