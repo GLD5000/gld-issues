@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GLD-ISSUES
 
-## Getting Started
+This is a custom UI / Project management system that leverages [GitHub Issues](https://github.com/features/issues) for the backend.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+It is still evolving but below are some of the current features.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### New ways to interact with issues
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- #### Easy topline editing
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Update the title, deadline and issue status from the main category view with no need to leave the page.
 
-## Learn More
+- #### Collapsible issues
 
-To learn more about Next.js, take a look at the following resources:
+Each issue expands inline to give you more detailed access for editing so you do not need to navigate away to edit.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- #### Easy issue adding
+  Add a issue to a category with one click. Enter your title and you are done, no need to navigate away or assign labels.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### New ways to organise issues
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- #### Deadlines
+  Easily add deadlines to your issues by adding a dd/mm/yy to the end of the title, or using the dedicated deadline field.
+- #### Categories
+  Issue labels are used to make categories for issues
