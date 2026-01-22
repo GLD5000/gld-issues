@@ -2,7 +2,7 @@
 import { useStore } from "@/zustand/zustand";
 import { useEffect } from "react";
 import Link from "next/link";
-import SignIn from "@/auth/SignIn";
+import SignIn from "@/auth/ClientSignIn";
 import GldSvg from "@/components/assets/GldSvg";
 import MoonSvg from "@/components/assets/MoonSvg";
 import SunSvg from "@/components/assets/SunSvg";
