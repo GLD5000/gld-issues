@@ -58,22 +58,3 @@ It is still evolving but below are some of the current features.
 - #### Filter Titles
 
   Start typing to filter titles by keyword across categories.
-
-```mermaid
-graph TD;
-    A[GitHub Issues]-->B[OAuth];
-    B-->C[Domain/Email Authorisation];
-    C-->D[UI];
-    D-->C;
-```
-
-```mermaid
-graph TD
-    Root[Project Root]
-    Root --> src[src/]
-    Root --> docs[docs/]
-    src --> main.js
-    src --> utils[utils/]
-    utils --> logger.js
-    docs --> api.md
-```
