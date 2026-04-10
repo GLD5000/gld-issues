@@ -27,7 +27,9 @@ export function authServerNextAuth(
 ) {
   return getServerSession(...args, configNextAuth);
 }
-
+/**
+ * Determines authorisation level and whether to show the login page or not
+ */
 export async function showLoginPage() {
   let shouldShowLogin = true;
   const isProduction = process.env.NODE_ENV === "production";
