@@ -56,12 +56,19 @@ export async function middleware(request: NextRequest) {
         error:
           "Unauthorized - no email claim found. Check NEXTAUTH_SECRET and JWT callbacks in production.",
       },
-      { status: 401 },
+      {
+        status: 401,
+        statusText:
+          "Unauthorized - no email claim found. Check NEXTAUTH_SECRET and JWT callbacks in production.",
+      },
     );
   }
 
   if (!isDevEmail(email)) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    return NextResponse.json(
+      { error: "Forbidden" },
+      { status: 403, statusText: "Forbidden" },
+    );
   }
 
   return NextResponse.next();
