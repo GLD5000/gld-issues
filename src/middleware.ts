@@ -5,6 +5,36 @@ function isDevEmail(email: string | null) {
   return email === process.env.DEV_EMAIL_A || email === process.env.DEV_EMAIL_B;
 }
 
+function getEmailFromToken(token: Awaited<ReturnType<typeof getToken>>) {
+  if (!token || typeof token === "string") return null;
+
+  const tokenRecord = token as Record<string, unknown>;
+
+  const claimCandidates = [
+    tokenRecord.email,
+    tokenRecord.preferred_username,
+    tokenRecord.upn,
+  ];
+
+  for (const candidate of claimCandidates) {
+    if (typeof candidate === "string" && candidate.includes("@")) {
+      return candidate;
+    }
+  }
+
+  const userClaim = tokenRecord.user;
+  if (
+    userClaim &&
+    typeof userClaim === "object" &&
+    "email" in userClaim &&
+    typeof userClaim.email === "string"
+  ) {
+    return userClaim.email;
+  }
+
+  return null;
+}
+
 export async function middleware(request: NextRequest) {
   const isIssueMutationRequest =
     request.nextUrl.pathname.startsWith("/api/makeGithubIssues") &&
@@ -18,10 +48,16 @@ export async function middleware(request: NextRequest) {
     req: request,
     secret: process.env.NEXTAUTH_SECRET,
   });
-  const email = typeof token?.email === "string" ? token.email : null;
+  const email = getEmailFromToken(token);
 
   if (!email) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return NextResponse.json(
+      {
+        error:
+          "Unauthorized - no email claim found. Check NEXTAUTH_SECRET and JWT callbacks in production.",
+      },
+      { status: 401 },
+    );
   }
 
   if (!isDevEmail(email)) {
