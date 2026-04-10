@@ -28,6 +28,14 @@ export function authServerNextAuth(
   return getServerSession(...args, configNextAuth);
 }
 /**
+ * Check if an email is a dev email
+ */
+export function isDevEmail(email: string | null | undefined): boolean {
+  if (!email) return false;
+  return email === process.env.DEV_EMAIL_A || email === process.env.DEV_EMAIL_B;
+}
+
+/**
  * Determines authorisation level and whether to show the login page or not
  */
 export async function showLoginPage() {
@@ -35,8 +43,7 @@ export async function showLoginPage() {
   const isProduction = process.env.NODE_ENV === "production";
   const auth = await authServerNextAuth();
   const email = auth?.user?.email || null;
-  const isDev =
-    email === process.env.DEV_EMAIL_A || email === process.env.DEV_EMAIL_B;
+  const isDev = isDevEmail(email);
   const isAuthorised =
     isDev ||
     email?.split("@")[1] === process.env.AUTH_EMAIL_DOMAIN ||
