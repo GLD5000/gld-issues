@@ -1,39 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { getToken } from "next-auth/jwt";
-
-function isDevEmail(email: string | null) {
-  return email === process.env.DEV_EMAIL_A || email === process.env.DEV_EMAIL_B;
-}
-
-function getEmailFromToken(token: Awaited<ReturnType<typeof getToken>>) {
-  if (!token || typeof token === "string") return null;
-
-  const tokenRecord = token as Record<string, unknown>;
-
-  const claimCandidates = [
-    tokenRecord.email,
-    tokenRecord.preferred_username,
-    tokenRecord.upn,
-  ];
-
-  for (const candidate of claimCandidates) {
-    if (typeof candidate === "string" && candidate.includes("@")) {
-      return candidate;
-    }
-  }
-
-  const userClaim = tokenRecord.user;
-  if (
-    userClaim &&
-    typeof userClaim === "object" &&
-    "email" in userClaim &&
-    typeof userClaim.email === "string"
-  ) {
-    return userClaim.email;
-  }
-
-  return null;
-}
+import { isDevEmail, authServerNextAuth } from "./auth/auth";
 
 export async function middleware(request: NextRequest) {
   const isIssueMutationRequest =
@@ -44,23 +10,13 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const token = await getToken({
-    req: request,
-    secret: process.env.NEXTAUTH_SECRET,
-  });
-  const email = getEmailFromToken(token);
+  const session = await authServerNextAuth();
+  const email = session?.user?.email || null;
 
   if (!email) {
     return NextResponse.json(
-      {
-        error:
-          "Unauthorized - no email claim found. Check NEXTAUTH_SECRET and JWT callbacks in production.",
-      },
-      {
-        status: 401,
-        statusText:
-          "Unauthorized - no email claim found. Check NEXTAUTH_SECRET and JWT callbacks in production.",
-      },
+      { error: "Unauthorized" },
+      { status: 401, statusText: "Unauthorized" },
     );
   }
 
@@ -77,3 +33,5 @@ export async function middleware(request: NextRequest) {
 export const config = {
   matcher: ["/api/makeGithubIssues/:path*"],
 };
+
+export const runtime = "nodejs";
