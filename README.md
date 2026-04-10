@@ -42,7 +42,7 @@ It is still evolving but below are some of the current features.
 
 - #### Categories
 
-  Issue labels are used to make collaspible categories for issues that can be easily added to with one-click.
+  Issue labels are used to make collapsible categories for issues that can be easily added to with one-click.
 
 - #### Category one-click filtering
 
