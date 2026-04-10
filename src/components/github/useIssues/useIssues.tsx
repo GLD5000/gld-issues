@@ -88,7 +88,11 @@ export function useIssues(): [
         };
         const response = await fetch(`/api/makeGithubIssues/${type}`, request);
         if (!response.ok) {
-          throw new Error("Failed to patch issue");
+          console.error("Failed to patch issue", {
+            status: response.status,
+            statusText: response.statusText,
+          });
+          return returnCachedIssuesWithUpdatedTimestamp(setState);
         }
         const returnValue = await response.json();
         await storeNewValue(setState, slug);
@@ -181,6 +185,30 @@ async function fetchGithubLabels() {
     return data as LabelsJsonShape;
   } catch (error) {
     console.error("Error fetching labels file:", error);
+    return null;
+  }
+}
+
+function returnCachedIssuesWithUpdatedTimestamp(
+  setState: Dispatch<SetStateAction<IssuesSessionObject | null>>,
+) {
+  const sessionStorageReturn = getSessionStorageIssues();
+  if (!sessionStorageReturn) return null;
+
+  try {
+    const parsedValue = JSON.parse(sessionStorageReturn) as IssuesSessionObject;
+    const updatedValue: IssuesSessionObject = {
+      ...parsedValue,
+      metadata: {
+        ...(parsedValue.metadata || {}),
+        lastUpdated: new Date().toISOString(),
+      },
+    };
+    setState(updatedValue);
+    setSessionStorageIssues(updatedValue);
+    return updatedValue;
+  } catch (error) {
+    console.error("Error updating cached issues timestamp:", error);
     return null;
   }
 }
