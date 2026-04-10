@@ -9,7 +9,7 @@ This is a custom UI / Project management system that leverages [GitHub Issues](h
 
 ## Technical documentation
 
-- [Technical summary](./technical-summary.md)
+- [Technical specification](./technical-specification.md)
 
 ## Features
 
