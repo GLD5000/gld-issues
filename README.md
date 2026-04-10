@@ -7,6 +7,10 @@
 
 This is a custom UI / Project management system that leverages [GitHub Issues](https://github.com/features/issues) for the backend.
 
+## Technical documentation
+
+- [Technical summary](./technical-summary.md)
+
 ## Features
 
 It is still evolving but below are some of the current features.
