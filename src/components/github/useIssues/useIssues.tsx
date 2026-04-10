@@ -88,7 +88,7 @@ export function useIssues(): [
         };
         const response = await fetch(`/api/makeGithubIssues/${type}`, request);
         if (!response.ok) {
-          throw new Error("Failed to fetch log file");
+          throw new Error("Failed to patch issue");
         }
         const returnValue = await response.json();
         await storeNewValue(setState, slug);
@@ -105,7 +105,7 @@ export function useIssues(): [
         };
         const response = await fetch(`/api/makeGithubIssues/${type}`, request);
         if (!response.ok) {
-          throw new Error("Failed to fetch log file");
+          throw new Error("Failed to make issue");
         }
         const returnValue = await response.json();
         await storeNewValue(setState, returnValue.issue.number);
@@ -159,7 +159,7 @@ async function fetchGithubTasks(slug?: string) {
       slug ? `/api/getGithubIssues/${slug}` : "/api/getGithubIssues/tasks/",
     );
     if (!response.ok) {
-      throw new Error("Failed to fetch log file");
+      throw new Error("Failed to fetch issues");
     }
     const { issues } = await response.json();
     return issues as IssuesJsonShape;
@@ -173,7 +173,7 @@ async function fetchGithubLabels() {
   try {
     const response = await fetch(`/api/getGithubLabels/`);
     if (!response.ok) {
-      throw new Error("Failed to fetch log file");
+      throw new Error("Failed to fetch labels");
     }
     const {
       labels: { data },
