@@ -12,11 +12,17 @@
 
 import { Octokit } from "octokit";
 import { NextResponse } from "next/server";
+import { authServerNextAuth } from "../../../../auth/auth";
 
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ slug: string }> },
 ): Promise<NextResponse> {
+  const authResponse = await ensureDevAccess();
+  if (authResponse) {
+    return authResponse;
+  }
+
   const { slug } = await params;
   console.log("slug:", slug);
   return postIssue(request);
@@ -26,6 +32,11 @@ export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ slug: string }> },
 ): Promise<NextResponse> {
+  const authResponse = await ensureDevAccess();
+  if (authResponse) {
+    return authResponse;
+  }
+
   const { slug } = await params;
   if (slug && slug === "patchTodo") {
     const res = await request.json();
@@ -46,6 +57,23 @@ export async function PATCH(
 
 export async function GET(): Promise<NextResponse> {
   return NextResponse.json({ error: "Method Not Allowed" }, { status: 405 });
+}
+
+async function ensureDevAccess(): Promise<NextResponse | null> {
+  const session = await authServerNextAuth();
+  const email = session?.user?.email;
+  const isDev =
+    email === process.env.DEV_EMAIL_A || email === process.env.DEV_EMAIL_B;
+
+  if (!email) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  if (!isDev) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
+  return null;
 }
 
 async function patchIssue(params: Record<string, string>) {
