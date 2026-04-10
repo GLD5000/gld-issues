@@ -80,55 +80,6 @@ export function useQueryParamsArray(
   return [returnState, updateState];
 }
 
-// export function useQueryParams(
-//     paramKey: string,
-//     initialValue?: string
-//
-// ): [string, (valueIn: string) => void] {
-//     const [state, setState] = useState<string>(initialValue || '');
-//     useEffect(() => {
-//         let run = true;
-//         if (run && window) {
-//             initializeState(setState, paramKey, initialValue);
-//         }
-//         return () => {
-//             run = false;
-//         };
-//     }, [setState, paramKey, initialValue]);
-
-//     function refreshValue(valueIn: string) {
-//         storeValue(setState, paramKey, valueIn);
-//     }
-
-//     return [state, refreshValue];
-// }
-
-// function storeValue(
-//     setState: Dispatch<SetStateAction<string>>,
-//     paramKey: string,
-//     newValue: string
-// ) {
-//     if (!newValue || newValue === null || newValue === 'null') {
-//         setParam(paramKey, '');
-//         setState('');
-//     } else {
-//         setParam(paramKey, newValue);
-//         setState(newValue || '');
-//     }
-// }
-// function initializeState(
-//     setState: Dispatch<SetStateAction<string>>,
-//     paramKey: string,
-//     initialValue?: string
-// ) {
-//     const storedValue = getParam(paramKey);
-//     if (storedValue && storedValue !== 'null') {
-//         storeValue(setState, paramKey, storedValue);
-//     } else if (initialValue) {
-//         storeValue(setState, paramKey, initialValue);
-//     }
-// }
-
 export function useQueryParams(
   paramKey: string,
   initialValue?: string,
