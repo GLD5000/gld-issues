@@ -9,12 +9,24 @@ import {
 import { convertIssuesToSelectiveIssues } from "./useIssuesUtils";
 
 const keyName = "gitHubIssues";
+
+/**
+ * Reads the cached issues payload from session storage.
+ */
 function getSessionStorageIssues() {
   return window.sessionStorage.getItem(keyName);
 }
+
+/**
+ * Persists the latest issues payload to session storage.
+ */
 function setSessionStorageIssues(newObject: IssuesSessionObject) {
   return window.sessionStorage.setItem(keyName, JSON.stringify(newObject));
 }
+
+/**
+ * Merges freshly fetched issues into the cached issue list by issue number.
+ */
 function addFetchedIssuesToSessionStorageObject(
   newObject: SelectiveIssuesJsonShape,
 ) {
@@ -37,6 +49,9 @@ function addFetchedIssuesToSessionStorageObject(
   return oldIssuesArray;
 }
 
+/**
+ * Provides issue and label state with helpers to refresh and mutate GitHub issues.
+ */
 export function useIssues(): [
   IssuesSessionObject | null,
   (
@@ -49,6 +64,9 @@ export function useIssues(): [
   const [state, setState] = useState<IssuesSessionObject | null>(null);
   const { accessLevel } = useStore((state) => state);
   useEffect(() => {
+    /**
+     * Initializes hook state from session storage and falls back to a fresh fetch.
+     */
     async function initializeState() {
       try {
         const sessionStorageReturn = getSessionStorageIssues();
@@ -77,6 +95,9 @@ export function useIssues(): [
     initializeState();
   }, [setState]);
 
+  /**
+   * Dispatches issue mutations and refreshes local state from the API.
+   */
   async function refreshValue(type = "refresh", body?: Record<string, string>) {
     if (type === "close" || (type === "patchTodo" && body)) {
       const slug =
@@ -134,6 +155,10 @@ export function useIssues(): [
         },
       ];
 }
+
+/**
+ * Fetches tasks and labels, then updates state and session storage with the combined payload.
+ */
 async function storeNewValue(
   setState: Dispatch<SetStateAction<IssuesSessionObject | null>>,
   slug?: string,
@@ -156,6 +181,10 @@ async function storeNewValue(
   setState(newObject);
   setSessionStorageIssues(newObject);
 }
+
+/**
+ * Retrieves GitHub issues from the issues API, optionally scoped to a single issue slug.
+ */
 async function fetchGithubTasks(slug?: string) {
   console.log("Fetch running...");
   try {
@@ -172,6 +201,10 @@ async function fetchGithubTasks(slug?: string) {
     return null;
   }
 }
+
+/**
+ * Retrieves GitHub labels from the labels API.
+ */
 async function fetchGithubLabels() {
   console.log("Fetch labels running...");
   try {
@@ -189,6 +222,9 @@ async function fetchGithubLabels() {
   }
 }
 
+/**
+ * Reuses cached issues while refreshing the metadata timestamp after a failed mutation.
+ */
 function returnCachedIssuesWithUpdatedTimestamp(
   setState: Dispatch<SetStateAction<IssuesSessionObject | null>>,
 ) {
