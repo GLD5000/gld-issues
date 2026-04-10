@@ -88,17 +88,21 @@ function handleError(error: Error | unknown) {
   console.error("GitHub API error:", error);
 
   let errorMessage = "An unexpected error occurred";
+  let statusText = "An unexpected error occurred";
   let statusCode = 500;
 
   if (error instanceof Error && error.message.includes("Bad credentials")) {
-    errorMessage = "Invalid GitHub credentials";
+    statusText = errorMessage = "Invalid GitHub credentials";
     statusCode = 401;
   } else if (error instanceof Error && error.message.includes("Not Found")) {
-    errorMessage = "Repository not found";
+    statusText = errorMessage = "Repository not found";
     statusCode = 404;
   }
 
-  return NextResponse.json({ error: errorMessage }, { status: statusCode });
+  return NextResponse.json(
+    { error: errorMessage },
+    { status: statusCode, statusText },
+  );
 }
 
 async function postIssue(request: Request) {
