@@ -85,24 +85,17 @@ async function patchIssue(params: Record<string, string>) {
 }
 
 function handleError(error: Error | unknown) {
+  const message = error instanceof Error ? error.message : String(error);
   console.error("GitHub API error:", error);
 
-  let errorMessage = "An unexpected error occurred";
-  let statusText = "An unexpected error occurred";
-  let statusCode = 500;
-
-  if (error instanceof Error && error.message.includes("Bad credentials")) {
-    statusText = errorMessage = "Invalid GitHub credentials";
-    statusCode = 401;
-  } else if (error instanceof Error && error.message.includes("Not Found")) {
-    statusText = errorMessage = "Repository not found";
-    statusCode = 404;
+  if (message.includes("Bad credentials")) {
+    return NextResponse.json({ error: "Invalid GitHub credentials" }, { status: 401 });
+  }
+  if (message.includes("Not Found")) {
+    return NextResponse.json({ error: "Repository not found" }, { status: 404 });
   }
 
-  return NextResponse.json(
-    { error: errorMessage },
-    { status: statusCode, statusText },
-  );
+  return NextResponse.json({ error: message }, { status: 500 });
 }
 
 async function postIssue(request: Request) {
@@ -136,6 +129,7 @@ async function postIssue(request: Request) {
       "X-GitHub-Api-Version": "2022-11-28",
     },
   };
+  console.log("postIssue parameters:", JSON.stringify({ ...parameters, headers: undefined }));
   try {
     const response = await octokit.request(
       "POST /repos/{owner}/{repo}/issues",
