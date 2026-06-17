@@ -17,7 +17,8 @@ export default function AddNewTodo({
       }}
       onBlur={(e) => {
         if (!document.hasFocus()) {
-          e.preventDefault();
+          const el = e.currentTarget;
+          window.addEventListener("focus", () => el.focus(), { once: true });
           return;
         }
         onBlurHandler(e);
