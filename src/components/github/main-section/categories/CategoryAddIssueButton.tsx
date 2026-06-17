@@ -119,17 +119,26 @@ export default function CategoryAddIssueButton({
       }
     }, 0);
   }
+  function parseGitLabLink(value: string): { title: string; body: string } | null {
+    const match = value.match(/https:\/\/gitlab\.com\/.+\/([^/]+)\/-\/work_items\/(\d+)/);
+    if (!match) return null;
+    const repoSlug = match[1];
+    const itemNumber = match[2];
+    const repoTitle = repoSlug
+      .split("-")
+      .map((w) => w.length <= 3 ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+    return { title: `${repoTitle} | ${itemNumber}`, body: value };
+  }
+
   function onBlurHandler(e: React.FocusEvent<HTMLInputElement>) {
     if (!document.hasFocus()) return;
-    if (
-      e.currentTarget.value &&
-      e.currentTarget.value.trim().length > 0 &&
-      e.currentTarget.value !== title
-    ) {
-      const setIssueParams: Record<string, string> = {
-        title: e.currentTarget.value,
-        labels: label,
-      };
+    const value = e.currentTarget.value;
+    if (value && value.trim().length > 0 && value !== title) {
+      const parsed = parseGitLabLink(value.trim());
+      const setIssueParams: Record<string, string> = parsed
+        ? { title: parsed.title, body: parsed.body, labels: label }
+        : { title: value, labels: label };
       setIssues("new", setIssueParams);
     }
   }
