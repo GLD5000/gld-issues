@@ -18,6 +18,7 @@ export default function EditTodo({
         }
       }}
       onBlur={(e) => {
+        if (!document.hasFocus()) return;
         onBlurHandler(e);
       }}
       onChange={(e) => {
