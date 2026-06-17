@@ -18,7 +18,11 @@ export default function EditTodo({
         }
       }}
       onBlur={(e) => {
-        if (!document.hasFocus()) return;
+        if (!document.hasFocus()) {
+          const el = e.currentTarget;
+          window.addEventListener("focus", () => el.focus(), { once: true });
+          return;
+        }
         onBlurHandler(e);
       }}
       onChange={(e) => {
