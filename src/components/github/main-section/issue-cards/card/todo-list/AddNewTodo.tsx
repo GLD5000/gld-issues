@@ -16,6 +16,10 @@ export default function AddNewTodo({
         }
       }}
       onBlur={(e) => {
+        if (!document.hasFocus()) {
+          e.preventDefault();
+          return;
+        }
         onBlurHandler(e);
         setValue("");
       }}
