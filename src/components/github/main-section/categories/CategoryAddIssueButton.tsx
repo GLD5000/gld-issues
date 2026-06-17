@@ -51,6 +51,11 @@ export default function CategoryAddIssueButton({
             }
           }}
           onBlur={(e) => {
+            if (!document.hasFocus()) {
+              const el = e.currentTarget;
+              window.addEventListener("focus", () => el.focus(), { once: true });
+              return;
+            }
             onBlurHandler(e);
             setIsEditing(false);
             setInputValue("");
