@@ -130,7 +130,8 @@ export function useIssues(): [
         };
         const response = await fetch(`/api/makeGithubIssues/${type}`, request);
         if (!response.ok) {
-          throw new Error("Failed to make issue");
+          const { error } = await response.json().catch(() => ({ error: response.statusText }));
+          throw new Error(`Failed to make issue: ${error}`);
         }
         const returnValue = await response.json();
         await storeNewValue(setState, returnValue.issue.number);
