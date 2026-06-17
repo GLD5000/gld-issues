@@ -115,6 +115,7 @@ export default function CategoryAddIssueButton({
     }, 0);
   }
   function onBlurHandler(e: React.FocusEvent<HTMLInputElement>) {
+    if (!document.hasFocus()) return;
     if (
       e.currentTarget.value &&
       e.currentTarget.value.trim().length > 0 &&
