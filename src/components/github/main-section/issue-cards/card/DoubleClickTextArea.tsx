@@ -54,6 +54,7 @@ export default function DoubleClickTextArea({
             }
           }}
           onBlur={(e) => {
+            if (!document.hasFocus()) return;
             onBlurHandler(e);
             setIsEditing(false);
           }}
