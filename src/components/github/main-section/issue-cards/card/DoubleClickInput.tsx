@@ -54,6 +54,7 @@ export default function DoubleClickInput({
             }
           }}
           onBlur={(e) => {
+            if (!document.hasFocus()) return;
             onBlurHandler(e);
             setIsEditing(false);
           }}
