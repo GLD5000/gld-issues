@@ -53,7 +53,9 @@ export default function CategoryAddIssueButton({
           onBlur={(e) => {
             if (!document.hasFocus()) {
               const el = e.currentTarget;
-              window.addEventListener("focus", () => el.focus(), { once: true });
+              window.addEventListener("focus", () => el.focus(), {
+                once: true,
+              });
               return;
             }
             onBlurHandler(e);
@@ -119,16 +121,36 @@ export default function CategoryAddIssueButton({
       }
     }, 0);
   }
-  function parseGitLabLink(value: string): { title: string; body: string } | null {
-    const match = value.match(/https:\/\/gitlab\.com\/.+\/([^/]+)\/-\/work_items\/(\d+)/);
-    if (!match) return null;
-    const repoSlug = match[1];
-    const itemNumber = match[2];
+  function parseGitLabLink(
+    value: string,
+  ): { title: string; body: string; labels: string } | null {
+    // Return if not a Gitlab URL ending with a digit
+    if (
+      !value.startsWith("https") ||
+      value.indexOf("gitlab") === -1 ||
+      !/\d$/.test(value)
+    )
+      return null;
+    const [repoSlug, , itemType, itemNumber] = value.split("/").slice(-4);
+    const newLabel =
+      itemType.indexOf("merge") > -1
+        ? "bau: merge requests"
+        : itemType.indexOf("work") > -1
+          ? "bau: issues"
+          : label;
     const repoTitle = repoSlug
       .split("-")
-      .map((w) => w.length <= 3 ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1))
+      .map((w) =>
+        w.length <= 3
+          ? w.toUpperCase()
+          : w.charAt(0).toUpperCase() + w.slice(1),
+      )
       .join(" ");
-    return { title: `${repoTitle} | ${itemNumber}`, body: value };
+    return {
+      title: `${repoTitle} | ${itemNumber}`,
+      body: value,
+      labels: newLabel,
+    };
   }
 
   function onBlurHandler(e: React.FocusEvent<HTMLInputElement>) {
@@ -137,7 +159,7 @@ export default function CategoryAddIssueButton({
     if (value && value.trim().length > 0 && value !== title) {
       const parsed = parseGitLabLink(value.trim());
       const setIssueParams: Record<string, string> = parsed
-        ? { title: parsed.title, body: parsed.body, labels: label }
+        ? parsed
         : { title: value, labels: label };
       setIssues("new", setIssueParams);
     }
