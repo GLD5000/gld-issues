@@ -17,7 +17,6 @@ import { SelectiveIssuesJsonShape } from "./useIssues/useIssuesTypes";
 import { makeWeeklyToDoObject } from "./useIssues/useIssuesUtils";
 import {
   useCategoryFilter,
-  usePriorityList,
   useSortMode,
   useSubCategoryFilter,
   useTitleFilter,
@@ -31,7 +30,6 @@ export default function GitTasks() {
   const [titleFilter, setTitleFilter] = useTitleFilter();
   const [categoryFilter, setCategoryFilter] = useCategoryFilter();
   const [subCategoryFilter, setSubCategoryFilter] = useSubCategoryFilter();
-  const [priorityList, setPriorityList] = usePriorityList();
   const [viewMode, setViewMode] = useViewMode();
   const [sortMode, incrementSortMode] = useSortMode();
   if (!issuesObject) return <LoadingSpinner />;
@@ -43,6 +41,25 @@ export default function GitTasks() {
   const subTitle = convertDateToDayDateComboString(currentDate);
   const hasNoIssues = !issues || issues.length === 0 || issues === null;
   if (hasNoIssues) return <LoadingSpinner />;
+
+  const priorityList = issues
+    .filter((issue) => issue.labels.some((label) => label.name === "priority"))
+    .map((issue) => `${issue.number}`);
+
+  function togglePriorityLabel(valueIn: string | string[]) {
+    if (Array.isArray(valueIn)) return;
+    const issue = issues!.find((i) => `${i.number}` === valueIn);
+    if (!issue) return;
+    const hasPriority = issue.labels.some((label) => label.name === "priority");
+    const currentLabels = issue.labels.map((label) => label.name);
+    const newLabels = hasPriority
+      ? currentLabels.filter((name) => name !== "priority")
+      : [...currentLabels, "priority"];
+    setIssues("patchTodo", {
+      issue_number: valueIn,
+      labels: newLabels.join(","),
+    });
+  }
 
   const { categoriesObject: toDoObject, timeObject } =
     makeWeeklyToDoObject(issuesObject);
@@ -100,14 +117,14 @@ export default function GitTasks() {
           priorityList={priorityList}
           issues={issues}
           setIssues={setIssues}
-          setPriorityList={setPriorityList}
+          setPriorityList={togglePriorityLabel}
           lastUpdated={lastUpdated}
         />
         {issues && (
           <IssueElements
             setIssues={setIssues}
             priorityList={priorityList}
-            setPriorityList={setPriorityList}
+            setPriorityList={togglePriorityLabel}
             filteredToDoObject={filteredToDoObject}
             subCategoryFilter={subCategoryFilter}
             setSubCategoryFilter={setSubCategoryFilter}
