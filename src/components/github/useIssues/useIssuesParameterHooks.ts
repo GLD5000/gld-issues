@@ -19,6 +19,3 @@ export function useSubCategoryFilter() {
 export function useViewMode() {
   return useQueryParams("vm", "Category");
 }
-export function usePriorityList() {
-  return useQueryParamsArray("p");
-}
