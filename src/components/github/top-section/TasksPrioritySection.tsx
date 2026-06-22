@@ -30,24 +30,7 @@ export default function TasksPrioritySection({
           );
           if (currentIssue) {
             return (
-              <div
-                key={`${index}${numberString}`}
-                className="px-1 grid grid-cols-[auto_1fr]"
-              >
-                <button
-                  className="block leading-[2.2] p-1 m-0 bg-transparent text-sm border-none min-w-[2.2em]"
-                  onClick={() => {
-                    const currentIssueNumberString = `${currentIssue.number}`;
-                    const newArray = priorityList.filter(
-                      (numberString) =>
-                        numberString !== currentIssueNumberString,
-                    );
-                    newArray.unshift(currentIssueNumberString);
-                    setPriorityList(newArray);
-                  }}
-                >
-                  {index + 1}
-                </button>
+              <div key={`${index}${numberString}`} className="px-1 grid">
                 <GitIssueCard
                   issue={currentIssue}
                   setIssues={setIssues}
