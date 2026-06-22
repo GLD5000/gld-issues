@@ -147,5 +147,7 @@ async function postIssue(request: Request) {
   }
 }
 function splitLabels(labels: string | undefined) {
-  return labels ? labels.split(",") : undefined;
+  if (labels === undefined) return undefined;
+  if (labels === "") return [];
+  return labels.split(",");
 }
