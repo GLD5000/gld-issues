@@ -144,12 +144,11 @@ export default function CategoryAddIssueButton({
     // Return if not a Gitlab URL ending with a digit
     if (!/\d$/.test(value)) return null;
     const [repoSlug, , itemType, itemNumber] = value.split("/").slice(-4);
-    const newLabel =
-      itemType.indexOf("merge") > -1
-        ? "bau: merge requests"
-        : itemType.indexOf("work") > -1
-          ? "bau: issues"
-          : label;
+    // Return for non issue / merge requests
+    const isMergeRequest = itemType === "merge_requests";
+    const isIssue = itemType === "work_items";
+    if (!isMergeRequest && !isIssue) return null;
+    const newLabel = isMergeRequest ? "bau: merge requests" : "bau: issues";
     const repoTitle = repoSlug
       .split("-")
       .map((w) =>
@@ -159,7 +158,7 @@ export default function CategoryAddIssueButton({
       )
       .join(" ");
     return {
-      title: `${repoTitle} | ${itemNumber}`,
+      title: `${repoTitle} | ${isMergeRequest ? "!" : "#"}${itemNumber}`,
       body: value,
       labels: newLabel,
     };
