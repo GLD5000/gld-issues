@@ -121,16 +121,28 @@ export default function CategoryAddIssueButton({
       }
     }, 0);
   }
+
+  function onBlurHandler(e: React.FocusEvent<HTMLInputElement>) {
+    // Abort blur handler when tab / window switching
+    if (!document.hasFocus()) return;
+    const value = e.currentTarget.value;
+    // Return unchanged for blank or no difference
+    if (!value || value.trim().length === 0 || value === title) return;
+    // Return normal (non-link) titles
+    if (!value.startsWith("https"))
+      return setIssues("new", { title: value, labels: label });
+
+    const parsed = parseLinks(value.trim());
+    const setIssueParams: Record<string, string> = parsed
+      ? parsed
+      : { title: value, labels: label };
+    setIssues("new", setIssueParams);
+  }
   function parseGitLabLink(
     value: string,
   ): { title: string; body: string; labels: string } | null {
     // Return if not a Gitlab URL ending with a digit
-    if (
-      !value.startsWith("https") ||
-      value.indexOf("gitlab") === -1 ||
-      !/\d$/.test(value)
-    )
-      return null;
+    if (!/\d$/.test(value)) return null;
     const [repoSlug, , itemType, itemNumber] = value.split("/").slice(-4);
     const newLabel =
       itemType.indexOf("merge") > -1
@@ -152,16 +164,22 @@ export default function CategoryAddIssueButton({
       labels: newLabel,
     };
   }
+  function parseJiraLink(
+    value: string,
+  ): { title: string; body: string; labels: string } | null {
+    // Return if not a Gitlab URL ending with a digit
+    if (!/\d$/.test(value)) return null;
+    const itemCode = value.split("/").at(-1);
+    return {
+      title: `JIRA | ${itemCode}`,
+      body: value,
+      labels: "bau: issues",
+    };
+  }
 
-  function onBlurHandler(e: React.FocusEvent<HTMLInputElement>) {
-    if (!document.hasFocus()) return;
-    const value = e.currentTarget.value;
-    if (value && value.trim().length > 0 && value !== title) {
-      const parsed = parseGitLabLink(value.trim());
-      const setIssueParams: Record<string, string> = parsed
-        ? parsed
-        : { title: value, labels: label };
-      setIssues("new", setIssueParams);
-    }
+  function parseLinks(value: string) {
+    if (value.indexOf("gitlab") > -1) return parseGitLabLink(value);
+    if (value.indexOf("atlassian") > -1) return parseJiraLink(value);
+    return null;
   }
 }
