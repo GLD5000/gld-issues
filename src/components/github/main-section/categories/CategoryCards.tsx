@@ -259,13 +259,12 @@ export default function CategoryCards({
     // }
 
     return (
-      !issueInWorkingList(issue.number, priorityList) &&
-      ((notFiltering && titleFilter.length === 0) ||
-        (notFiltering &&
-          issue.title.toLowerCase().indexOf(titleFilter.toLowerCase()) > -1) ||
-        (isFilteringBlocked && issueIsBlocked(issue)) ||
-        // (shouldShowOpen && issueIsOpen) ||
-        (isFilteringDeadline && getIssueDeadline(issue)))
+      (notFiltering && titleFilter.length === 0) ||
+      (notFiltering &&
+        issue.title.toLowerCase().indexOf(titleFilter.toLowerCase()) > -1) ||
+      (isFilteringBlocked && issueIsBlocked(issue)) ||
+      // (shouldShowOpen && issueIsOpen) ||
+      (isFilteringDeadline && getIssueDeadline(issue))
     );
   }
   function sortCategory(issueArray: SelectiveIssue[], sortMode: string) {
@@ -297,9 +296,4 @@ export default function CategoryCards({
       )
       .toReversed();
   }
-}
-
-function issueInWorkingList(issueNumber: number, priorityList: string[]) {
-  const testResult = priorityList.includes(`${issueNumber}`);
-  return testResult;
 }
