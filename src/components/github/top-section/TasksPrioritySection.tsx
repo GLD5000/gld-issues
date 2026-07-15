@@ -30,7 +30,10 @@ export default function TasksPrioritySection({
           );
           if (currentIssue) {
             return (
-              <div key={`${index}${numberString}`} className="px-1 grid">
+              <div
+                key={`${index}${numberString}-priority`}
+                className="px-1 grid"
+              >
                 <GitIssueCard
                   issue={currentIssue}
                   setIssues={setIssues}
