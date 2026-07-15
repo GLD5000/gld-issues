@@ -26,7 +26,7 @@ export default function IssueCards({
       {issueArray.map((issue, index) => {
         return (
           <GitIssueCard
-            key={`${index}${issue.number}`}
+            key={`${index}${issue.number}-cards`}
             issue={issue}
             setIssues={setIssues}
             priorityList={priorityList}
