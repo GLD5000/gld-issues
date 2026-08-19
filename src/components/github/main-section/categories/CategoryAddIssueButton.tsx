@@ -132,7 +132,7 @@ export default function CategoryAddIssueButton({
     if (!value.startsWith("https"))
       return setIssues("new", { title: value, labels: label });
 
-    const parsed = parseLinks(value.trim());
+    const parsed = parseLinks(value.trim(), label);
     const setIssueParams: Record<string, string> = parsed
       ? parsed
       : { title: value, labels: label };
@@ -140,6 +140,7 @@ export default function CategoryAddIssueButton({
   }
   function parseGitLabLink(
     value: string,
+    label: string,
   ): { title: string; body: string; labels: string } | null {
     // Return if not a Gitlab URL ending with a digit
     if (!/\d$/.test(value)) return null;
@@ -148,7 +149,9 @@ export default function CategoryAddIssueButton({
     const isMergeRequest = itemType === "merge_requests";
     const isIssue = itemType === "work_items";
     if (!isMergeRequest && !isIssue) return null;
-    const newLabel = isMergeRequest ? "bau: merge requests" : "bau: issues";
+    const mergeRequestLabel =
+      label === "bau: code review" ? "bau: code review" : "bau: merge requests";
+    const newLabel = isMergeRequest ? mergeRequestLabel : "bau: issues";
     const repoTitle = repoSlug
       .split("-")
       .map((w) =>
@@ -176,8 +179,8 @@ export default function CategoryAddIssueButton({
     };
   }
 
-  function parseLinks(value: string) {
-    if (value.indexOf("gitlab") > -1) return parseGitLabLink(value);
+  function parseLinks(value: string, label: string) {
+    if (value.indexOf("gitlab") > -1) return parseGitLabLink(value, label);
     if (value.indexOf("atlassian") > -1) return parseJiraLink(value);
     return null;
   }
