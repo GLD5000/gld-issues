@@ -149,8 +149,10 @@ export default function CategoryAddIssueButton({
     const isMergeRequest = itemType === "merge_requests";
     const isIssue = itemType === "work_items";
     if (!isMergeRequest && !isIssue) return null;
-    const mergeRequestLabel =
-      label === "bau: code review" ? "bau: code review" : "bau: merge requests";
+    const isCodeReview = label === "bau: code review";
+    const mergeRequestLabel = isCodeReview
+      ? "bau: code review"
+      : "bau: merge requests";
     const newLabel = isMergeRequest ? mergeRequestLabel : "bau: issues";
     const repoTitle = repoSlug
       .split("-")
@@ -161,7 +163,7 @@ export default function CategoryAddIssueButton({
       )
       .join(" ");
     return {
-      title: `${repoTitle} | ${isMergeRequest ? "!" : "#"}${itemNumber}`,
+      title: `${isCodeReview ? "Review: " : ""}${repoTitle} | ${isMergeRequest ? "!" : "#"}${itemNumber}`,
       body: value,
       labels: newLabel,
     };
