@@ -21,7 +21,7 @@ export default function SubCategoryFilters({
       <div className="flex flex-wrap gap-1 items-center justify-between">
         <div className="flex flex-wrap gap-1 items-center">
           <span className="text-sm font-light">Show:</span>
-          {["Deadlines", "Completed", "Testing", "Blocked", "Open"].map(
+          {["Deadlines", "Completed", "Testing", "Blocked", "All"].map(
             (value, index) => (
               <FilterButtonSmall
                 key={`${index}${value}`}
