@@ -32,11 +32,12 @@ export async function PATCH(
     return await patchIssue(res);
   } else if (slug && slug === "close") {
     const res = await request.json();
-    const { issue_number, current_state } = res;
+    const { issue_number, current_state, labels } = res;
     return await patchIssue({
       state: current_state !== "closed" ? "closed" : "open",
       issue_number,
       issue: res,
+      labels,
     });
   } else {
     console.error("Incorrect Slug:", slug);
@@ -89,10 +90,16 @@ function handleError(error: Error | unknown) {
   console.error("GitHub API error:", error);
 
   if (message.includes("Bad credentials")) {
-    return NextResponse.json({ error: "Invalid GitHub credentials" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Invalid GitHub credentials" },
+      { status: 401 },
+    );
   }
   if (message.includes("Not Found")) {
-    return NextResponse.json({ error: "Repository not found" }, { status: 404 });
+    return NextResponse.json(
+      { error: "Repository not found" },
+      { status: 404 },
+    );
   }
 
   return NextResponse.json({ error: message }, { status: 500 });
@@ -129,7 +136,10 @@ async function postIssue(request: Request) {
       "X-GitHub-Api-Version": "2022-11-28",
     },
   };
-  console.log("postIssue parameters:", JSON.stringify({ ...parameters, headers: undefined }));
+  console.log(
+    "postIssue parameters:",
+    JSON.stringify({ ...parameters, headers: undefined }),
+  );
   try {
     const response = await octokit.request(
       "POST /repos/{owner}/{repo}/issues",
