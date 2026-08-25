@@ -190,19 +190,19 @@ export default function CategoryCards({
     const showDeadlines =
       subCategoryFilterActive &&
       (subCategoryFilter.includes("Deadlines") ||
-        subCategoryFilter.includes("Open"));
+        subCategoryFilter.includes("All"));
     const showCompleted =
       subCategoryFilterActive && subCategoryFilter.includes("Completed");
     const showTesting =
       subCategoryFilterActive &&
       (subCategoryFilter.includes("Testing") ||
-        subCategoryFilter.includes("Open"));
+        subCategoryFilter.includes("All"));
     const showBlocked =
       subCategoryFilterActive &&
       (subCategoryFilter.includes("Blocked") ||
-        subCategoryFilter.includes("Open"));
+        subCategoryFilter.includes("All"));
     const showOpen =
-      subCategoryFilterActive && subCategoryFilter.includes("Open");
+      !subCategoryFilterActive || subCategoryFilter.includes("All");
     return {
       showDeadlines,
       showCompleted,
@@ -225,8 +225,14 @@ export default function CategoryCards({
     const issueHasDeadline = !!getIssueDeadline(issue);
     const issueHasBlocked = issueIsBlocked(issue);
     const issueHasTesting = issueIsTesting(issue);
+
+    if (!issueIsOpen && !subCategoryFilterActive) return false;
+
     if (subCategoryFilterActive) {
-      if (!issueIsOpen && showCompleted) {
+      if (
+        !issueIsOpen &&
+        (showCompleted || subCategoryFilter.includes("All"))
+      ) {
         return true;
       }
       if (issueIsOpen && issueHasBlocked && showBlocked) {
