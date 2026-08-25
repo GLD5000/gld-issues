@@ -57,9 +57,12 @@ export default function GitIssueStateButton({
   function handleClick(e: SyntheticEvent<HTMLSelectElement>) {
     const newValue = e.currentTarget.value;
     if (newValue === "Completed" || newValue === "Open") {
+      const newLabels = getNewLabelsListString(issue, newValue);
+
       setIssues("close", {
         issue_number: `${issue.number}`,
         current_state: `${issue.state}`,
+        labels: newLabels,
       });
       setPreviousUpdated(lastUpdated);
     } else if (
